@@ -4,8 +4,12 @@ elpa/
 .cache/
 .lsp-session-v1
 .mc-lists.el
+.DS_Store
+*.elc
+*.cask
 places
 bookmarks
 ido.last
 projectile-bookmarks.eld
 recentf
+
