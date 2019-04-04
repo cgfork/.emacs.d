@@ -1,0 +1,11 @@
+auto-save-list/
+eshell/
+elpa/
+.cache/
+.lsp-session-v1
+.mc-lists.el
+places
+bookmarks
+ido.last
+projectile-bookmarks.eld
+recentf
