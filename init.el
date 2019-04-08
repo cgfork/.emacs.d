@@ -97,13 +97,12 @@
  '(custom-safe-themes
    (quote
     ("d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" default)))
- ;;'(debug-on-error t)
  '(electric-pair-mode t)
  '(global-display-line-numbers-mode t)
  '(org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
+    (neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
  '(tool-bar-mode nil)
  '(winner-mode t))
 (custom-set-faces

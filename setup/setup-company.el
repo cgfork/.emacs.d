@@ -28,5 +28,22 @@
   (define-key company-active-map (kbd "\C-p") #'company-select-previous)
   )
 
+(defun autoinsert-yas-expand()
+  "Replace text in yasnippet template."
+  (yas-expand-snippet (buffer-string) (point-min) (point-max)))
+
+(use-package autoinsert
+  :ensure t
+  :init
+  ;; Don't want to be prompted before insertion:
+  (setq auto-insert-query nil)
+  (setq auto-insert-directory (locate-user-emacs-file "templates"))
+  (add-hook 'find-file-hook 'auto-insert)
+  (auto-insert-mode 1)
+  :config
+  (define-auto-insert "\\.org?$" [ "default-org.org" autoinsert-yas-expand ])
+  (define-auto-insert "\\.el?$" [ "default-el.el" autoinsert-yas-expand ])
+  )
+
 (provide 'setup-company)
 ;;; setup-company.el ends here

@@ -5,28 +5,32 @@
   (require 'setup-const))
 
 ;; my workflow
-(setq cgfork-job-home "~/.job")
+(setq org-home "~/.org")
 
-(setq job-plan-file (concat (file-name-as-directory cgfork-job-home) (format-time-string "job_plan_%Y.org")))
-(setq job-time-file (concat (file-name-as-directory cgfork-job-home) (format-time-string "job_time_%Y.org")))
-(setq job-snippet-file (concat (file-name-as-directory cgfork-job-home) (format-time-string "job_snippet_%Y.org")))
-(setq job-journal-file (concat (file-name-as-directory cgfork-job-home) (format-time-string "job_journal_%Y.org")))
+(setq gtd-file (concat (file-name-as-directory org-home) (format-time-string "gtd_%Y.org")))
+(setq record-file (concat (file-name-as-directory org-home) (format-time-string "record_%Y.org")))
+(setq snippet-file (concat (file-name-as-directory org-home) (format-time-string "snippet_%Y.org")))
+(setq journal-file (concat (file-name-as-directory org-home) (format-time-string "journal_%Y.org")))
 
-(defun open-job-plan-file()
+(defun open-gtd-file()
+  "Open the gtd file."
   (interactive)
-  (find-file job-plan-file))
+  (find-file gtd-file))
 
-(defun open-job-time-file()
+(defun open-record-file()
+  "Open the record file."
   (interactive)
-  (find-file job-time-file))
+  (find-file record-file))
 
-(defun open-job-snippet-file()
+(defun open-snippet-file()
+  "Open the snippet file."
   (interactive)
-  (find-file job-snippet-file))
+  (find-file snippet-file))
 
-(defun open-job-journal-file()
+(defun open-journal-file()
+  "Open the journal file."
   (interactive)
-  (find-file job-journal-file))
+  (find-file journal-file))
 
 (use-package org
   :ensure nil
@@ -37,7 +41,7 @@
 	 ("C-c c" . org-capture))
   :hook (org-indent-mode . (lambda() (diminish 'org-indent-mode)))
   :config
-  (setq org-agenda-files '("~/note/agenda")
+  (setq org-agenda-files (list org-home)
         org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)"
                                       "|" "DONE(d)" "CANCEL(c)"))
         org-log-done 'time
@@ -46,22 +50,36 @@
         org-pretty-entities t
         org-hide-emphasis-markers t)
   (setq org-capture-templates
-	'(("t" "Todo" entry (file+datetree job-plan-file)
-           "* TODO %^{Description} %^g\n %?\n %i\n Added:%U")
-	  ("T" "Todo with Clipboard" entry (file+datetree job-plan-file)
-           "* TODO %^{Description} %^g\n %c\n Added:%U")
-	  ("s" "Todo with Scheduled" entry (file+datetree job-plan-file)
-           "* TODO %^{Description} %^g\n SCHEDULED: %^t\n %?\n %i\n Added:%U")
-	  ("d" "Todo with Deadline" entry (file+datetree job-plan-file)
-           "* TODO %^{Description} %^g\n DEADLINE: %^t\n %?\n %i\n Added:%U")
-          ("j" "Journal" entry (file+datetree job-journal-file)
+	'(("t" "Todo" entry (file+datetree gtd-file)
+           "* TODO [#B] %^{Description} %^g\n %?\n %i\n Added:%U")
+	  ("T" "Todo with Clipboard" entry (file+datetree gtd-file)
+           "* TODO [#B] %^{Description} %^g\n %c\n Added:%U")
+	  ("S" "Todo with Scheduled" entry (file+datetree gtd-file)
+           "* TODO [#B] %^{Description} %^g\n SCHEDULED: %^t\n %?\n %i\n Added:%U")
+	  ("D" "Todo with Deadline" entry (file+datetree gtd-file)
+           "* TODO [#B] %^{Description} %^g\n DEADLINE: %^t\n %?\n %i\n Added:%U")
+          ("j" "Journal" entry (file+datetree journal-file)
            "* %U - %^{Heading}\n %?")
-	  ("l" "Log Time" entry (file+datetree job-time-file)
+	  ("l" "Log Time" entry (file+datetree record-file)
 	   "* %U - %^{Activity}\t :TIME:")
-	  ("s" "Code Snippets" entry (file+datetree job-snippet-file)
+	  ("s" "Code Snippets" entry (file+datetree snippet-file)
 	   "* %U - %^{Heading} %^g\n %?\n")
 	  )
 	)
+  (setq org-agenda-custom-commands
+        '(
+          ("w" . "任务安排")
+          ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
+          ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+          ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
+          ("b" "NOTE" tags-todo "NOTE")
+          ("p" . "项目安排")
+          ("pw" "迭代任务" tags-todo "PROJECT+WORK+CATEGORY=\"kaola\"")
+          ("pf" "未来要做的任务" tags-todo "PROJECT+FUTURE+CATEGORY=\"kaola\"")
+          ("W" "Weekly Review"
+           ((stuck "") ;; review stuck projects as designated by org-stuck-projects
+            (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
+            ))))
   
   (add-to-list 'org-export-backends 'md)
 

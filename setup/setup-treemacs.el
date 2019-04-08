@@ -87,4 +87,5 @@
   :ensure t)
 
 (provide 'setup-treemacs)
+
 ;;; setup-treemacs.el ends here

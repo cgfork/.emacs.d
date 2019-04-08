@@ -83,5 +83,9 @@
 	 )
   )
 
+(use-package command-log-mode
+  :ensure t
+  )
+
 (provide 'setup-basic)
 ;;; setup-basic.el ends here
