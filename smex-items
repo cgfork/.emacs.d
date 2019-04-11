@@ -1,0 +1,26 @@
+
+;; ----- smex-history -----
+(
+ open-gtd-file
+ describe-variable
+ dired
+ go-rename
+ recentf-open-files
+ treemacs-find-file
+ org-mode
+)
+
+;; ----- smex-data -----
+(
+ (open-gtd-file . 6)
+ (treemacs-projectile . 1)
+ (treemacs-mode . 1)
+ (org-mode . 1)
+ (treemacs-find-file . 1)
+ (treemacs-refresh . 1)
+ (recentf-open-files . 1)
+ (go-rename . 1)
+ (treemacs-add-project . 1)
+ (dired . 1)
+ (describe-variable . 1)
+)

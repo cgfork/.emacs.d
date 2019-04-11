@@ -51,19 +51,21 @@
         org-hide-emphasis-markers t)
   (setq org-capture-templates
 	'(("t" "Todo" entry (file+datetree gtd-file)
-           "* TODO [#B] %^{Description} %^g\n %?\n %i\n Added:%U")
+           "* TODO [#B] %^{Description} %^g\n%?\n%i\nAdded:%U")
 	  ("T" "Todo with Clipboard" entry (file+datetree gtd-file)
-           "* TODO [#B] %^{Description} %^g\n %c\n Added:%U")
+           "* TODO [#B] %^{Description} %^g\n%c\nAdded:%U")
 	  ("S" "Todo with Scheduled" entry (file+datetree gtd-file)
-           "* TODO [#B] %^{Description} %^g\n SCHEDULED: %^t\n %?\n %i\n Added:%U")
+           "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\n%?\n%i\nAdded:%U")
 	  ("D" "Todo with Deadline" entry (file+datetree gtd-file)
-           "* TODO [#B] %^{Description} %^g\n DEADLINE: %^t\n %?\n %i\n Added:%U")
+           "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n%?\n%i\nAdded:%U")
+	  ("W" "Work" entry (file+datetree gtd-file)
+           "* TODO [#B] %^{Description} :PROJECT:%^g\nDEADLINE: %^t\n:PROPERTIES:\n:CATEGORY: %^{Category}\n:END:\n%?\n %i\nAdded:%U")
           ("j" "Journal" entry (file+datetree journal-file)
            "* %U - %^{Heading}\n %?")
 	  ("l" "Log Time" entry (file+datetree record-file)
 	   "* %U - %^{Activity}\t :TIME:")
 	  ("s" "Code Snippets" entry (file+datetree snippet-file)
-	   "* %U - %^{Heading} %^g\n %?\n")
+	   "* %U - %^{Heading}%^g\n%?\n")
 	  )
 	)
   (setq org-agenda-custom-commands
@@ -74,8 +76,8 @@
           ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
           ("b" "NOTE" tags-todo "NOTE")
           ("p" . "项目安排")
-          ("pw" "迭代任务" tags-todo "PROJECT+WORK+CATEGORY=\"kaola\"")
-          ("pf" "未来要做的任务" tags-todo "PROJECT+FUTURE+CATEGORY=\"kaola\"")
+          ("pw" "迭代任务" tags-todo "+PROJECT+WORK+CATEGORY=\"kaola\"")
+          ("pf" "未来要做的任务" tags-todo "+PROJECT+FUTURE+CATEGORY=\"kaola\"")
           ("W" "Weekly Review"
            ((stuck "") ;; review stuck projects as designated by org-stuck-projects
             (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
@@ -126,6 +128,26 @@
 	    )
 	  )
     )
+  (add-to-list 'org-src-lang-modes '("data-model" . data-model))
+  (define-generic-mode
+      'data-model-mode ;; mode name
+    '("%") ;; comments start '%
+    '("string" "int" "float" "int64" "int32" "bool" "map") ;; keywords
+    '(("@" . 'font-lock-builtin) ;; is builtin
+      ("!" . 'font-lock-operator) ;; is operator
+      ("%{\\([A-Z_]+\\)}" . font-lock-variable-name-face)
+      )
+    '("\\.dm$") ;; file to activate this mode
+    nil ;; functions to call
+    "A mode for defining a data model"
+    )
+  (add-hook 'data-model-mode
+	    (function
+	     (lambda ()
+	       (setq indent-tabs-mode nil)
+	       (setq tab-width 4)
+	       ))
+	    )
   )
 
 (use-package ox-publish
