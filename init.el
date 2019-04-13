@@ -87,6 +87,7 @@
 (require 'setup-org)
 (require 'setup-treemacs)
 (require 'setup-git)
+(require 'setup-clisp)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

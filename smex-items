@@ -1,18 +1,18 @@
 
 ;; ----- smex-history -----
 (
+ slime
+ slime-connect
+ eval-buffer
+ delete-file
  open-gtd-file
+ shell
  describe-variable
- dired
- go-rename
- recentf-open-files
- treemacs-find-file
- org-mode
 )
 
 ;; ----- smex-data -----
 (
- (open-gtd-file . 6)
+ (open-gtd-file . 7)
  (treemacs-projectile . 1)
  (treemacs-mode . 1)
  (org-mode . 1)
@@ -23,4 +23,9 @@
  (treemacs-add-project . 1)
  (dired . 1)
  (describe-variable . 1)
+ (delete-file . 2)
+ (shell . 1)
+ (eval-buffer . 1)
+ (slime-connect . 1)
+ (slime . 1)
 )
