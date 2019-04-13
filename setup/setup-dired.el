@@ -22,9 +22,11 @@
     (setq ls-lisp-use-insert-directory-program t)
     (setq dired-listing-switches "-alh -group-directories-first")
     (use-package dired-quick-sort
+      :ensure nil
       :init (dired-quick-sort-setup)))
 
   (use-package diredfl
+    :ensure nil
     :init (diredfl-global-mode 1))
 
   (use-package dired-aux
