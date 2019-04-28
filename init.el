@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-XS
 ;;; package --- summary
 ;;; Commentary:
 ;;;
@@ -19,7 +20,7 @@
 
 ;; Setup `package`
 ;; Define the customize variable
-(defcustom cgfork-package-archives 'emacs-china
+(defcustom cgfork-package-archives 'netease
   "Set package archives from which to fetch."
   :type '(choice
           (const :tag "Melpa" melpa)
@@ -89,23 +90,30 @@
 (require 'setup-git)
 (require 'setup-clisp)
 
+;; A temporary codes for fixing some bugs of the libs
+;; fix the problems with the "go tool vet unsupported"
+;; (let ((govet (flycheck-checker-get 'go-vet 'command)))
+;;  (when (equal (cadr govet) "tool")
+;;    (setf (cdr govet) (cddr govet))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(cgfork-package-archives (quote emacs-china))
+ '(cgfork-package-archives (quote netease))
  '(current-language-environment "UTF-8")
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
    (quote
-    ("d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" default)))
+    ("04232a0bfc50eac64c12471607090ecac9d7fd2d79e388f8543d1c5439ed81f5" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" default)))
  '(electric-pair-mode t)
+ '(ns-pop-up-frames nil)
  '(global-display-line-numbers-mode t)
  '(org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (slime smex neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
+    (go-rename go-dlv golint highlight-parentheses slime smex neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
  '(tab-stop-list
    (quote
     (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))

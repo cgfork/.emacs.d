@@ -95,5 +95,10 @@
   :ensure t
   )
 
+(use-package highlight-parentheses
+  :ensure t
+  :init
+  (highlight-parentheses-mode t))
+
 (provide 'setup-basic)
 ;;; setup-basic.el ends here

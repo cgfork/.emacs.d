@@ -85,6 +85,15 @@
   
   (add-to-list 'org-export-backends 'md)
 
+  ;; org-babel
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (go . t)
+     (python . t)
+     (java . t)
+   ))
+
   ;; Rich text clipboard
   (use-package org-rich-yank
     :bind (:map org-mode-map

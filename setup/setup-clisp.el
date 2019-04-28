@@ -9,6 +9,7 @@
   :ensure t
   :init
   :config
+  (slime-setup)
   (setq inferior-lisp-program "sbcl")
   (setq slime-contribs '(slime-fancy))
   )

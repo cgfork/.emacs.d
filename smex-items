@@ -1,19 +1,19 @@
 
 ;; ----- smex-history -----
 (
- slime
- slime-connect
- eval-buffer
  delete-file
- open-gtd-file
- shell
- describe-variable
+ eval-buffer
+ load-file
+ recover-this-file
+ package-autoremove
+ list-packages
+ package-refresh-contents
 )
 
 ;; ----- smex-data -----
 (
- (open-gtd-file . 7)
- (treemacs-projectile . 1)
+ (open-gtd-file . 11)
+ (treemacs-projectile . 3)
  (treemacs-mode . 1)
  (org-mode . 1)
  (treemacs-find-file . 1)
@@ -23,9 +23,29 @@
  (treemacs-add-project . 1)
  (dired . 1)
  (describe-variable . 1)
- (delete-file . 2)
+ (delete-file . 5)
  (shell . 1)
- (eval-buffer . 1)
- (slime-connect . 1)
- (slime . 1)
+ (eval-buffer . 2)
+ (slime-connect . 2)
+ (slime . 4)
+ (package-install . 1)
+ (highlight-parentheses-mode . 2)
+ (slime-inspect . 1)
+ (slime-complete-symbol . 1)
+ (slime-goto-xref . 1)
+ (slime-edit-definition . 1)
+ (find-function . 1)
+ (open-journal-file . 1)
+ (open-record-file . 1)
+ (projectile-ag . 2)
+ (projectile-cleanup-known-projects . 1)
+ (godef-describe . 2)
+ (org-babel-tangle . 2)
+ (org-babel-detangle . 1)
+ (org-babel-execute-maybe . 1)
+ (recover-this-file . 6)
+ (package-refresh-contents . 4)
+ (list-packages . 1)
+ (package-autoremove . 1)
+ (load-file . 1)
 )
