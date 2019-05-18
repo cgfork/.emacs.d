@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ recentf-open-files
+ swiper-query-replace
+ go-rename
  delete-file
+ go-guru-definition
  eval-buffer
- load-file
- recover-this-file
- package-autoremove
- list-packages
- package-refresh-contents
+ describe-variable
 )
 
 ;; ----- smex-data -----
@@ -18,14 +18,14 @@
  (org-mode . 1)
  (treemacs-find-file . 1)
  (treemacs-refresh . 1)
- (recentf-open-files . 1)
- (go-rename . 1)
+ (recentf-open-files . 4)
+ (go-rename . 7)
  (treemacs-add-project . 1)
  (dired . 1)
- (describe-variable . 1)
- (delete-file . 5)
+ (describe-variable . 2)
+ (delete-file . 9)
  (shell . 1)
- (eval-buffer . 2)
+ (eval-buffer . 3)
  (slime-connect . 2)
  (slime . 4)
  (package-install . 1)
@@ -42,10 +42,18 @@
  (godef-describe . 2)
  (org-babel-tangle . 2)
  (org-babel-detangle . 1)
- (org-babel-execute-maybe . 1)
+ (org-babel-execute-maybe . 7)
  (recover-this-file . 6)
  (package-refresh-contents . 4)
  (list-packages . 1)
  (package-autoremove . 1)
  (load-file . 1)
+ (magit-status . 2)
+ (magit-add-change-log-entry . 2)
+ (magit-commit . 2)
+ (magit-push . 1)
+ (org-babel-remove-result . 1)
+ (org-babel-execute-buffer . 1)
+ (go-guru-definition . 1)
+ (swiper-query-replace . 1)
 )
