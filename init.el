@@ -108,17 +108,17 @@
    (quote
     ("04232a0bfc50eac64c12471607090ecac9d7fd2d79e388f8543d1c5439ed81f5" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" default)))
  '(electric-pair-mode t)
- '(ns-pop-up-frames nil)
  '(global-display-line-numbers-mode t)
+ '(ns-pop-up-frames nil)
  '(org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (go-rename go-dlv golint highlight-parentheses slime smex neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
+    (paredit go-rename go-dlv golint highlight-parentheses slime smex neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
+ '(show-paren-mode t)
  '(tab-stop-list
    (quote
     (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
  '(tool-bar-mode nil)
- '(show-paren-mode t)
  '(winner-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

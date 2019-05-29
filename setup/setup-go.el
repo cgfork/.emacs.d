@@ -23,6 +23,7 @@
          (before-save . gofmt-before-save)
          )
   :config
+  (setq compile-command "echo Building... && go build -v && echo Testing... && go test -v && echo Linter... && golint")
   (setq gofmt-command "goimports")
   (add-hook 'go-mode-hook (lambda ()
 			    (setq-default)
@@ -30,6 +31,22 @@
 			    (setq standard-indent 2)
 			    (setq indent-tabs-mode nil)
 			    ))
+  (setq compilation-window-height 14)
+  (add-hook 'compilation-mode-hook (lambda ()
+				     (when (not (get-buffer-window "*compilation*"))
+				       (save-selected-window
+					 (save-excursion
+					   (let* ((w (split-window-vertically))
+						  (h (window-height w)))
+					     (select-window w)
+					     (switch-to-buffer "*compilation*")
+					     (shrink-window (- h compilation-window-height))))))
+				     ))
+  (setq compilation-exit-message-function (lambda (status code msg)
+					    (when (and (eq status 'exit) (zerop code))
+					      (bury-buffer "*compilation*")
+					      (delete-window (get-buffer-window (get-buffer "*compilation*"))))
+					    (cons msg code)))
   (use-package golint
     :ensure t
     )

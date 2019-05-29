@@ -1,18 +1,18 @@
 
 ;; ----- smex-history -----
 (
- recentf-open-files
- swiper-query-replace
- go-rename
- delete-file
- go-guru-definition
- eval-buffer
- describe-variable
+ paredit-open-round
+ package-install
+ package-refresh-contents
+ open-gtd-file
+ compile
+ string-rectangle
+ rectangle-mark-mode
 )
 
 ;; ----- smex-data -----
 (
- (open-gtd-file . 11)
+ (open-gtd-file . 13)
  (treemacs-projectile . 3)
  (treemacs-mode . 1)
  (org-mode . 1)
@@ -23,12 +23,12 @@
  (treemacs-add-project . 1)
  (dired . 1)
  (describe-variable . 2)
- (delete-file . 9)
+ (delete-file . 10)
  (shell . 1)
  (eval-buffer . 3)
  (slime-connect . 2)
  (slime . 4)
- (package-install . 1)
+ (package-install . 2)
  (highlight-parentheses-mode . 2)
  (slime-inspect . 1)
  (slime-complete-symbol . 1)
@@ -44,7 +44,7 @@
  (org-babel-detangle . 1)
  (org-babel-execute-maybe . 7)
  (recover-this-file . 6)
- (package-refresh-contents . 4)
+ (package-refresh-contents . 5)
  (list-packages . 1)
  (package-autoremove . 1)
  (load-file . 1)
@@ -56,4 +56,8 @@
  (org-babel-execute-buffer . 1)
  (go-guru-definition . 1)
  (swiper-query-replace . 1)
+ (rectangle-mark-mode . 1)
+ (string-rectangle . 1)
+ (compile . 5)
+ (paredit-open-round . 1)
 )
