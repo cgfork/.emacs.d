@@ -18,7 +18,7 @@
   :ensure t
   :hook ((emacs-lisp-mode . enable-paredit-mode)
 	 (lisp-mode . enable-paredit-mode)
-	 (go-mode . enable-paredit-mode)
+	;; (go-mode . enable-paredit-mode)
 	 (eval-expression-minibuffer-setup . enable-paredit-mode))
   :config
   )

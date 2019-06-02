@@ -1,25 +1,25 @@
 
 ;; ----- smex-history -----
 (
- paredit-open-round
- package-install
- package-refresh-contents
- open-gtd-file
- compile
+ disable-paredit-mode
+ enable-paredit-mode
+ treemacs-add-and-display-current-project
+ go-rename
  string-rectangle
- rectangle-mark-mode
+ open-gtd-file
+ paredit-open-round
 )
 
 ;; ----- smex-data -----
 (
- (open-gtd-file . 13)
+ (open-gtd-file . 14)
  (treemacs-projectile . 3)
  (treemacs-mode . 1)
  (org-mode . 1)
  (treemacs-find-file . 1)
  (treemacs-refresh . 1)
  (recentf-open-files . 4)
- (go-rename . 7)
+ (go-rename . 8)
  (treemacs-add-project . 1)
  (dired . 1)
  (describe-variable . 2)
@@ -57,7 +57,10 @@
  (go-guru-definition . 1)
  (swiper-query-replace . 1)
  (rectangle-mark-mode . 1)
- (string-rectangle . 1)
+ (string-rectangle . 3)
  (compile . 5)
  (paredit-open-round . 1)
+ (treemacs-add-and-display-current-project . 1)
+ (enable-paredit-mode . 1)
+ (disable-paredit-mode . 2)
 )
