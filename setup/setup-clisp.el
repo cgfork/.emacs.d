@@ -23,5 +23,9 @@
   :config
   )
 
+(use-package cider
+  :ensure t
+  :init)
+
 (provide 'setup-clisp)
 ;;; setup-clisp.el ends here

@@ -1,18 +1,18 @@
 
 ;; ----- smex-history -----
 (
+ package-install
+ package-refresh-contents
+ open-gtd-file
  disable-paredit-mode
  enable-paredit-mode
  treemacs-add-and-display-current-project
  go-rename
- string-rectangle
- open-gtd-file
- paredit-open-round
 )
 
 ;; ----- smex-data -----
 (
- (open-gtd-file . 14)
+ (open-gtd-file . 15)
  (treemacs-projectile . 3)
  (treemacs-mode . 1)
  (org-mode . 1)
@@ -28,7 +28,7 @@
  (eval-buffer . 3)
  (slime-connect . 2)
  (slime . 4)
- (package-install . 2)
+ (package-install . 3)
  (highlight-parentheses-mode . 2)
  (slime-inspect . 1)
  (slime-complete-symbol . 1)
@@ -44,7 +44,7 @@
  (org-babel-detangle . 1)
  (org-babel-execute-maybe . 7)
  (recover-this-file . 6)
- (package-refresh-contents . 5)
+ (package-refresh-contents . 6)
  (list-packages . 1)
  (package-autoremove . 1)
  (load-file . 1)
