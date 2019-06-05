@@ -1,18 +1,18 @@
 
 ;; ----- smex-history -----
 (
+ dired-sidebar-hide-sidebar
+ dired-sidebar-show-sidebar
  package-install
- package-refresh-contents
+ paredit-kill-region
+ protobuf-mode
+ delete-file
  open-gtd-file
- disable-paredit-mode
- enable-paredit-mode
- treemacs-add-and-display-current-project
- go-rename
 )
 
 ;; ----- smex-data -----
 (
- (open-gtd-file . 15)
+ (open-gtd-file . 16)
  (treemacs-projectile . 3)
  (treemacs-mode . 1)
  (org-mode . 1)
@@ -23,12 +23,12 @@
  (treemacs-add-project . 1)
  (dired . 1)
  (describe-variable . 2)
- (delete-file . 10)
+ (delete-file . 11)
  (shell . 1)
  (eval-buffer . 3)
  (slime-connect . 2)
  (slime . 4)
- (package-install . 3)
+ (package-install . 4)
  (highlight-parentheses-mode . 2)
  (slime-inspect . 1)
  (slime-complete-symbol . 1)
@@ -60,7 +60,12 @@
  (string-rectangle . 3)
  (compile . 5)
  (paredit-open-round . 1)
- (treemacs-add-and-display-current-project . 1)
+ (treemacs-add-and-display-current-project . 3)
  (enable-paredit-mode . 1)
  (disable-paredit-mode . 2)
+ (cider-jack-in . 1)
+ (paredit-kill-region . 2)
+ (protobuf-mode . 1)
+ (dired-sidebar-show-sidebar . 1)
+ (dired-sidebar-hide-sidebar . 1)
 )

@@ -89,6 +89,10 @@
 (require 'setup-treemacs)
 (require 'setup-git)
 (require 'setup-clisp)
+(require 'protobuf-mode)
+
+(add-hook 'protobuf-mode-hook
+	  (lambda () (c-add-style "my-style" '((c-basic-offset . 2) (indent-tabs-mode . nil)) t)))
 
 ;; A temporary codes for fixing some bugs of the libs
 ;; fix the problems with the "go tool vet unsupported"
@@ -113,7 +117,7 @@
  '(org-adapt-indentation nil)
  '(package-selected-packages
    (quote
-    (cider paredit go-rename go-dlv golint highlight-parentheses slime smex neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
+    (dired-sidebar cider paredit go-rename go-dlv golint highlight-parentheses slime smex neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
  '(show-paren-mode t)
  '(tab-stop-list
    (quote

@@ -12,6 +12,9 @@
 ;; disable tool bar
 (tool-bar-mode -1)
 
+;; disable scroll mode
+(set-scroll-bar-mode nil)
+
 ;; Key Modifiers in windows
 (when sys/win32p
   (setq w32-lwindow-modifier 'super) ; left win
