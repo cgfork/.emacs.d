@@ -3,11 +3,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
-  (require 'setup-const)
-  (require 'setup-basic)
-  )
-
 (use-package treemacs
   :ensure t
   :defer t

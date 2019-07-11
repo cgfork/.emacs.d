@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
-  (require 'setup-const)
-  (require 'setup-basic))
-
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)

@@ -1,9 +1,6 @@
 ;;; package --- summary
 ;;; Commentary:
 ;;; Code:
-(eval-when-compile
-  (require 'setup-const)
-  (require 'setup-basic))
 
 (use-package slime
   :ensure t

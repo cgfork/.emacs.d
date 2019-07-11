@@ -1,8 +1,6 @@
 ;;; package --- summary
 ;;; Commentary:
 ;;; Code:
-(eval-when-compile
-  (require 'setup-const))
 
 ;; my workflow
 (setq org-home "~/.org")
@@ -82,9 +80,14 @@
            ((stuck "") ;; review stuck projects as designated by org-stuck-projects
             (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
             ))))
+
+  (use-package plantuml-mode
+    :ensure t)
   
   (add-to-list 'org-export-backends 'md)
 
+  (setq org-plantuml-jar-path
+      (expand-file-name "~/.bin/plantuml.jar"))
   ;; org-babel
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -92,6 +95,7 @@
      (go . t)
      (python . t)
      (java . t)
+     (plantuml . t)
    ))
 
   ;; Rich text clipboard
@@ -116,6 +120,7 @@
        (python . t)
        (emacs-lisp .t)))
     )
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
 
   (use-package ox-md
     :config

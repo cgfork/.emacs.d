@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
-  (require 'setup-const)
-  (require 'setup-basic))
-
 (use-package projectile
   :ensure t
   :config

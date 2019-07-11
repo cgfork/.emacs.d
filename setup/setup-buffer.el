@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
- (require 'setup-const)
- (require 'setup-basic))
-
 ;; Setup buffers
 ;; (setq ido-enable-flex-matching t)
 ;; (setq ido-everywhere t)

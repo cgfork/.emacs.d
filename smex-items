@@ -1,34 +1,34 @@
 
 ;; ----- smex-history -----
 (
- dired-sidebar-hide-sidebar
- dired-sidebar-show-sidebar
+ customize-variable
+ describe-function
+ delete-region
+ describe-variable
+ comment-region
  package-install
- paredit-kill-region
- protobuf-mode
- delete-file
- open-gtd-file
+ package-refresh-contents
 )
 
 ;; ----- smex-data -----
 (
- (open-gtd-file . 16)
+ (open-gtd-file . 23)
  (treemacs-projectile . 3)
  (treemacs-mode . 1)
  (org-mode . 1)
  (treemacs-find-file . 1)
  (treemacs-refresh . 1)
  (recentf-open-files . 4)
- (go-rename . 8)
+ (go-rename . 10)
  (treemacs-add-project . 1)
  (dired . 1)
- (describe-variable . 2)
- (delete-file . 11)
- (shell . 1)
+ (describe-variable . 6)
+ (delete-file . 17)
+ (shell . 2)
  (eval-buffer . 3)
  (slime-connect . 2)
  (slime . 4)
- (package-install . 4)
+ (package-install . 15)
  (highlight-parentheses-mode . 2)
  (slime-inspect . 1)
  (slime-complete-symbol . 1)
@@ -43,9 +43,9 @@
  (org-babel-tangle . 2)
  (org-babel-detangle . 1)
  (org-babel-execute-maybe . 7)
- (recover-this-file . 6)
- (package-refresh-contents . 6)
- (list-packages . 1)
+ (recover-this-file . 7)
+ (package-refresh-contents . 12)
+ (list-packages . 2)
  (package-autoremove . 1)
  (load-file . 1)
  (magit-status . 2)
@@ -63,9 +63,30 @@
  (treemacs-add-and-display-current-project . 3)
  (enable-paredit-mode . 1)
  (disable-paredit-mode . 2)
- (cider-jack-in . 1)
+ (cider-jack-in . 12)
  (paredit-kill-region . 2)
  (protobuf-mode . 1)
  (dired-sidebar-show-sidebar . 1)
  (dired-sidebar-hide-sidebar . 1)
+ (find-grep . 2)
+ (load-theme . 36)
+ (describe-font . 4)
+ (eshell . 3)
+ (json-pretty-print-buffer . 16)
+ (rename-file . 1)
+ (lsp . 9)
+ (lsp-workspace-folders-open . 2)
+ (lsp-workspace-folders-add . 2)
+ (lsp-workspace-blacklist-remove . 2)
+ (lsp-workspace-folders-remove . 1)
+ (mc/mark-all-like-this-dwim . 2)
+ (company-go . 1)
+ (comment-box . 1)
+ (uncomment-region . 1)
+ (customize-variable . 11)
+ (plantuml-set-exec-mode . 3)
+ (comment-region . 2)
+ (x . 2)
+ (delete-region . 3)
+ (describe-function . 1)
 )

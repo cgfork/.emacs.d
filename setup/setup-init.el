@@ -2,9 +2,50 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
-  (require 'setup-const)
-  )
+(defconst sys/win32p
+  (eq system-type 'windows-nt)
+  "Are we running on a WinTel system?")
+
+(defconst sys/linuxp
+  (eq system-type 'gnu/linux)
+  "Are we running on a GNU/Linux system?")
+
+(defconst sys/macp
+  (eq system-type 'darwin)
+  "Are we running on a Mac system?")
+
+(defconst sys/mac-x-p
+  (and (display-graphic-p) sys/macp)
+  "Are we running under X on a Mac system?")
+
+(defconst sys/linux-x-p
+  (and (display-graphic-p) sys/linuxp)
+  "Are we running under X on a GNU/Linux system?")
+
+(defconst sys/cygwinp
+  (eq system-type 'cygwin)
+  "Are we running on a Cygwin system?")
+
+(defconst sys/rootp
+  (string-equal "root" (getenv "USER"))
+  "Are you using ROOT user?")
+
+(defconst emacs/>=25p
+  (>= emacs-major-version 25)
+  "Emacs is 25 or above.")
+
+(defconst emacs/>=26p
+  (>= emacs-major-version 26)
+  "Emacs is 26 or above.")
+
+(defconst emacs/>=27p
+  (>= emacs-major-version 27)
+  "Emacs is 27 or above.")
+
+(defconst emacs/>=25.2p
+  (or emacs/>=26p
+      (and (= emacs-major-version 25) (>= emacs-minor-version 2)))
+  "Emacs is 25.2 or above.")
 
 ;; disable files backup
 (setq make-backup-files nil)
@@ -14,6 +55,11 @@
 
 ;; disable scroll mode
 (set-scroll-bar-mode nil)
+
+;; display tim
+(display-time-mode t)
+
+(column-number-mode t)
 
 ;; Key Modifiers in windows
 (when sys/win32p
@@ -103,5 +149,13 @@
   :init
   (highlight-parentheses-mode t))
 
-(provide 'setup-basic)
-;;; setup-basic.el ends here
+;; (use-package doom-modeline
+;;       :ensure t
+;;       :hook (after-init . doom-modeline-mode))
+
+
+(provide 'setup-init)
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars)
+;; End:
+;;; setup-init.el ends here

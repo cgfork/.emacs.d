@@ -2,15 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
-  (require 'setup-const)
-  (require 'setup-basic))
-
 (use-package dired
   :ensure nil
   :config
   (setq dired-recursive-deletes 'always)
-  (setq dired-recursize-copies 'always)
+  (setq dired-recursive-copies 'always)
 
   (when sys/macp
     (setq dired-use-ls-dired nil)
@@ -59,12 +55,6 @@
 	  (concat dired-omit-files
 		  "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*"))
     )
-  )
-
-(use-package pcre2el
-  :ensure t
-  :config
-  (pcre-mode)
   )
 
 (provide 'setup-dired)
