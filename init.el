@@ -148,6 +148,7 @@
 
 ;; Setup load path and use-pacakge
 (add-to-list 'load-path (expand-file-name "setup" user-emacs-directory))
+(cgfork-set-package-archives cgfork-package-archives)
 (require 'package)
 (setq package-enable-at-startup nil)
 (package-initialize)
