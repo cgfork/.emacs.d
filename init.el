@@ -556,12 +556,23 @@
 	("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
 	("b" "NOTE" tags-todo "NOTE")
 	("p" . "项目安排")
-	("pw" "迭代任务" tags-todo "+PROJECT+WORK+CATEGORY=\"kaola\"")
-	("pf" "未来要做的任务" tags-todo "+PROJECT+FUTURE+CATEGORY=\"kaola\"")
+	("pw" "迭代任务" tags-todo "+PROJECT+CATEGORY=\"WORK\"")
+	("pf" "未来要做的任务" tags-todo "+PROJECT+FUTURE+CATEGORY=\"WORK\"")
 	("W" "Weekly Review"
 	 ((stuck "") ;; review stuck projects as designated by org-stuck-projects
        (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
        )))))
+  (defadvice org-html-paragraph (before org-html-paragraph-advice
+                                        (paragraph contents info) activate)
+    "Join consecutive Chinese lines into a single long line without
+unwanted space when exporting org-mode to html."
+    (let* ((origin-contents (ad-get-arg 1))
+           (fix-regexp "[[:multibyte:]]")
+           (fixed-contents
+            (replace-regexp-in-string
+             (concat
+              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
+      (ad-set-arg 1 fixed-contents)))
 
   (add-to-list 'org-export-backends 'md)
 
@@ -772,7 +783,6 @@
     )
   )
 
-
 (use-package slime
   :ensure t
   :init
@@ -782,18 +792,18 @@
   (setq slime-contribs '(slime-fancy))
   )
 
+(use-package cider
+  :ensure t
+  :init)
+
 (use-package paredit
   :ensure t
   :hook ((emacs-lisp-mode . enable-paredit-mode)
 	 (lisp-mode . enable-paredit-mode)
-	;; (go-mode . enable-paredit-mode)
+	 (clojure-mode . enable-paredit-mode)
 	 (eval-expression-minibuffer-setup . enable-paredit-mode))
   :config
   )
-
-(use-package cider
-  :ensure t
-  :init)
 
 ;; setup protobuf
 (require 'protobuf-mode)
@@ -883,6 +893,7 @@ Added:%U")
       "* %U - %^{Heading}%^g
 %?
 "))))
+ '(org-export-headline-levels 6)
  '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(package-selected-packages
    (quote

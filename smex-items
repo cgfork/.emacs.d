@@ -1,29 +1,29 @@
 
 ;; ----- smex-history -----
 (
+ delete-directory
+ delete-file
+ cgfork-open-gtd-file
  customize-variable
- describe-function
- delete-region
  describe-variable
- comment-region
- package-install
- package-refresh-contents
+ cider-jack-in
+ paredit-mode
 )
 
 ;; ----- smex-data -----
 (
  (open-gtd-file . 23)
- (treemacs-projectile . 3)
+ (treemacs-projectile . 6)
  (treemacs-mode . 1)
  (org-mode . 1)
- (treemacs-find-file . 1)
+ (treemacs-find-file . 2)
  (treemacs-refresh . 1)
  (recentf-open-files . 4)
  (go-rename . 10)
- (treemacs-add-project . 1)
+ (treemacs-add-project . 2)
  (dired . 1)
- (describe-variable . 6)
- (delete-file . 17)
+ (describe-variable . 7)
+ (delete-file . 22)
  (shell . 2)
  (eval-buffer . 3)
  (slime-connect . 2)
@@ -47,7 +47,7 @@
  (package-refresh-contents . 12)
  (list-packages . 2)
  (package-autoremove . 1)
- (load-file . 1)
+ (load-file . 2)
  (magit-status . 2)
  (magit-add-change-log-entry . 2)
  (magit-commit . 2)
@@ -63,7 +63,7 @@
  (treemacs-add-and-display-current-project . 3)
  (enable-paredit-mode . 1)
  (disable-paredit-mode . 2)
- (cider-jack-in . 12)
+ (cider-jack-in . 19)
  (paredit-kill-region . 2)
  (protobuf-mode . 1)
  (dired-sidebar-show-sidebar . 1)
@@ -83,10 +83,15 @@
  (company-go . 1)
  (comment-box . 1)
  (uncomment-region . 1)
- (customize-variable . 11)
+ (customize-variable . 12)
  (plantuml-set-exec-mode . 3)
  (comment-region . 2)
  (x . 2)
  (delete-region . 3)
  (describe-function . 1)
+ (cgfork-open-gtd-file . 7)
+ (treemacs . 1)
+ (describe-mode . 1)
+ (paredit-mode . 1)
+ (delete-directory . 1)
 )
