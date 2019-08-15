@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- delete-directory
- delete-file
+ tags-query-replace
  cgfork-open-gtd-file
  customize-variable
- describe-variable
  cider-jack-in
- paredit-mode
+ delete-pair
+ cider-test-run-test
+ cider-run
 )
 
 ;; ----- smex-data -----
@@ -23,7 +23,7 @@
  (treemacs-add-project . 2)
  (dired . 1)
  (describe-variable . 7)
- (delete-file . 22)
+ (delete-file . 23)
  (shell . 2)
  (eval-buffer . 3)
  (slime-connect . 2)
@@ -63,7 +63,7 @@
  (treemacs-add-and-display-current-project . 3)
  (enable-paredit-mode . 1)
  (disable-paredit-mode . 2)
- (cider-jack-in . 19)
+ (cider-jack-in . 23)
  (paredit-kill-region . 2)
  (protobuf-mode . 1)
  (dired-sidebar-show-sidebar . 1)
@@ -73,7 +73,7 @@
  (describe-font . 4)
  (eshell . 3)
  (json-pretty-print-buffer . 16)
- (rename-file . 1)
+ (rename-file . 2)
  (lsp . 9)
  (lsp-workspace-folders-open . 2)
  (lsp-workspace-folders-add . 2)
@@ -83,15 +83,19 @@
  (company-go . 1)
  (comment-box . 1)
  (uncomment-region . 1)
- (customize-variable . 12)
+ (customize-variable . 13)
  (plantuml-set-exec-mode . 3)
  (comment-region . 2)
  (x . 2)
  (delete-region . 3)
  (describe-function . 1)
- (cgfork-open-gtd-file . 7)
+ (cgfork-open-gtd-file . 12)
  (treemacs . 1)
  (describe-mode . 1)
  (paredit-mode . 1)
  (delete-directory . 1)
+ (cider-run . 1)
+ (cider-test-run-test . 2)
+ (delete-pair . 1)
+ (tags-query-replace . 1)
 )

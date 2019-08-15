@@ -540,8 +540,8 @@
 	 "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\n%?\n%i\nAdded:%U")
 	("D" "Todo with Deadline" entry (file+datetree cgfork-gtd-file)
 	 "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n%?\n%i\nAdded:%U")
-	("W" "Work" entry (file+datetree cgfork-gtd-file)
-	 "* TODO [#B] %^{Description} :PROJECT:%^g\nDEADLINE: %^t\n:PROPERTIES:\n:CATEGORY: %^{Category}\n:END:\n%?\n %i\nAdded:%U")
+	("P" "TODO with Properties" entry (file+datetree cgfork-gtd-file)
+	 "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n:PROPERTIES:\n:CATEGORY: %^{Category}\n:END:\n%?\n %i\nAdded:%U")
 	("j" "Journal" entry (file+datetree cgfork-journal-file)
 	 "* %U - %^{Heading}\n %?")
 	("l" "Log Time" entry (file+datetree cgfork-record-file)
@@ -557,8 +557,12 @@
 	("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
 	("b" "NOTE" tags-todo "NOTE")
 	("p" . "项目安排")
-	("pw" "迭代任务" tags-todo "+PROJECT+CATEGORY=\"WORK\"")
-	("pf" "未来要做的任务" tags-todo "+PROJECT+FUTURE+CATEGORY=\"WORK\"")
+	("pw" "迭代任务" tags "CATEGORY=\"WORK\"")
+	("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORK\"")
+	("P" "Programming Language" ((tags "JAVA|GO|CLJ|CLJS|JS|SHELL")
+				     (tags-todo "JAVA|GO|CLJ|CLJS|JS|SHELL")))
+	("S" "Skills Review" ((tags "CATEGORY=\"SKILLS\"")
+			       (tags-todo "CATEGORY=\"SKILLS\"")))
 	("W" "Weekly Review"
 	 ((stuck "") ;; review stuck projects as designated by org-stuck-projects
        (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
@@ -832,68 +836,6 @@ unwanted space when exporting org-mode to html."
  '(make-backup-files nil)
  '(ns-pop-up-frames nil)
  '(org-adapt-indentation nil)
- '(org-agenda-custom-commands
-   (quote
-    (("w" . "任务安排")
-     ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
-     ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
-     ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
-     ("b" "NOTE" tags-todo "NOTE")
-     ("p" . "项目安排")
-     ("pw" "迭代任务" tags-todo "+PROJECT+WORK+CATEGORY=\"kaola\"")
-     ("pf" "未来要做的任务" tags-todo "+PROJECT+FUTURE+CATEGORY=\"kaola\"")
-     ("W" "Weekly Review"
-      ((stuck "")
-       (tags-todo "PROJECT"))))))
- '(org-capture-templates
-   (quote
-    (("t" "Todo" entry
-      (file+datetree gtd-file)
-      "* TODO [#B] %^{Description} %^g
-%?
-%i
-Added:%U")
-     ("T" "Todo with Clipboard" entry
-      (file+datetree cgfork-gtd-file)
-      "* TODO [#B] %^{Description} %^g
-%c
-Added:%U")
-     ("S" "Todo with Scheduled" entry
-      (file+datetree cgfork-gtd-file)
-      "* TODO [#B] %^{Description} %^g
-SCHEDULED: %^t
-%?
-%i
-Added:%U")
-     ("D" "Todo with Deadline" entry
-      (file+datetree cgfork-gtd-file)
-      "* TODO [#B] %^{Description} %^g
-DEADLINE: %^t
-%?
-%i
-Added:%U")
-     ("W" "Work" entry
-      (file+datetree cgfork-gtd-file)
-      "* TODO [#B] %^{Description} :PROJECT:%^g
-DEADLINE: %^t
-:PROPERTIES:
-:CATEGORY: %^{Category}
-:END:
-%?
- %i
-Added:%U")
-     ("j" "Journal" entry
-      (file+datetree cgfork-journal-file)
-      "* %U - %^{Heading}
- %?")
-     ("l" "Log Time" entry
-      (file+datetree cgfork-record-file)
-      "* %U - %^{Activity}	 :TIME:")
-     ("s" "Code Snippets" entry
-      (file+datetree cgfork-snippet-file)
-      "* %U - %^{Heading}%^g
-%?
-"))))
  '(org-export-headline-levels 6)
  '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(package-selected-packages
