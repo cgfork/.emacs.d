@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- tags-query-replace
- cgfork-open-gtd-file
  customize-variable
- cider-jack-in
- delete-pair
  cider-test-run-test
- cider-run
+ clojure-mode-menu
+ cider-jack-in
+ show-entry
+ show-all
+ org-align-all-tags
 )
 
 ;; ----- smex-data -----
@@ -63,7 +63,7 @@
  (treemacs-add-and-display-current-project . 3)
  (enable-paredit-mode . 1)
  (disable-paredit-mode . 2)
- (cider-jack-in . 23)
+ (cider-jack-in . 24)
  (paredit-kill-region . 2)
  (protobuf-mode . 1)
  (dired-sidebar-show-sidebar . 1)
@@ -83,19 +83,23 @@
  (company-go . 1)
  (comment-box . 1)
  (uncomment-region . 1)
- (customize-variable . 13)
+ (customize-variable . 14)
  (plantuml-set-exec-mode . 3)
  (comment-region . 2)
  (x . 2)
  (delete-region . 3)
  (describe-function . 1)
- (cgfork-open-gtd-file . 12)
+ (cgfork-open-gtd-file . 17)
  (treemacs . 1)
  (describe-mode . 1)
  (paredit-mode . 1)
  (delete-directory . 1)
  (cider-run . 1)
- (cider-test-run-test . 2)
+ (cider-test-run-test . 5)
  (delete-pair . 1)
  (tags-query-replace . 1)
+ (org-align-all-tags . 1)
+ (show-all . 1)
+ (show-entry . 1)
+ (clojure-mode-menu . 1)
 )

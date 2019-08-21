@@ -77,14 +77,8 @@
 (defvar cgfork-gtd-file
   (concat (file-name-as-directory cgfork-org-home) (format-time-string "gtd_%Y.org")))
 
-(defvar cgfork-record-file
-  (concat (file-name-as-directory cgfork-org-home) (format-time-string "record_%Y.org")))
-
-(defvar cgfork-snippet-file
-  (concat (file-name-as-directory cgfork-org-home) (format-time-string "snippet_%Y.org")))
-
 (defvar cgfork-journal-file
-  (concat (file-name-as-directory cgfork-org-home) (format-time-string "journal_%Y.org")))
+  (concat (file-name-as-directory cgfork-org-home) "journal.org"))
 
 ;; Define alias
 ;; Set list-buffers to ibuffer
@@ -130,21 +124,6 @@
   "Open the gtd file."
   (interactive)
   (find-file cgfork-gtd-file))
-
-(defun cgfork-open-record-file()
-  "Open the record file."
-  (interactive)
-  (find-file cgfork-record-file))
-
-(defun cgfork-open-snippet-file()
-  "Open the snippet file."
-  (interactive)
-  (find-file cgfork-snippet-file))
-
-(defun cgfork-open-journal-file()
-  "Open the journal file."
-  (interactive)
-  (find-file cgfork-journal-file))
 
 ;; Setup load path and use-pacakge
 (add-to-list 'load-path (expand-file-name "setup" user-emacs-directory))
@@ -532,22 +511,24 @@
   (custom-set-variables
     '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
     '(org-capture-templates
-      '(("t" "Todo" entry (file+datetree gtd-file)
-	 "* TODO [#B] %^{Description} %^g\n%?\n%i\nAdded:%U")
-	("T" "Todo with Clipboard" entry (file+datetree cgfork-gtd-file)
-	 "* TODO [#B] %^{Description} %^g\n%c\nAdded:%U")
-	("S" "Todo with Scheduled" entry (file+datetree cgfork-gtd-file)
-	 "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\n%?\n%i\nAdded:%U")
-	("D" "Todo with Deadline" entry (file+datetree cgfork-gtd-file)
-	 "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n%?\n%i\nAdded:%U")
-	("P" "TODO with Properties" entry (file+datetree cgfork-gtd-file)
-	 "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n:PROPERTIES:\n:CATEGORY: %^{Category}\n:END:\n%?\n %i\nAdded:%U")
-	("j" "Journal" entry (file+datetree cgfork-journal-file)
+      '(("t" "Todo" entry (file+olp+datetree cgfork-gtd-file)
+	 "* TODO [#B] %^{Description} %^g\n%?\n%i\nAdded:%U" :time-prompt t)
+	("T" "Todo with Clipboard" entry (file+olp+datetree cgfork-gtd-file)
+	 "* TODO [#B] %^{Description} %^g\n%c\nAdded:%U" :time-prompt t)
+	("S" "Todo with Scheduled" entry (file+olp+datetree cgfork-gtd-file)
+	 "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\n%?\n%i\nAdded:%U" :time-prompt t)
+	("D" "Todo with Deadline" entry (file+olp+datetree cgfork-gtd-file)
+	 "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n%?\n%i\nAdded:%U" :time-prompt t)
+	("P" "TODO with Properties" entry (file+olp+datetree cgfork-gtd-file)
+	 "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n:PROPERTIES:\n:CATEGORY: %^{Category}\n:END:\n%?\n %i\nAdded:%U" :time-prompt t)
+	("j" "Journal" entry (file+olp cgfork-journal-file "Journal")
 	 "* %U - %^{Heading}\n %?")
-	("l" "Log Time" entry (file+datetree cgfork-record-file)
+	("l" "Log Time" entry (file+olp cgfork-journal-file "Log Time")
 	 "* %U - %^{Activity}\t :TIME:")
-	("s" "Code Snippets" entry (file+datetree cgfork-snippet-file)
+	("s" "Code Snippets" entry (file+olp cgfork-journal-file "Code Snippets")
 	 "* %U - %^{Heading}%^g\n%?\n")
+	("c" "Contacts" table-line (file+olp cgfork-journal-file "Contacts")
+         "| %U | %^{Name} | %^{Phone}| %^{E-mail} |")
 	))
     '(org-agenda-custom-commands
       '(
