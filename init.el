@@ -782,6 +782,21 @@ unwanted space when exporting org-mode to html."
   :ensure t
   :init)
 
+(use-package clj-refactor
+  :ensure t
+  :config
+  (add-hook 'clojure-mode-hook
+	    (lambda ()
+	      (clj-refactor-mode 1)
+	      (yas-minor-mode 1)
+	      (cljr-add-keybindings-with-prefix "C-c C-m"))))
+
+;; (use-package flycheck-clojure
+;;   :ensure t
+;;   :config
+;;   (flycheck-clojure-setup)
+;;   (add-hook 'after-init-hook #'global-flycheck-mode))
+
 (use-package paredit
   :ensure t
   :hook ((emacs-lisp-mode . enable-paredit-mode)
@@ -817,11 +832,82 @@ unwanted space when exporting org-mode to html."
  '(make-backup-files nil)
  '(ns-pop-up-frames nil)
  '(org-adapt-indentation nil)
+ '(org-agenda-custom-commands
+   (quote
+    (("w" . "任务安排")
+     ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
+     ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+     ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
+     ("b" "NOTE" tags-todo "NOTE")
+     ("p" . "项目安排")
+     ("pw" "迭代任务" tags "CATEGORY=\"WORK\"")
+     ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORK\"")
+     ("P" "Programming Language"
+      ((tags "JAVA|GO|CLJ|CLJS|JS|SHELL")
+       (tags-todo "JAVA|GO|CLJ|CLJS|JS|SHELL")))
+     ("S" "Skills Review"
+      ((tags "CATEGORY=\"SKILLS\"")
+       (tags-todo "CATEGORY=\"SKILLS\"")))
+     ("W" "Weekly Review"
+      ((stuck "")
+       (tags-todo "PROJECT"))))))
+ '(org-capture-templates
+   (quote
+    (("t" "Todo" entry
+      (file+olp+datetree cgfork-gtd-file)
+      "* TODO [#B] %^{Description} %^g
+%?
+%i
+Added:%U" :time-prompt t)
+     ("T" "Todo with Clipboard" entry
+      (file+olp+datetree cgfork-gtd-file)
+      "* TODO [#B] %^{Description} %^g
+%c
+Added:%U" :time-prompt t)
+     ("S" "Todo with Scheduled" entry
+      (file+olp+datetree cgfork-gtd-file)
+      "* TODO [#B] %^{Description} %^g
+SCHEDULED: %^t
+%?
+%i
+Added:%U" :time-prompt t)
+     ("D" "Todo with Deadline" entry
+      (file+olp+datetree cgfork-gtd-file)
+      "* TODO [#B] %^{Description} %^g
+DEADLINE: %^t
+%?
+%i
+Added:%U" :time-prompt t)
+     ("P" "TODO with Properties" entry
+      (file+olp+datetree cgfork-gtd-file)
+      "* TODO [#B] %^{Description} %^g
+DEADLINE: %^t
+:PROPERTIES:
+:CATEGORY: %^{Category}
+:END:
+%?
+ %i
+Added:%U" :time-prompt t)
+     ("j" "Journal" entry
+      (file+olp cgfork-journal-file "Journal")
+      "* %U - %^{Heading}
+ %?")
+     ("l" "Log Time" entry
+      (file+olp cgfork-journal-file "Log Time")
+      "* %U - %^{Activity}	 :TIME:")
+     ("s" "Code Snippets" entry
+      (file+olp cgfork-journal-file "Code Snippets")
+      "* %U - %^{Heading}%^g
+%?
+")
+     ("c" "Contacts" table-line
+      (file+olp cgfork-journal-file "Contacts")
+      "| %U | %^{Name} | %^{Phone}| %^{E-mail} |"))))
  '(org-export-headline-levels 6)
  '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(package-selected-packages
    (quote
-    (ac-html doom-modeline spacemacs-theme solarized-theme lsp-ui lsp-mode ample-zen-theme dracula-theme dired-sidebar cider paredit go-rename go-dlv golint highlight-parentheses slime smex neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
+    (flycheck-clojure clj-refactor cli-refactor ac-html doom-modeline spacemacs-theme solarized-theme lsp-ui lsp-mode ample-zen-theme dracula-theme dired-sidebar cider paredit go-rename go-dlv golint highlight-parentheses slime smex neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
  '(plantuml-default-exec-mode (quote jar))
  '(plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(scroll-bar-mode nil)
