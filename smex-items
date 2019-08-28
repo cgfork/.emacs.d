@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ paredit-reindent-defun
+ cider-jack-in
+ org-set-tags-command
  customize-variable
  cider-test-run-test
  clojure-mode-menu
- cider-jack-in
  show-entry
- show-all
- org-align-all-tags
 )
 
 ;; ----- smex-data -----
@@ -63,7 +63,7 @@
  (treemacs-add-and-display-current-project . 3)
  (enable-paredit-mode . 1)
  (disable-paredit-mode . 2)
- (cider-jack-in . 24)
+ (cider-jack-in . 27)
  (paredit-kill-region . 2)
  (protobuf-mode . 1)
  (dired-sidebar-show-sidebar . 1)
@@ -102,4 +102,6 @@
  (show-all . 1)
  (show-entry . 1)
  (clojure-mode-menu . 1)
+ (org-set-tags-command . 1)
+ (paredit-reindent-defun . 1)
 )
