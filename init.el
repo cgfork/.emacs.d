@@ -542,8 +542,8 @@
 	("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORK\"")
 	("P" "Programming Language" ((tags "JAVA|GO|CLJ|CLJS|JS|SHELL")
 				     (tags-todo "JAVA|GO|CLJ|CLJS|JS|SHELL")))
-	("S" "Skills Review" ((tags "CATEGORY=\"SKILLS\"")
-			       (tags-todo "CATEGORY=\"SKILLS\"")))
+	("S" "Skills Review" ((tags "CATEGORY=\"LEARN\"")
+			       (tags-todo "CATEGORY=\"LEARN\"")))
 	("W" "Weekly Review"
 	 ((stuck "") ;; review stuck projects as designated by org-stuck-projects
        (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
