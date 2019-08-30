@@ -155,7 +155,11 @@
   )
 
 ;; Setup fonts
-(set-frame-font "-*-Ubuntu Mono derivative Powerline-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+(when sys/mac-x-p
+  (set-frame-font "-*-Ubuntu Mono derivative Powerline-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
+
+(when sys/linux-x-p
+  (set-frame-font "-GOOG-Noto Mono-normal-normal-normal-*-24-*-*-*-m-0-iso10646-1"))
 
 ;; Setup packages
 ;; Start server
@@ -299,44 +303,12 @@
 	    (and (not sys/macp) (executable-find "ls")))
     (setq dired-listing-switches "-alh -group-directories-first")
     (use-package dired-quick-sort
-      :ensure nil
+      :ensure t
       :init (dired-quick-sort-setup)))
 
   (use-package diredfl
-    :ensure nil
-    :init (diredfl-global-mode 1))
-
-  (use-package dired-aux
-    :ensure nil)
-  
-  (use-package dired-x
-    :ensure nil
-    :demand
-    :config
-    (let ((cmd (cond
-		(sys/mac-x-p "open")
-		(sys/linux-x-p "xdg-open")
-		(sys/win32p "start")
-		(t ""))))
-      (setq dired-guess-shell-alist-user
-	     `(("\\.pdf\\'" ,cmd)
-              ("\\.docx\\'" ,cmd)
-              ("\\.\\(?:djvu\\|eps\\)\\'" ,cmd)
-              ("\\.\\(?:jpg\\|jpeg\\|png\\|gif\\|xpm\\)\\'" ,cmd)
-              ("\\.\\(?:xcf\\)\\'" ,cmd)
-              ("\\.csv\\'" ,cmd)
-              ("\\.tex\\'" ,cmd)
-              ("\\.\\(?:mp4\\|mkv\\|avi\\|flv\\|rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'"
-               ,cmd)
-              ("\\.\\(?:mp3\\|flac\\)\\'" ,cmd)
-              ("\\.html?\\'" ,cmd)
-              ("\\.md\\'" ,cmd))))
-
-    (setq dired-omit-files
-	  (concat dired-omit-files
-		  "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*"))
-    )
-  )
+    :ensure t
+    :init (diredfl-global-mode 1)))
 
 (use-package projectile
   :ensure t
@@ -364,7 +336,8 @@
   :ensure t
   :diminish yas-minor-mode
   :init (yas-global-mode 1)
-  :config (use-package yasnippet-snippets))
+  :config (use-package yasnippet-snippets
+	    :ensure t))
 
 (use-package company
   :ensure t
@@ -482,7 +455,7 @@
   :ensure t)
 
 (use-package plantuml-mode
-  :ensure nil
+  :ensure t
   :init
   (custom-set-variables
    '(plantuml-default-exec-mode (quote jar))
@@ -490,6 +463,9 @@
    )
   :config
   (plantuml-set-exec-mode "jar"))
+
+(use-package ob-go
+    :ensure t)
 
 (use-package org
   :ensure nil
@@ -601,6 +577,7 @@ unwanted space when exporting org-mode to html."
 
   ;; Preview
   (use-package org-preview-html
+    :ensure t
     :diminish org-preview-html-mode)
 
   (use-package ob
@@ -907,7 +884,7 @@ Added:%U" :time-prompt t)
  '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(package-selected-packages
    (quote
-    (flycheck-clojure clj-refactor cli-refactor ac-html doom-modeline spacemacs-theme solarized-theme lsp-ui lsp-mode ample-zen-theme dracula-theme dired-sidebar cider paredit go-rename go-dlv golint highlight-parentheses slime smex neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors ob-go org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
+    (flycheck-clojure clj-refactor cli-refactor ac-html doom-modeline spacemacs-theme solarized-theme lsp-ui lsp-mode ample-zen-theme dracula-theme dired-sidebar cider paredit go-rename go-dlv golint highlight-parentheses slime smex neotree command-log-mode zenburn-theme treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil treemacs go-guru go-eldoc company-go multiple-cursors org-preview-html go-mode counsel-projectile projectile diredfl all-the-icons-dired pcre2el dired+ yasnippet-snippets company counsel ace-window exec-path-from-shell try use-package)))
  '(plantuml-default-exec-mode (quote jar))
  '(plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(scroll-bar-mode nil)
