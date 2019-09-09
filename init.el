@@ -797,6 +797,7 @@ unwanted space when exporting org-mode to html."
  '(cgfork-package-archives (quote netease))
  '(column-number-mode t)
  '(current-language-environment "UTF-8")
+ '(cursor-type (quote bar))
  '(custom-enabled-themes (quote (solarized-light)))
  '(custom-safe-themes
    (quote

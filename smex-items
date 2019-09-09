@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- paredit-reindent-defun
  cider-jack-in
- org-set-tags-command
  customize-variable
- cider-test-run-test
- clojure-mode-menu
- show-entry
+ cgfork-open-gtd-file
+ clojure-align
+ cljr-rename-symbol
+ cider
+ paredit-backward
 )
 
 ;; ----- smex-data -----
@@ -22,7 +22,7 @@
  (go-rename . 10)
  (treemacs-add-project . 2)
  (dired . 1)
- (describe-variable . 7)
+ (describe-variable . 8)
  (delete-file . 23)
  (shell . 2)
  (eval-buffer . 3)
@@ -63,7 +63,7 @@
  (treemacs-add-and-display-current-project . 3)
  (enable-paredit-mode . 1)
  (disable-paredit-mode . 2)
- (cider-jack-in . 27)
+ (cider-jack-in . 33)
  (paredit-kill-region . 2)
  (protobuf-mode . 1)
  (dired-sidebar-show-sidebar . 1)
@@ -83,13 +83,13 @@
  (company-go . 1)
  (comment-box . 1)
  (uncomment-region . 1)
- (customize-variable . 14)
+ (customize-variable . 15)
  (plantuml-set-exec-mode . 3)
  (comment-region . 2)
  (x . 2)
  (delete-region . 3)
  (describe-function . 1)
- (cgfork-open-gtd-file . 17)
+ (cgfork-open-gtd-file . 22)
  (treemacs . 1)
  (describe-mode . 1)
  (paredit-mode . 1)
@@ -102,6 +102,13 @@
  (show-all . 1)
  (show-entry . 1)
  (clojure-mode-menu . 1)
- (org-set-tags-command . 1)
+ (org-set-tags-command . 2)
  (paredit-reindent-defun . 1)
+ (cider-debug-move-here . 1)
+ (cider-debug-mode-menu . 1)
+ (org-tags-view . 1)
+ (paredit-backward . 1)
+ (cider . 1)
+ (cljr-rename-symbol . 2)
+ (clojure-align . 1)
 )
