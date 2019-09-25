@@ -159,7 +159,7 @@
   (set-frame-font "-*-Ubuntu Mono derivative Powerline-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
 
 (when sys/linux-x-p
-  (set-frame-font "-GOOG-Noto Mono-normal-normal-normal-*-24-*-*-*-m-0-iso10646-1"))
+  (set-frame-font "-GOOG-Noto Mono-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
 
 ;; Setup packages
 ;; Start server
