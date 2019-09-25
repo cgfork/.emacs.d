@@ -2,12 +2,12 @@
 ;; ----- smex-history -----
 (
  cider-jack-in
- customize-variable
  cgfork-open-gtd-file
+ cljr-add-require-to-ns
+ dired
+ customize-variable
  clojure-align
  cljr-rename-symbol
- cider
- paredit-backward
 )
 
 ;; ----- smex-data -----
@@ -21,7 +21,7 @@
  (recentf-open-files . 4)
  (go-rename . 10)
  (treemacs-add-project . 2)
- (dired . 1)
+ (dired . 2)
  (describe-variable . 8)
  (delete-file . 23)
  (shell . 2)
@@ -63,7 +63,7 @@
  (treemacs-add-and-display-current-project . 3)
  (enable-paredit-mode . 1)
  (disable-paredit-mode . 2)
- (cider-jack-in . 33)
+ (cider-jack-in . 43)
  (paredit-kill-region . 2)
  (protobuf-mode . 1)
  (dired-sidebar-show-sidebar . 1)
@@ -89,7 +89,7 @@
  (x . 2)
  (delete-region . 3)
  (describe-function . 1)
- (cgfork-open-gtd-file . 22)
+ (cgfork-open-gtd-file . 23)
  (treemacs . 1)
  (describe-mode . 1)
  (paredit-mode . 1)
@@ -111,4 +111,5 @@
  (cider . 1)
  (cljr-rename-symbol . 2)
  (clojure-align . 1)
+ (cljr-add-require-to-ns . 1)
 )
