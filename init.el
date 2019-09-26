@@ -301,7 +301,7 @@
 
   (when (or (and sys/macp (executable-find "gls"))
 	    (and (not sys/macp) (executable-find "ls")))
-    (setq dired-listing-switches "-alh -group-directories-first")
+    (setq dired-listing-switches "-alh --group-directories-first")
     (use-package dired-quick-sort
       :ensure t
       :init (dired-quick-sort-setup)))
