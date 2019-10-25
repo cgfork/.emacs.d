@@ -79,6 +79,7 @@
     ("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" default)))
  '(display-time-mode t)
  '(electric-pair-mode t)
+ '(save-place-mode t)
  '(flycheck-emacs-lisp-load-path (quote inherit))
  '(global-display-line-numbers-mode t)
  '(inhibit-startup-screen t)
