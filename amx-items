@@ -1,29 +1,19 @@
 
 ;; ----- amx-history -----
 (
+ package-install
+ list-packages
  cd
  5x5
  amx
  arp
  dbx
- dig
- dlv
- erc
- ert
- eww
- ftp
- gdb
- irc
- jdb
- man
- mpc
- pdb
- pwd
- rsh
- sdb
 )
 
 ;; ----- amx-data -----
 (
- 
+ (cd . 3)
+ (package-install . 6)
+ (list-packages . 1)
+ (org-publish . 2)
 )
