@@ -237,4 +237,4 @@
 
 ;; (provide 'init)
 
-;;; init.el ends here
+;;; Init.el ends here

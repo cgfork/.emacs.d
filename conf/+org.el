@@ -85,12 +85,6 @@
   (use-package htmlize
     :ensure t)
   
-  (use-package ox-md
-    :config
-    (setq org-md-headline-style 'atx)
-    (use-package ox-gfm
-      :ensure t))
- 
   (use-package ox-html
     :config
     (setq org-html-doctype "html5"

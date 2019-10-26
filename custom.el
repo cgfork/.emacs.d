@@ -69,6 +69,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-save-default nil)
  '(cgfork-package-archives (quote netease))
  '(column-number-mode t)
  '(current-language-environment "UTF-8")
@@ -76,12 +77,9 @@
  '(custom-enabled-themes (quote (solarized-light)))
  '(custom-safe-themes
    (quote
-    ("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" default)))
+    ("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" default)))
  '(display-time-mode t)
- '(make-backup-files nil)
- '(auto-save-default nil)
  '(electric-pair-mode t)
- '(save-place-mode t)
  '(flycheck-emacs-lisp-load-path (quote inherit))
  '(global-display-line-numbers-mode t)
  '(inhibit-startup-screen t)
@@ -163,6 +161,7 @@ Added:%U" :time-prompt t)
  '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(plantuml-default-exec-mode (quote jar))
  '(plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
+ '(save-place-mode t)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-stop-list
