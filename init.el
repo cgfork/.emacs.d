@@ -116,6 +116,19 @@
 	      (when (file-exists-p file)
 		  (load file)))))
 
+;; Set Key Modifiers.
+(with-no-warnings
+  (cond
+   (sys/win32p
+    (setq w32-lwindow-modifier 'super ; Left windows key
+	  w32-apps-modifier 'hyper) ; Menu key
+    (w32-register-hot-key [s-t]))
+   (sys/mac-x-p
+    (setq mac-option-modifier 'super ; option
+	  mac-command-modifier 'meta ; command
+	  mac-control-modifier 'control ; control
+	  ns-function-modifier 'hyper)))) ; fn
+
 ;; HACK: DO NOT copy package-selected-packages to init/custom file forcibly.
 ;; https://github.com/jwiegley/use-package/issues/383#issuecomment-247801751
 (defun my-save-selected-packages (&optional value)
@@ -160,6 +173,47 @@
 (defalias 'list-buffers 'ibuffer)
 
 (require 'package)
+(require 'cl-lib)
+
+(defun cgfork/install (package &optional min-version no-refresh)
+  "Install the PACKAGE, optionally requiring MIN-VERSION.
+If NO-REFRESH is non-nil, the available pacakge lists will
+not be re-downloaded in order to locate PACKAGE."
+  (or (package-installed-p package min-version)
+      (let* ((known (cdr (assoc package package-archive-contents)))
+	     (versions (mapcar #'package-desc-version known)))
+	(if (cl-find-if (lambda (v) (version-list-<= min-version v)) versions)
+	    (package-install package)
+	  (if no-refresh
+	      (error "No version of %s >= %S is available" package min-version)
+	    (package-refresh-contents)
+	    (cgfork/install package min-version t))))))
+
+(defun cgfork/try-install (package &optional min-version no-refresh)
+  "Try to install PACKAGE, and return non-nil if successful.
+If it is failure, return nil and display a warning message.
+Optionally require MIN-VERSION.  If NO-REFRESH is non-nil, the
+available package lists will not be re-downloaded in order to
+locate PACKAGE."
+  (condition-case err
+      (cgfork/install package min-version no-refresh)
+    (error
+     (message "Couldn't install optional package `%s': %S" package err)
+     nil)))
+
+;; package.el updates the saved version of package-selected-packages correctly only
+;; after custom-file has been loaded, which is a bug. We work around this by adding
+;; the required packages to package-selected-packages after startup is complete.
+(defvar cgfork/installed-packages nil)
+
+(defun cgfork/note-selected-package (oldfun package &rest args)
+  "If OLDFUN reports PACKAGE with ARGS was successfully installed, note it in `cgfork/installed-packages'."
+  (let ((available (apply oldfun package args)))
+    (prog1 available ;; return available
+      (when (and available (boundp 'package-selected-packages))
+        (add-to-list 'cgfork/installed-packages package)))))
+
+(advice-add 'require-package :around 'cgfork/note-selected-package)
 
 ;; Initialize packages.
 (unless (bound-and-true-p package--initialized)
@@ -194,18 +248,7 @@
     (setq exec-path-from-shell-arguments '("-l"))
     (exec-path-from-shell-initialize)))
 
-;; Set Key Modifiers.
-(with-no-warnings
-  (cond
-   (sys/win32p
-    (setq w32-lwindow-modifier 'super ; Left windows key
-	  w32-apps-modifier 'hyper) ; Menu key
-    (w32-register-hot-key [s-t]))
-   (sys/mac-x-p
-    (setq mac-option-modifier 'super ; option
-	  mac-command-modifier 'meta ; command
-	  mac-control-modifier 'control ; control
-	  ns-function-modifier 'hyper)))) ; fn
+
 
 ;;;;;;;;;;;;;;;;;;;;;; Basic Setup ;;;;;;;;;;;;;;;;;;;;;;;;;
 
