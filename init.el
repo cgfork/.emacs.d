@@ -5,19 +5,19 @@
 (when (version< emacs-version "25.1")
   (error "This requires Emacs 25.1 or above!"))
 
-(defun add-load-path (&rest _)
+(defun cgfork/add-load-path (&rest _)
   "Add 'conf' and 'site-conf' to `load-path'."
   (add-to-list 'load-path (expand-file-name "site-conf" user-emacs-directory))
   (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory)))
 
-(defun add-subdirs-load-path (&rest _)
+(defun cgfork/add-subdirs-load-path (&rest _)
   "Add subdirectories to `load-path'."
   (let ((default-directory
 	  (expand-file-name "site-conf" user-emacs-directory)))
     (normal-top-level-add-subdirs-to-load-path)))
 
-(advice-add #'package-initialize :after #'add-load-path)
-(advice-add #'package-initialize :after #'add-subdirs-load-path)
+(advice-add #'package-initialize :after #'cgfork/add-load-path)
+(advice-add #'package-initialize :after #'cgfork/add-subdirs-load-path)
 
 (add-load-path)
 
@@ -131,13 +131,13 @@
 
 ;; HACK: DO NOT copy package-selected-packages to init/custom file forcibly.
 ;; https://github.com/jwiegley/use-package/issues/383#issuecomment-247801751
-(defun my-save-selected-packages (&optional value)
+(defun cgfork/save-selected-packages (&optional value)
   "Set `package-selected-packages' to VALUE but don't save to `custom-file'."
   (when value
     (setq package-selected-packages value)))
-(advice-add 'package--save-selected-packages :override #'my-save-selected-packages)
+(advice-add 'package--save-selected-packages :override #'cgfork/save-selected-packages)
 
-(defun set-package-archives (archives)
+(defun cgfork/set-package-archives (archives)
   "Set specific package ARCHIVES repository."
   (interactive
    (list (intern (completing-read "Choose package archives: "
@@ -167,7 +167,7 @@
   (message "Set package archives to '%s'." archives))
 
 ;; Set package archives.
-(set-package-archives cgfork-package-archives)
+(cgfork/set-package-archives cgfork-package-archives)
 
 ;; Set list-buffers to ibuffer
 (defalias 'list-buffers 'ibuffer)
