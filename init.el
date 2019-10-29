@@ -195,6 +195,23 @@ If it is failure, return nil and display a warning message.
 Optionally require MIN-VERSION.  If NO-REFRESH is non-nil, the
 available package lists will not be re-downloaded in order to
 locate PACKAGE."
+  (interactive
+   (progn
+     ;; Initialize the package system to get the list of package
+     ;; symbols for completion.
+     (unless package--initialized
+       (package-initialize t))
+     (unless package-archive-contents
+       (package-refresh-contents))
+     (list (intern (completing-read
+                    "Install package: "
+                    (delq nil
+                          (mapcar (lambda (elt)
+                                    (unless (package-installed-p (car elt))
+                                      (symbol-name (car elt))))
+                                  package-archive-contents))
+                    nil t))
+           nil)))
   (condition-case err
       (cgfork/install package min-version no-refresh)
     (error
