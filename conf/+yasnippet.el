@@ -22,7 +22,7 @@
     (add-hook 'find-file-hook 'auto-insert)
     (auto-insert-mode 1)
     :config
-    (define-auto-insert "\\.org?$" [ "default-org.org" autoinert-yas-expand ])
+    (define-auto-insert "\\.org?$" [ "default-org.org" autoinsert-yas-expand ])
     (define-auto-insert "\\.el?$" [ "default-el.el" autoinsert-yas-expand ])
     (define-auto-insert "\\.sh?$" "default-sh.sh")))
 
