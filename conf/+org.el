@@ -6,9 +6,6 @@
 (require 'ob)
 (require 'ox-publish)
 (require 'ox-html)
-;; Avoid free variable warning.
-(defvar cgfork-org-home)
-(defvar sys/macp)
 
 (when sys/macp
   (cgfork/try-install 'grab-mac-link))

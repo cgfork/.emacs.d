@@ -3,18 +3,16 @@
 ;;; Code:
 
 ;; highlight the brackets
-(use-package highlight-parentheses
-  :ensure t
-  :init
-  (highlight-parentheses-mode t))
+(when (cgfork/try-install 'highlight-parentheses)
+  (with-eval-after-load 'highlight-parentheses
+    (highlight-parentheses-mode t)))
 
-(use-package paredit
-  :ensure t
-  :hook ((emacs-lisp-mode . enable-paredit-mode)
-	 (lisp-mode . enable-paredit-mode)
-	 (clojure-mode . enable-paredit-mode)
-	 (eval-expression-minibuffer-setup . enable-paredit-mode))
-  :config)
+(cgfork/install 'paredit)
+(with-eval-after-load 'paredit
+  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook 'enable-paredit-mode)
+  (add-hook 'clojure-mode 'enable-paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook 'enable-paredit-mode))
 
 (provide '+paredit)
 ;;; +paredit.el ends here

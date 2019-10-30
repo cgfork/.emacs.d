@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package magit
-  :ensure t
-  :bind (("C-x g" . magit-status)))
+(when (cgfork/try-install 'magit)
+  (with-eval-after-load 'magit
+    (define-key global-map (kbd "C-x g") 'magit-status)))
 
 (provide '+magit)
 ;;; +magit.el ends here
