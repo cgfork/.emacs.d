@@ -240,38 +240,27 @@ locate PACKAGE."
 ;; Set `diminish'.
 (cgfork/install 'diminish)
 
-;; Set `use-package'.
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-when-compile
-  (require 'use-package))
-
 ;; Keep keyring updated.
-(use-package gnu-elpa-keyring-update)
+(cgfork/install 'gnu-elpa-keyring-update)
 
 ;; Auto update packages.
-(use-package auto-package-update
-  :init
+(when (cgfork/try-install 'auto-package-update)
   (setq auto-package-update-delete-old-versions t
         auto-package-update-hide-results t)
   (defalias 'upgrade-packages #'auto-package-update-now))
 
 ;; Setup environment for linux.
 (when (or sys/mac-x-p sys/linux-x-p)
-  (use-package exec-path-from-shell
-    :ensure t
-    :init
-    (setq exec-path-from-shell-check-startup-files nil)
-    (setq exec-path-from-shell-variables '("PATH" "MANPATH" "PYTHONPATH" "GOPATH"))
-    (setq exec-path-from-shell-arguments '("-l"))
-    (exec-path-from-shell-initialize)))
+  (cgfork/install 'exec-path-from-shell)
+  (setq exec-path-from-shell-check-startup-files nil)
+  (setq exec-path-from-shell-variables '("PATH" "MANPATH" "PYTHONPATH" "GOPATH"))
+  (setq exec-path-from-shell-arguments '("-l"))
+  (exec-path-from-shell-initialize))
 
 
 
 ;;;;;;;;;;;;;;;;;;;;;; Basic Setup ;;;;;;;;;;;;;;;;;;;;;;;;;
-
+(require '+funcs)
 (require '+server)
 (require '+recentf)
 (require '+try)
@@ -291,7 +280,7 @@ locate PACKAGE."
 (require '+org)
 (require '+markdown)
 (require '+flycheck)
-(require '+go)
+;;(require '+go)
 
 ;; setup protobuf
 (require 'protobuf-mode)

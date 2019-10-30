@@ -1,13 +1,13 @@
 
 ;; ----- amx-history -----
 (
+ load-file
+ customize-variable
+ describe-variable
+ add-dir-local-variable
  load-theme
  org-publish
  package-install
- list-packages
- cd
- 5x5
- amx
 )
 
 ;; ----- amx-data -----
@@ -17,4 +17,8 @@
  (list-packages . 1)
  (org-publish . 3)
  (load-theme . 1)
+ (add-dir-local-variable . 1)
+ (describe-variable . 1)
+ (customize-variable . 1)
+ (load-file . 5)
 )
