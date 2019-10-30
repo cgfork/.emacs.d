@@ -14,6 +14,8 @@
   (cgfork/try-install 'grab-mac-link))
 
 (define-key global-map (kbd "C-c a") 'org-agenda)
+(define-key global-map (kbd "C-c c") 'org-capture)
+(define-key global-map (kbd "C-c b") 'org-switchb)
 
 ;; Setup.
 (setq org-agenda-files (list cgfork-org-home)
@@ -27,8 +29,9 @@
 
 ;; Clear the whitespace when exporting chinese.
 (defun cgfork/org-html-paragraph (oldfunc paragraph contents info)
-  "Join consecutive Chinese lines into a single long line without unwanted space when exporting to html.
-By advicing the OLDFUNC with PARAGRAPH, CONTENTS and INFO."
+  "Handle the space end of the line when exporting chinese.
+Join consecutive Chinese lines into a single long line without unwanted space
+when exporting to html by advicing the OLDFUNC with PARAGRAPH, CONTENTS and INFO."
   (let* ((fix-regexp "[[:multibyte::]")
 	 (fixed-contents (replace-regexp-in-string
 			  (concat "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)")
@@ -57,14 +60,15 @@ By advicing the OLDFUNC with PARAGRAPH, CONTENTS and INFO."
 (when (cgfork/try-install 'toc-org)
   (add-hook 'org-mode-hook 'toc-org-mode))
 
-(when (cgfork/try-install 'org-tree-slide)
-  (define-key org-mode-map (kbd "C-<f7>") org-tree-slide-mode)
-  (define-key org-tree-slide-mode-map (kbd "<left>") org-tree-slide-move-previous-tree)
-  (define-key org-tree-slide-mode-map (kbd "<right>") org-tree-slide-move-next-tree)
+(cgfork/try-install 'org-tree-slide)
+(with-eval-after-load 'org-tree-slide
+  (define-key org-mode-map (kbd "C-<f7>") 'org-tree-slide-mode)
+  (define-key org-tree-slide-mode-map (kbd "<left>") 'org-tree-slide-move-previous-tree)
+  (define-key org-tree-slide-mode-map (kbd "<right>") 'org-tree-slide-move-next-tree)
   (org-tree-slide-simple-profile)
   (setq org-tree-slide-skip-outline-level 2))
 	
-(cgfork/install 'htmlsize)
+(cgfork/install 'htmlize)
 ;; Set ox-html
 (setq org-html-doctype "html5"
       org-html-html5-fancy t
@@ -129,9 +133,6 @@ By advicing the OLDFUNC with PARAGRAPH, CONTENTS and INFO."
 	 :recursive t
 	 :publishing-function org-publish-attachment)
 	("draft" :components ("draft-notes" "draft-static"))))
-
-
-
 
 (provide '+org)
 ;;; +org.el ends here
