@@ -19,7 +19,7 @@
 (advice-add #'package-initialize :after #'cgfork/add-load-path)
 (advice-add #'package-initialize :after #'cgfork/add-subdirs-load-path)
 
-(add-load-path)
+(cgfork/add-load-path)
 
 ;; Define consts
 (defconst sys/win32p

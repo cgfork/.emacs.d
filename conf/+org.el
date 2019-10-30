@@ -2,56 +2,61 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package org
-  :defines cgfork-org-home
-  :bind (("C-c a" . org-agenda)
-	 ("C-c b" . org-switchb)
-	 ("C-c c" . org-capture))
-  :config
-  (setq org-agenda-files (list cgfork-org-home)
-        org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)"
-                                      "|" "DONE(d)" "CANCEL(c)"))
-        org-log-done 'time
-        org-startup-indented nil
-        org-ellipsis "  "
-        org-pretty-entities t
-	org-src-fontify-natively t)
-  
-  (defadvice org-html-paragraph (before org-html-paragraph-advice
-					(paragraph contents info) activate)
-    "Join consecutive Chinese lines into a single long line without unwanted space when exporting org-mode to html."
-    (let* ((origin-contents (ad-get-arg 1))
-           (fix-regexp "[[:multibyte:]]")
-           (fixed-contents
-            (replace-regexp-in-string
-             (concat
-              "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
-      (ad-set-arg 1 fixed-contents)))
-  
-  (add-to-list 'org-export-backends 'md)
-  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (go . t)
-     (python . t)
-     (java . t)
-     (plantuml . t)
-     (shell . t)))
-  ;; Rich text clipboard
-  (use-package org-rich-yank
-    :ensure t
-    :bind (:map org-mode-map
-                ("C-M-y" . org-rich-yank)))
-  ;; Preview
-  (use-package org-preview-html
-    :ensure t
-    :diminish org-preview-html-mode)
+(require 'org)
+(require 'ox-html)
+(require 'ob)
 
-   ;; Table of contents
-  (use-package toc-org
-    :ensure t
-    :hook (org-mode . toc-org-mode))
+;; Avoid free variable warning.
+(defvar cgfork-org-home)
+(defvar sys/macp)
+
+(when sys/macp
+  (cgfork/try-install 'grab-mac-link))
+
+(define-key global-map (kbd "C-c a") 'org-agenda)
+
+;; Setup.
+(setq org-agenda-files (list cgfork-org-home)
+      org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)"
+                                    "|" "DONE(d)" "CANCEL(c)"))
+      org-log-done 'time
+      org-startup-indented nil
+      org-ellipsis "  "
+      org-pretty-entities t
+      org-src-fontify-natively t)
+
+;; Clear the whitespace when exporting chinese.
+(defun cgfork/org-html-paragraph (oldfunc paragraph contents info)
+  "Join consecutive Chinese lines into a single long line without unwanted space when exporting to html by advicing the OLDFUNC with PARAGRAPH, CONTENTS and INFO."
+  (let* ((fix-regexp "[[:multibyte::]")
+	 (fixed-contents (replace-regexp-in-string
+			  (concat "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)")
+			  "\\1\\2" contents)))
+    (apply oldfunc paragraph fixed-contents info)))
+
+(advice-add 'org-html-paragraph :around 'cgfork/org-html-paragraph)
+
+(cgfork/install 'ob-go)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (go . t)
+   (python . t)
+   (java . t)
+   (plantuml . t)
+   (shell . t)))
+
+;; Rich text clipboard
+(when (cgfork/try-install 'org-rich-yank)
+  (define-key org-mode-map (kbd "C-M-y") 'org-rich-yank))
+
+(when (cgfork/try-install 'org-preview-html)
+  (diminish 'org-preview-html-mode))
+
+(when (cgfork/try-install 'toc-org)
+  (add-hook 'org-mode-hook 'toc-org-mode))
+
+(when (cgfork/try-install 'org))
 
     ;; Presentation
   (use-package org-tree-slide
@@ -76,9 +81,6 @@
     :config
     (org-tree-slide-simple-profile)
     (setq org-tree-slide-skip-outline-level 2))
-
-  (use-package ob-go
-    :ensure t))
 
 (use-package ox-publish
   :config
