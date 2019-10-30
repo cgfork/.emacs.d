@@ -237,6 +237,9 @@ locate PACKAGE."
   (setq package-enable-at-startup nil)
   (package-initialize))
 
+;; Set `diminish'.
+(cgfork/install 'diminish)
+
 ;; Set `use-package'.
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
