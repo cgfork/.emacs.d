@@ -2,36 +2,36 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun delete-this-file ()
+(defun cgfork/rename-this-file-and-buffer (name)
+  "Rename both current buffer and file to the NAME."
+  (interactive)
+  (let ((bname (buffer-name))
+	(fname (buffer-file-name)))
+    (unless  fname
+      (error "Buffer '%s' is not a visiting file!" bname))
+    (progn
+      (when (file-exists-p fname)
+	(rename-file fname name 1))
+      (set-visited-file-name name)
+      (rename-buffer name))))
+
+(defun cgfork/delete-this-file ()
   "Delete the current file, and kill the buffer."
   (interactive)
   (unless (buffer-file-name)
-    (error "No file is currently being edited"))
-  (when (yes-or-no-p (format "Really delete '%s'?"
-                             (file-name-nondirectory buffer-file-name)))
+    (error "No file is currently being edited!"))
+  (when (yes-or-no-p (format "Are you sure to delete '%s'?"
+			     (file-name-nondirectory buffer-file-name)))
     (delete-file (buffer-file-name))
     (kill-this-buffer)))
 
-(defun rename-this-file-and-buffer (new-name)
-  "Renames both current buffer and file it's visiting to NEW-NAME."
-  (interactive "sNew name: ")
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
-    (unless filename
-      (error "Buffer '%s' is not visiting a file!" name))
-    (progn
-      (when (file-exists-p filename)
-        (rename-file filename new-name 1))
-      (set-visited-file-name new-name)
-      (rename-buffer new-name))))
-
-(defun browse-current-file ()
-  "Open the current file as a URL using `browse-url'."
+(defun cgfork/open-in-browse ()
+  "Open the current file using `browse-url'."
   (interactive)
   (let ((file-name (buffer-file-name)))
     (if (and (fboundp 'tramp-tramp-file-p)
-             (tramp-tramp-file-p file-name))
-        (error "Cannot open tramp file")
+	     (tramp-tramp-file-p file-name))
+	    (error "Cannot open tramp file")
       (browse-url (concat "file://" file-name)))))
 
 (provide '+funcs)
