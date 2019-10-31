@@ -12,9 +12,8 @@
 ;;   (avy-goto-line)
 ;;   (avy-goto-word-0)
 ;;   (avy-goto-word-1)
-(use-package avy
-  :ensure t
-  :config
+(cgfork/install 'avy)
+(with-eval-after-load 'avy
   (avy-setup-default))
 
 (provide '+avy)

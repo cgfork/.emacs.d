@@ -5,44 +5,37 @@
 ;; ivy - Completion
 ;; SEEALSO: https://www.reddit.com/r/emacs/comments/6xc0im/ivy_counsel_swiper_company_helm_smex_and_evil/
 ;; https://github.com/myrjola/diminish.el
-(use-package ivy
-  :ensure t
-  ;:delight
-  :diminish (ivy-mode) ;; hide the ivy-mode lighter from mode line
-  :bind (("C-x b" . ivy-switch-buffer))
-  :config
-  (ivy-mode 1)
-  (setq enable-recursive-minibuffers t
-        ivy-use-virtual-buffers t
-	ivy-count-format "%d/%d"
-        ivy-display-style 'fancy
-        ivy-format-function 'ivy-format-function-line
-        ivy-re-builders-alist '((counsel-M-x . ivy--regex-fuzzy) ; Only counsel-M-x use flx fuzzy search
-				(t . ivy--regex-plus))
-        ivy-initial-inputs-alist nil))
+(when (cgfork/try-install 'ivy)
+  (diminish 'ivy-mode)
+  (add-hook 'after-init-hook 'ivy-mode)
+  (with-eval-after-load 'ivy
+    (setq enable-recursive-minibuffers t
+          ivy-use-virtual-buffers t
+	  ivy-count-format "%d/%d"
+          ivy-display-style 'fancy
+          ivy-format-function 'ivy-format-function-line
+          ivy-re-builders-alist '((counsel-M-x . ivy--regex-fuzzy) 
+				  (t . ivy--regex-plus))
+          ivy-initial-inputs-alist nil)
+    (define-key global-map (kbd "C-x b") 'ivy-switch-buffer)
+    (define-key global-map (kbd "C-c C-r") 'ivy-resume)
+    (define-key global-map (kbd "C-c v p") 'ivy-push-view)
+    (define-key global-map (kbd "C-c v o") 'ivy-pop-view)
+    (define-key global-map (kbd "C-c C .") 'ivy-switch-view)))
 
-;; Add C-o quick menu in ivy selection
-(use-package ivy-hydra)
+(when (cgfork/try-install 'swiper)
+  (with-eval-after-load 'swiper
+    (define-key global-map (kbd "C-s") 'swiper-isearch)
+    (define-key global-map (kbd "C-r") 'swiper-isearch-backward)
+    (define-key global-map (kbd "C-s-f") 'swiper)
+    (define-key global-map (kbd "C-s-s") 'swiper-all)))
 
-;; swiper - show all overview of searches
-(use-package swiper
-  :ensure t
-  :bind (("C-s" . swiper-isearch)
-	 ("C-r" . swiper-isearch-backward)
-	 ("C-s-f" . swiper)
-	 ("C-s-s" . swiper-all)
-	 ("C-c C-r" . ivy-resume)
-	 ("C-c v p" . ivy-push-view)
-         ("C-c v o" . ivy-pop-view)
-         ("C-c v ." . ivy-switch-view)))
-
-;; counsel - enhanced default common commands
-(use-package counsel
-  :ensure t
-  :diminish (counsel-mode)
-  :hook (after-init . counsel-mode)
-  :bind (("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)))
+(when (cgfork/try-install 'counsel)
+  (diminish 'counsel-mode)
+  (add-hook 'after-init-hook 'counsel-mode)
+  (with-eval-after-load 'counsel
+    (define-key global-map (kbd "M-x") 'counsel-M-x)
+    (define-key global-map (kbd "C-x C-f") 'counsel-find-file)))
 
 (provide '+ivy)
 ;;; +ivy.el ends here

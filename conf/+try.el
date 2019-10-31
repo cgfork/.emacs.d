@@ -5,8 +5,7 @@
 ;; Try out Emacs packages without installing
 ;; them. (M-x try RET some-package)
 ;; Github: https://github.com/larstvei/Try
-(use-package try
-  :ensure t)
 
+(cgfork/install 'try)
 (provide '+try)
 ;;; +try.el ends here

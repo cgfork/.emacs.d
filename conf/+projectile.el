@@ -2,11 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package projectile
-  :ensure t
-  :config
-  (projectile-mode)
-  (setq projectile-completion-system 'ivy))
+(when (cgfork/try-install 'projectile)
+  (add-hook 'after-init-hook 'projectile-mode)
+
+  ;; Shorter modeline
+  (setq-default projectile-mode-line-prefix " Proj")
+
+  (with-eval-after-load 'projectile
+    (setq projectile-completion-system 'ivy)
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
+  (cgfork/try-install 'ibuffer-projectile))
 
 (provide '+projectile)
 ;;; +projectile.el ends here

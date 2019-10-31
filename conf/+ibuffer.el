@@ -2,14 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package ibuffer
-  :ensure nil
-  :commands (ibuffer-find-file
-	     ibuffer-current-buffer)
-  :bind (("C-x C-b" . ibuffer))
-  :init
-  (setq ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
-  :config
+(setq ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
+(with-eval-after-load 'ibuffer
+  (define-key global-map (kbd "C-x C-b") 'ibuffer)
   (with-eval-after-load 'counsel
     (defun my-ibuffer-find-file ()
       (interactive)
@@ -19,8 +14,7 @@
 				   default-directory))))
 	(counsel-find-file default-directory)))
     (advice-add #'ibuffer-find-file :override #'my-ibuffer-find-file))
-  (use-package ibuffer-projectile
-    :ensure t))
+  (cgfork/try-install 'ibuffer-projectile))
 
 (provide '+ibuffer)
 ;;; +ibuffer.el ends here

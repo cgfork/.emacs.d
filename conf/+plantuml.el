@@ -2,9 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package plantuml-mode
-  :ensure t
-  :config
-  (plantuml-set-exec-mode "jar"))
+(when (cgfork/try-install 'plantuml-mode)
+  (with-eval-after-load 'plantuml-mode
+    (plantuml-set-exec-mode "jar")))
 (provide '+plantuml)
 ;;; +plantuml.el ends here
