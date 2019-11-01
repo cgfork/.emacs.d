@@ -230,13 +230,14 @@ locate PACKAGE."
       (when (and available (boundp 'package-selected-packages))
         (add-to-list 'cgfork/installed-packages package)))))
 
-(advice-add 'require-package :around 'cgfork/note-selected-package)
+(advice-add 'cgfork/install :around 'cgfork/note-selected-package)
 
 ;; Initialize packages.
 (unless (bound-and-true-p package--initialized)
   (setq package-enable-at-startup nil)
   (package-initialize))
 
+;;;;;;;;;;;;;;;;;;;;;; Basic Packages ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Set `diminish'.
 (cgfork/install 'diminish)
 
@@ -257,20 +258,35 @@ locate PACKAGE."
   (setq exec-path-from-shell-arguments '("-l"))
   (exec-path-from-shell-initialize))
 
+;; Setup paredit for lisp programming.
+;; If you want to open paredit mode, you should add the hook
+;; to `enable-paredit-mode'.
+(cgfork/install 'paredit)
+(with-eval-after-load 'paredit
+  (add-hook 'eval-expression-minibuffer-setup-hook 'enable-paredit-mode))
 
+;; A macro for openning paredit.
+(defmacro cgfork/open-paredit (mode-hook)
+  "Add the `enable-paredit-mode' to the specific MODE-HOOK."
+  `(add-hook ,mode-hook 'enable-paredit-mode))
 
-;;;;;;;;;;;;;;;;;;;;;; Basic Setup ;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Highlight parentheses.
+(when (cgfork/try-install 'highlight-parentheses)
+  (with-eval-after-load 'highlight-parentheses
+    (highlight-parentheses-mode t)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require '+funcs)
 (require '+server)
 (require '+recentf)
 (require '+try)
 (require '+which-key)
 (require '+multiple-cursors)
-(require '+paredit)
 (require '+avy)
 (require '+all-the-icons)
 (require '+yasnippet)
 (require '+ivy)
+(require '+emacs-lisp)
 (require '+cider)
 (require '+projectile)
 (require '+ibuffer)
