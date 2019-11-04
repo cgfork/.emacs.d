@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Command log -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

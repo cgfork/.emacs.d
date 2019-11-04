@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize org -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

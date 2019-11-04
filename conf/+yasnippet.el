@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Yasnippet -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

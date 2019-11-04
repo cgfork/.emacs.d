@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Magit -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Emacs lisp -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

@@ -145,7 +145,7 @@ Added:%U" :time-prompt t)
  '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(package-selected-packages
    (quote
-    (company-prescient flycheck markdown-mode htmlize org-tree-slide toc-org org-preview-html org-rich-yank ob-go grab-mac-link plantuml-mode magit company ibuffer-projectile projectile clj-refactor flycheck-clojure cider elein cljsbuild-mode clojure-mode counsel swiper ivy yasnippet-snippets yasnippet all-the-icons avy multiple-cursors which-key try highlight-parentheses paredit exec-path-from-shell auto-package-update gnu-elpa-keyring-update diminish seq)))
+    (company-prescient go-mode company-lsp lsp-mode flycheck markdown-mode htmlize org-tree-slide toc-org org-preview-html org-rich-yank ob-go grab-mac-link plantuml-mode magit company ibuffer-projectile projectile clj-refactor flycheck-clojure cider elein cljsbuild-mode clojure-mode counsel swiper ivy yasnippet-snippets yasnippet all-the-icons avy multiple-cursors which-key try highlight-parentheses paredit exec-path-from-shell auto-package-update gnu-elpa-keyring-update diminish seq flycheck-golangci-lint go-rename go-impl go-fill-struct go-dlv)))
  '(plantuml-default-exec-mode (quote jar))
  '(plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(save-place-mode t)

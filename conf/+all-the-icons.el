@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- All The Icons -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

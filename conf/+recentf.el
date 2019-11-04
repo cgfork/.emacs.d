@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Recentf -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

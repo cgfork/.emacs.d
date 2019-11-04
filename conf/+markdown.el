@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Markdown -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

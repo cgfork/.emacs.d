@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Which Key -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

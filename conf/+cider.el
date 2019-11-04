@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Cider -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

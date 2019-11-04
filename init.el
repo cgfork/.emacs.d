@@ -309,7 +309,8 @@ locate PACKAGE."
 (require '+org)
 (require '+markdown)
 (require '+flycheck)
-;;(require '+go)
+(require '+lsp)
+(require '+go)
 
 ;; setup protobuf
 (require 'protobuf-mode)

@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize ibuffer -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

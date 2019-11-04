@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Company -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

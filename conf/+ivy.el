@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize ivy -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
