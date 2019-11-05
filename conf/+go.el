@@ -73,7 +73,6 @@
   (when (executable-find "goimports")
     (setq gofmt-command "goimports"))
   (add-hook 'before-save-hook #'gofmt-before-save)
-  (define-key go-mode-map [remap xref-find-definitions] 'godef-jump)
   (define-key go-mode-map (kbd "C-c R") 'go-remove-unused-imports)
   (define-key go-mode-map (kbd "<f1>") 'godoc-at-point)
   (unless (executable-find "gopls")
