@@ -2,11 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(defvar cgfork/go--tools '("golang.org/x/tools/cmd/imports"
+(defvar cgfork/go--tools '("golang.org/x/tools/cmd/goimports"
 			   "golang.org/x/tools/cmd/gorename"
 			   "github.com/go-delve/delve/cmd/dlv"
 			   "github.com/josharian/impl"
-			   "github.com/cweill/gotest..."
+			   "github.com/cweill/gotests/..."
 			   "github.com/fatih/gomodifytags"
 			   "github.com/davidrjenni/reftools/cmd/fillstruct"
 			   "github.com/golangci/golangci-lint/cmd/golangci-lint")
@@ -22,7 +22,7 @@
 ;;    (message ,msg)))
 ;; You can learn more detail about `lexical-binding' and `dynamic-binding'.
 (defun cgfork/go-install-pkg (pkg)
-  "Install the PKG, optionally NO-UPDATE."
+  "Install the PKG."
   (interactive "sGo Package:")
   (unless (executable-find "go")
     (user-error "Unable to find `go' in `exec-path'!"))
@@ -38,7 +38,7 @@
 	   (message "Failed to install %s: %d." pkg status)))))))
 
 (defun cgfork/go-install-pkg-no-update (pkg)
-  "Install the PKG, optionally NO-UPDATE."
+  "Install the PKG."
   (interactive "sGo Package:")
   (unless (executable-find "go")
     (user-error "Unable to find `go' in `exec-path'!"))
