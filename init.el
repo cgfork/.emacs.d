@@ -289,11 +289,13 @@ locate PACKAGE."
   (global-highlight-parentheses-mode 1))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require '+gui)
 (require '+funcs)
 (require '+server)
 (require '+recentf)
 (require '+try)
 (require '+which-key)
+(require '+dired)
 (require '+multiple-cursors)
 (require '+avy)
 (require '+all-the-icons)
@@ -304,6 +306,7 @@ locate PACKAGE."
 (require '+projectile)
 (require '+ibuffer)
 (require '+company)
+(require '+grep)
 (require '+magit)
 (require '+plantuml)
 (require '+org)
@@ -311,6 +314,7 @@ locate PACKAGE."
 (require '+flycheck)
 (require '+lsp)
 (require '+go)
+(require '+treeslide)
 
 ;; setup protobuf
 (require 'protobuf-mode)

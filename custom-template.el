@@ -30,23 +30,6 @@
         (set-fontset-font t '(#x4e00 . #x9fff) font)
         (throw 'loop t)))))
 
-;; Mail
-;; (setq message-send-mail-function 'smtpmail-send-it
-;;       smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-;;       smtpmail-auth-credentials '(("smtp.gmail.com" 587
-;;                                    user-mail-address nil))
-;;       smtpmail-default-smtp-server "smtp.gmail.com"
-;;       smtpmail-smtp-server "smtp.gmail.com"
-;;       smtpmail-smtp-service 587)
-
-;; Misc.
-;; (setq confirm-kill-emacs 'y-or-n-p)
-
-;; Display on the specified monitor
-;; (when (and (> (length (display-monitor-attributes-list)) 1)
-;;            (> (display-pixel-width) 1920))
-;;   (set-frame-parameter nil 'left 1920))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

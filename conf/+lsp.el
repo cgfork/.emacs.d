@@ -19,5 +19,11 @@
 (when (cgfork/try-install 'company-lsp)
   (setq company-lsp-cache-candidates 'auto))
 
+(when (cgfork/try-install 'lsp-ui)
+  ;; `C-g'to close doc
+  (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide)
+  (cgfork/after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook 'lsp-ui-mode)))
+
 (provide '+lsp)
 ;;; +lsp.el ends here

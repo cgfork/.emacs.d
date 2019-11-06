@@ -3,6 +3,7 @@
 ;;; Code:
 
 (when (cgfork/try-install 'plantuml-mode)
+  (setq plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
   (with-eval-after-load 'plantuml-mode
     (plantuml-set-exec-mode "jar")))
 (provide '+plantuml)
