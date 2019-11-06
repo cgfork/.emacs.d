@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Plantuml -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

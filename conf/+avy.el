@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Avy -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

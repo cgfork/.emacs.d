@@ -1,4 +1,4 @@
-;;; package --- summary
+;; package --- summary
 ;;; Commentary:
 ;;; Code:
 
@@ -73,7 +73,7 @@
   :group 'convenience)
 
 ;; Define the customize variables
-(defcustom cgfork-package-archives 'tuna
+(defcustom cgfork/package-archives 'tuna
   "Set package archives from which to fetch."
   :type '(choice
 	  (const :tag "Melpa" melpa)
@@ -83,17 +83,17 @@
 	  (const :tag "Tuna" tuna))
   :group 'cgfork)
 
-(defcustom cgfork-org-home (expand-file-name "~/note")
+(defcustom cgfork/org-home (expand-file-name "~/note")
   "Set the org home path."
   :type 'string
   :group 'cgfork)
 
-(defcustom cgfork-gtd-file (expand-file-name "getting-things-done.org" cgfork-org-home)
+(defcustom cgfork/tasks-file (expand-file-name "getting-things-done.org" cgfork/org-home)
   "Set the gtd file."
   :type 'string
   :group 'cgfork)
 
-(defcustom cgfork-journal-file (expand-file-name "journal.org" cgfork-org-home)
+(defcustom cgfork/journal-file (expand-file-name "journal.org" cgfork/org-home)
   "Set the journal file."
   :type 'string
   :group 'cgfork)
@@ -135,7 +135,7 @@
   "Set `package-selected-packages' to VALUE but don't save to `custom-file'."
   (when value
     (setq package-selected-packages value)))
-(advice-add 'package--save-selected-packages :override #'cgfork/save-selected-packages)
+;; (advice-add 'package--save-selected-packages :override #'cgfork/save-selected-packages)
 
 (defun cgfork/set-package-archives (archives)
   "Set specific package ARCHIVES repository."
@@ -167,7 +167,7 @@
   (message "Set package archives to '%s'." archives))
 
 ;; Set package archives.
-(cgfork/set-package-archives cgfork-package-archives)
+(cgfork/set-package-archives cgfork/package-archives)
 
 ;; Set list-buffers to ibuffer
 (defalias 'list-buffers 'ibuffer)
@@ -218,6 +218,11 @@ locate PACKAGE."
      (message "Couldn't install optional package `%s': %S" package err)
      nil)))
 
+(defmacro cgfork/after-load (file &rest body)
+  "Print the message after loading the FILE, and then eval the BODY."
+  (declare (indent 1) (debug t))
+  `(with-eval-after-load ,file (message "Emacs Init: '%s' is loaded." ,file) ,@body))
+
 ;; package.el updates the saved version of package-selected-packages correctly only
 ;; after custom-file has been loaded, which is a bug. We work around this by adding
 ;; the required packages to package-selected-packages after startup is complete.
@@ -230,13 +235,21 @@ locate PACKAGE."
       (when (and available (boundp 'package-selected-packages))
         (add-to-list 'cgfork/installed-packages package)))))
 
-(advice-add 'require-package :around 'cgfork/note-selected-package)
+(advice-add 'cgfork/install :around 'cgfork/note-selected-package)
 
 ;; Initialize packages.
 (unless (bound-and-true-p package--initialized)
   (setq package-enable-at-startup nil)
-  (package-initialize))
+  (package-initialize)
+  (message "Package Initialized!"))
 
+(when (fboundp 'package--save-selected-packages)
+  (cgfork/install 'seq)
+  (add-hook 'after-init-hook
+	    (lambda () (package--save-selected-packages
+			(seq-uniq (append cgfork/installed-packages package-selected-packages))))))
+
+;;;;;;;;;;;;;;;;;;;;;; Basic Packages ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Set `diminish'.
 (cgfork/install 'diminish)
 
@@ -245,32 +258,48 @@ locate PACKAGE."
 
 ;; Auto update packages.
 (when (cgfork/try-install 'auto-package-update)
-  (setq auto-package-update-delete-old-versions t
-        auto-package-update-hide-results t)
-  (defalias 'upgrade-packages #'auto-package-update-now))
+  (defalias 'upgrade-packages #'auto-package-update-now)
+  (cgfork/after-load 'auto-package-update
+    (setq auto-package-update-delete-old-versions t
+          auto-package-update-hide-results t)))
 
 ;; Setup environment for linux.
 (when (or sys/mac-x-p sys/linux-x-p)
   (cgfork/install 'exec-path-from-shell)
-  (setq exec-path-from-shell-check-startup-files nil)
-  (setq exec-path-from-shell-variables '("PATH" "MANPATH" "PYTHONPATH" "GOPATH"))
-  (setq exec-path-from-shell-arguments '("-l"))
+  (cgfork/after-load 'exec-path-from-shell
+    (setq exec-path-from-shell-check-startup-files nil)
+    (setq exec-path-from-shell-variables '("PATH" "MANPATH" "PYTHONPATH" "GOPATH" "JAVA_HOME"))
+    (setq exec-path-from-shell-arguments '("-l")))
   (exec-path-from-shell-initialize))
 
+;; Setup paredit for lisp programming.
+;; If you want to open paredit mode, you should add the hook
+;; to `enable-paredit-mode'.
+(cgfork/install 'paredit)
+(with-eval-after-load 'paredit
+  (add-hook 'eval-expression-minibuffer-setup-hook 'enable-paredit-mode))
 
+;; A macro for openning paredit.
+(defmacro cgfork/open-paredit (mode-hook)
+  "Add the `enable-paredit-mode' to the specific MODE-HOOK."
+  `(add-hook ,mode-hook 'enable-paredit-mode))
 
-;;;;;;;;;;;;;;;;;;;;;; Basic Setup ;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Highlight parentheses.
+(when (cgfork/try-install 'highlight-parentheses)
+  (global-highlight-parentheses-mode 1))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require '+funcs)
 (require '+server)
 (require '+recentf)
 (require '+try)
 (require '+which-key)
 (require '+multiple-cursors)
-(require '+paredit)
 (require '+avy)
 (require '+all-the-icons)
 (require '+yasnippet)
 (require '+ivy)
+(require '+emacs-lisp)
 (require '+cider)
 (require '+projectile)
 (require '+ibuffer)
@@ -280,7 +309,8 @@ locate PACKAGE."
 (require '+org)
 (require '+markdown)
 (require '+flycheck)
-;;(require '+go)
+(require '+lsp)
+(require '+go)
 
 ;; setup protobuf
 (require 'protobuf-mode)

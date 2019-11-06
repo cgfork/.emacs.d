@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- My functions -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

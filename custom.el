@@ -4,22 +4,6 @@
 ;;;       Put your own configurations in custom-post.el to override default configurations.
 ;;; Code:
 
-;; (setq centaur-logo nil)                        ; Logo file or nil (official logo)
-;; (setq centaur-full-name "user name")           ; User full name
-;; (setq centaur-mail-address "user@email.com")   ; Email address
-;; (setq centaur-proxy "127.0.0.1:1080")          ; Network proxy
-;; (setq centaur-package-archives 'emacs-china)   ; Package repo: melpa, melpa-mirror, emacs-china, netease, tencent or tuna
-;; (setq centaur-theme 'classic)                  ; Color theme: default, classic, dark, light, day or night
-;; (setq centaur-dashboard nil)                   ; Use dashboard at startup or not: t or nil
-;; (setq centaur-lsp 'eglot)                      ; Set LSP client: lsp-mode, eglot or nil
-;; (setq centaur-chinese-calendar nil)            ; Use Chinese calendar or not: t or nil
-;; (setq centaur-benchmark t)                     ; Enable initialization benchmark or not: t or nil
-
-;; For Emacs devel
-;; (setq package-user-dir (locate-user-emacs-file (format "elpa-%s" emacs-major-version)))
-;; (setq desktop-base-file-name (format ".emacs-%s.desktop" emacs-major-version))
-;; (setq desktop-base-lock-name (format ".emacs-%s.desktop.lock" emacs-major-version))
-
 ;; Fonts
 (when (display-graphic-p)
   ;; Set default font
@@ -108,32 +92,32 @@
  '(org-capture-templates
    (quote
     (("t" "Todo" entry
-      (file+olp+datetree cgfork-gtd-file)
+      (file+olp+datetree cgfork/tasks-file)
       "* TODO [#B] %^{Description} %^g
 %?
 %i
 Added:%U" :time-prompt t)
      ("T" "Todo with Clipboard" entry
-      (file+olp+datetree cgfork-gtd-file)
+      (file+olp+datetree cgfork/tasks-file)
       "* TODO [#B] %^{Description} %^g
 %c
 Added:%U" :time-prompt t)
      ("S" "Todo with Scheduled" entry
-      (file+olp+datetree cgfork-gtd-file)
+      (file+olp+datetree cgfork/tasks-file)
       "* TODO [#B] %^{Description} %^g
 SCHEDULED: %^t
 %?
 %i
 Added:%U" :time-prompt t)
      ("D" "Todo with Deadline" entry
-      (file+olp+datetree cgfork-gtd-file)
+      (file+olp+datetree cgfork/tasks-file)
       "* TODO [#B] %^{Description} %^g
 DEADLINE: %^t
 %?
 %i
 Added:%U" :time-prompt t)
      ("P" "TODO with Properties" entry
-      (file+olp+datetree cgfork-gtd-file)
+      (file+olp+datetree cgfork/tasks-file)
       "* TODO [#B] %^{Description} %^g
 DEADLINE: %^t
 :PROPERTIES:
@@ -143,22 +127,25 @@ DEADLINE: %^t
  %i
 Added:%U" :time-prompt t)
      ("j" "Journal" entry
-      (file+olp cgfork-journal-file "Journal")
+      (file+olp cgfork/journal-file "Journal")
       "* %U - %^{Heading}
  %?")
      ("l" "Log Time" entry
-      (file+olp cgfork-journal-file "Log Time")
+      (file+olp cgfork/journal-file "Log Time")
       "* %U - %^{Activity}	 :TIME:")
      ("s" "Code Snippets" entry
-      (file+olp cgfork-journal-file "Code Snippets")
+      (file+olp cgfork/journal-file "Code Snippets")
       "* %U - %^{Heading}%^g
 %?
 ")
      ("c" "Contacts" table-line
-      (file+olp cgfork-journal-file "Contacts")
+      (file+olp cgfork/journal-file "Contacts")
       "| %U | %^{Name} | %^{Phone}| %^{E-mail} |"))))
  '(org-export-headline-levels 6)
  '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
+ '(package-selected-packages
+   (quote
+    (company-prescient go-mode company-lsp lsp-mode flycheck markdown-mode htmlize org-tree-slide toc-org org-preview-html org-rich-yank ob-go grab-mac-link plantuml-mode magit company ibuffer-projectile projectile clj-refactor flycheck-clojure cider elein cljsbuild-mode clojure-mode counsel swiper ivy yasnippet-snippets yasnippet all-the-icons avy multiple-cursors which-key try highlight-parentheses paredit exec-path-from-shell auto-package-update gnu-elpa-keyring-update diminish seq flycheck-golangci-lint go-rename go-impl go-fill-struct go-dlv)))
  '(plantuml-default-exec-mode (quote jar))
  '(plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(save-place-mode t)

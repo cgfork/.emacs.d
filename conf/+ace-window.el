@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Ace Window -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

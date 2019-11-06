@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Multiple Cursors -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

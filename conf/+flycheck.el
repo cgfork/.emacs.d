@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Flycheck -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

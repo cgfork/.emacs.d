@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Try -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

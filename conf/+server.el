@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; package --- Initialize Server -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
