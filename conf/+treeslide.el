@@ -8,7 +8,9 @@
 
 (cgfork/after-load 'neotree
   ;; Must install `all-the-icons' and run `all-the-icons-install-fonts'.
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)
+	neo-window-width 30
+	neo-smart-open t))
 
 (provide '+treeslide)
 ;;; +treeslide.el ends here
