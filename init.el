@@ -318,6 +318,7 @@ locate PACKAGE."
 
 ;; setup protobuf
 (require 'protobuf-mode)
+(add-to-list 'auto-mode-alist (cons "\\.proto\\'" 'protobuf-mode))
 (add-hook 'protobuf-mode-hook
 	  (lambda () (c-add-style "my-style" '((c-basic-offset . 2) (indent-tabs-mode . nil)) t)))
 
