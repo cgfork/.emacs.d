@@ -32,38 +32,50 @@
    (plantuml . t)
    (shell . t)))
 
-(define-generic-mode 'bnf-mode
- () ;; comment char: inapplicable because # must be at start of line
- nil ;; keywords
- '(
-   ("^#.*" . 'font-lock-comment-face) ;; comments at start of line
-   ("^<[^ \t\n]*?>" . 'font-lock-function-name-face) ;; LHS nonterminals
-   ("<[^ \t\n]*?>" . 'font-lock-builtin-face) ;; other nonterminals
-   ("::=" . 'font-lock-const-face) ;; "goes-to" symbol
-   ("\|" . 'font-lock-warning-face) ;; "OR" symbol
-   )
- '("\\.bnf\\'") ;; filename suffixes
- nil ;; extra function hooks
- "Major mode for BNF highlighting.")
+;; Replaced by bnf-mode.
+;; (define-generic-mode 'bnf-mode
+;;  () ;; comment char: inapplicable because # must be at start of line
+;;  nil ;; keywords
+;;  '(
+;;    ("^#.*" . 'font-lock-comment-face) ;; comments at start of line
+;;    ("^<[^ \t\n]*?>" . 'font-lock-function-name-face) ;; LHS nonterminals
+;;    ("<[^ \t\n]*?>" . 'font-lock-builtin-face) ;; other nonterminals
+;;    ("::=" . 'font-lock-const-face) ;; "goes-to" symbol
+;;    ("\|" . 'font-lock-warning-face) ;; "OR" symbol
+;;    )
+;;  '("\\.bnf\\'") ;; filename suffixes
+;;  nil ;; extra function hooks
+;;  "Major mode for BNF highlighting.")
 
-(add-to-list 'org-src-lang-modes '("bnf" . bnf))
+(when (cgfork/try-install 'bnf-mode)
+  (add-to-list 'org-src-lang-modes '("bnf" . bnf)))
 
 (unless (featurep 'ob) (require 'ob))
 (unless (featurep 'ox-html) (require 'ox-html))
 (unless (featurep 'ox-publish) (require 'ox-publish))
 
-;; Clear the whitespace when exporting chinese.
-(defun cgfork/org-html-paragraph (oldfunc paragraph contents info)
-  "Handle the space end of the line when exporting chinese.
-Join consecutive Chinese lines into a single long line without unwanted space
-when exporting to html by advicing the OLDFUNC with PARAGRAPH, CONTENTS and INFO."
-  (let* ((fix-regexp "[[:multibyte::]")
-	 (fixed-contents (replace-regexp-in-string
-			  (concat "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)")
-			  "\\1\\2" contents)))
-    (apply oldfunc paragraph fixed-contents info)))
-
-(advice-add 'org-html-paragraph :around 'cgfork/org-html-paragraph)
+(defun ox-org-clean-space (text backend _)
+  "Clean the space between chinese when export to html.
+Replace the TEXT when the BACKEND is html."
+  (when (org-export-derived-backend-p backend 'html)
+    (let ((regexp "[[:multibyte:]]")
+	  (s text))
+      ;; 删除换行产生的空格，当使用中文的时候
+      (setq s
+	    (replace-regexp-in-string
+	     (format "\\(%s\\) *\n *\\(%s\\)" regexp regexp)
+	     "\\1\\2" s))
+      ;; 删除粗体之前的空格
+      (setq s
+	    (replace-regexp-in-string
+	     (format "\\(%s\\) +\\(<\\)" regexp)
+	     "\\1\\2" s))
+      (setq s
+	    (replace-regexp-in-string
+	     (format "\\(>\\) +\\(%s\\)" regexp)
+	     "\\1\\2" s))
+      s)))
+(add-to-list 'org-export-filter-paragraph-functions 'ox-org-clean-space)
 
   ;; Rich text clipboard
 

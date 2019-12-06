@@ -21,7 +21,7 @@
 
 (when (cgfork/try-install 'lsp-ui)
   ;; `C-g'to close doc
-  (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide)
+  ;; (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide)
   (cgfork/after-load 'lsp-mode
     (add-hook 'lsp-mode-hook 'lsp-ui-mode)))
 
