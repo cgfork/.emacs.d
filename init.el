@@ -83,21 +83,6 @@
 	  (const :tag "Tuna" tuna))
   :group 'cgfork)
 
-(defcustom cgfork/org-home (expand-file-name "~/note")
-  "Set the org home path."
-  :type 'string
-  :group 'cgfork)
-
-(defcustom cgfork/tasks-file (expand-file-name "getting-things-done.org" cgfork/org-home)
-  "Set the gtd file."
-  :type 'string
-  :group 'cgfork)
-
-(defcustom cgfork/journal-file (expand-file-name "journal.org" cgfork/org-home)
-  "Set the journal file."
-  :type 'string
-  :group 'cgfork)
-
 ;; Load `custom-file'.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 ;; If it doesn't exist, copy from the template, then load it.
@@ -254,7 +239,7 @@ locate PACKAGE."
 (cgfork/install 'diminish)
 
 ;; Keep keyring updated.
-(cgfork/install 'gnu-elpa-keyring-update)
+(cgfork/try-install 'gnu-elpa-keyring-update)
 
 ;; Auto update packages.
 (when (cgfork/try-install 'auto-package-update)
@@ -308,8 +293,6 @@ locate PACKAGE."
 (require '+company)
 (require '+grep)
 (require '+magit)
-(require '+plantuml)
-(require '+org)
 (require '+markdown)
 (require '+flycheck)
 (require '+lsp)
