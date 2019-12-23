@@ -112,7 +112,7 @@ Added:%U" :time-prompt t)
  '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(package-selected-packages
    (quote
-    (racket-mode company-prescient neotree go-mode lsp-ui company-lsp lsp-mode flycheck markdown-mode htmlize org-tree-slide toc-org org-preview-html org-rich-yank bnf-mode ob-go grab-mac-link plantuml-mode magit deadgrep rg wgrep-ag ag wgrep company ibuffer-projectile projectile clj-refactor flycheck-clojure cider elein cljsbuild-mode clojure-mode counsel swiper ivy yasnippet-snippets yasnippet all-the-icons avy multiple-cursors diff-hl diredfl which-key try dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview highlight-parentheses paredit exec-path-from-shell auto-package-update gnu-elpa-keyring-update diminish seq yaml-mode go-rename go-impl go-fill-struct go-dlv flycheck-golangci-lint))))
+    (company-prescient ob-go grab-mac-link plantuml-mode magit deadgrep rg wgrep-ag ag wgrep company ibuffer-projectile projectile clj-refactor flycheck-clojure cider elein cljsbuild-mode clojure-mode counsel swiper ivy yasnippet-snippets yasnippet all-the-icons avy multiple-cursors diff-hl diredfl which-key try dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview highlight-parentheses paredit exec-path-from-shell auto-package-update gnu-elpa-keyring-update diminish seq racket-mode neotree go-mode lsp-ui company-lsp lsp-mode flycheck markdown-mode htmlize org-tree-slide toc-org org-preview-html org-rich-yank bnf-mode yaml-mode go-rename go-impl go-fill-struct go-dlv flycheck-golangci-lint))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
