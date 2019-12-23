@@ -315,6 +315,8 @@ locate PACKAGE."
 (require '+lsp)
 (require '+go)
 (require '+treeslide)
+(require '+yaml)
+(require '+racket)
 
 ;; setup protobuf
 (require 'protobuf-mode)

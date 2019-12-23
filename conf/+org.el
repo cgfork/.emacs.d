@@ -30,7 +30,8 @@
    (python . t)
    (java . t)
    (plantuml . t)
-   (shell . t)))
+   (shell . t)
+   (racket . t)))
 
 ;; Replaced by bnf-mode.
 ;; (define-generic-mode 'bnf-mode
