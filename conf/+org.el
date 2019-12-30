@@ -134,34 +134,7 @@ Replace the TEXT when the BACKEND is html."
          :publishing-directory "~/note/public_html/"
          :recursive t
          :publishing-function org-publish-attachment)
-        ("blog" :components ("blog-notes" "blog-static"))
-        ("draft-notes"
-         :base-directory "~/note/draft"
-         :base-extension "org"
-         :publishing-directory "~/note/draft_html/"
-         :recursive t
-         :publishing-function org-html-publish-to-html
-         :headline-levels 4             ; Just the default for this project.
-         :auto-preamble t
-         :section-numbers nil
-         :author "C_G"
-         :email "cg.fork@gmail.com"
-         :auto-sitemap t                ; Generate sitemap.org automagically...
-         :sitemap-filename "sitemap_draft.org"  ; ... call it sitemap.org (it's the default)...
-         :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
-         :sitemap-sort-files anti-chronologically
-         :sitemap-file-entry-format "%d %t"
-         :html-head "<link rel=\"shortcut icon\" href=\"/favicon.ico\" type=\"image/x-icon\"/>
-                       <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/worg.css\"/>"
-         :html-preamble "<div id=\"preamble\"><p class=\"preamble\">Last updated %C.</p></div>"
-         :html-postamble "<div id=\"postamble\"><p class=\"postamble\">The %t published by %a with %c.</p></div>")
-        ("draft-static"
-         :base-directory "~/note/draft"
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|ico"
-         :publishing-directory "~/note/draft_html/"
-         :recursive t
-         :publishing-function org-publish-attachment)
-        ("draft" :components ("draft-notes" "draft-static"))))
+        ("blog" :components ("blog-notes" "blog-static"))))
   
 (custom-set-variables
  '(org-adapt-indentation nil)
@@ -193,15 +166,15 @@ Replace the TEXT when the BACKEND is html."
      ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
      ("b" "NOTE" tags-todo "NOTE")
      ("p" . "项目安排")
-     ("pw" "迭代任务" tags "CATEGORY=\"WORK\"")
-     ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORK\"")
-     ("P" "Programming Language" ((tags "JAVA|GO|CLJ|CLJS|JS|SHELL")
-				  (tags-todo "JAVA|GO|CLJ|CLJS|JS|SHELL")))
-     ("S" "Skills Review" ((tags "CATEGORY=\"LEARN\"")
+     ("pw" "迭代任务" tags "CATEGORY=\"WORKLIST\"")
+     ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORKLIST\"")
+     ("P" "编程" ((tags "java|go|clj|racket|js|shell|c++")
+		  (tags-todo "java|go|clj|racket|js|shell|c++")))
+     ("R" "提醒事项" ((tags "CATEGORY=\"LEARN\"")
 			   (tags-todo "CATEGORY=\"LEARN\"")))
-     ("W" "Weekly Review"
+     ("W" "每周计划"
       ((stuck "") ;; review stuck projects as designated by org-stuck-projects
-       (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
+       (tags-todo "CATEGORY=\"PLAN\"") ;; review all projects (assuming you use todo keywords to designate projects)
        )))))
 
 (provide '+org)

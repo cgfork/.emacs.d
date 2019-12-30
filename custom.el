@@ -45,17 +45,17 @@
      ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
      ("b" "NOTE" tags-todo "NOTE")
      ("p" . "项目安排")
-     ("pw" "迭代任务" tags "CATEGORY=\"WORK\"")
-     ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORK\"")
-     ("P" "Programming Language"
-      ((tags "JAVA|GO|CLJ|CLJS|JS|SHELL")
-       (tags-todo "JAVA|GO|CLJ|CLJS|JS|SHELL")))
-     ("S" "Skills Review"
+     ("pw" "迭代任务" tags "CATEGORY=\"WORKLIST\"")
+     ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORKLIST\"")
+     ("P" "编程"
+      ((tags "java|go|clj|racket|js|shell|c++")
+       (tags-todo "java|go|clj|racket|js|shell|c++")))
+     ("R" "提醒事项"
       ((tags "CATEGORY=\"LEARN\"")
        (tags-todo "CATEGORY=\"LEARN\"")))
-     ("W" "Weekly Review"
+     ("W" "每周计划"
       ((stuck "")
-       (tags-todo "PROJECT"))))))
+       (tags-todo "CATEGORY=\"PLAN\""))))))
  '(org-capture-templates
    (quote
     (("t" "Todo" entry
@@ -112,7 +112,7 @@ Added:%U" :time-prompt t)
  '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
  '(package-selected-packages
    (quote
-    (company-prescient ob-go grab-mac-link plantuml-mode magit deadgrep rg wgrep-ag ag wgrep company ibuffer-projectile projectile clj-refactor flycheck-clojure cider elein cljsbuild-mode clojure-mode counsel swiper ivy yasnippet-snippets yasnippet all-the-icons avy multiple-cursors diff-hl diredfl which-key try dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview highlight-parentheses paredit exec-path-from-shell auto-package-update gnu-elpa-keyring-update diminish seq racket-mode neotree go-mode lsp-ui company-lsp lsp-mode flycheck markdown-mode htmlize org-tree-slide toc-org org-preview-html org-rich-yank bnf-mode yaml-mode go-rename go-impl go-fill-struct go-dlv flycheck-golangci-lint))))
+    (company-prescient racket-mode yaml-mode neotree go-mode lsp-ui company-lsp lsp-mode flycheck markdown-mode htmlize org-tree-slide toc-org org-preview-html org-rich-yank bnf-mode ob-go grab-mac-link plantuml-mode magit deadgrep rg wgrep-ag ag wgrep company ibuffer-projectile projectile clj-refactor flycheck-clojure cider elein cljsbuild-mode clojure-mode counsel swiper ivy yasnippet-snippets yasnippet all-the-icons avy multiple-cursors diff-hl diredfl which-key try dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview highlight-parentheses paredit exec-path-from-shell auto-package-update gnu-elpa-keyring-update diminish seq go-rename go-impl go-fill-struct go-dlv flycheck-golangci-lint))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
