@@ -109,9 +109,9 @@ Replace the TEXT when the BACKEND is html."
 ;; Set ox-publ ish
 (setq org-publish-project-alist
       '(("blog-notes"
-         :base-directory "~/note/notes"
+         :base-directory "~/Prophet/notes"
          :base-extension "org"
-         :publishing-directory "~/note/public_html/"
+         :publishing-directory "~/Prophet/public_html/"
          :recursive t
          :publishing-function org-html-publish-to-html
          :headline-levels 4             ; Just the default for this project.
@@ -131,7 +131,7 @@ Replace the TEXT when the BACKEND is html."
         ("blog-static"
          :base-directory "~/note/notes"
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|ico"
-         :publishing-directory "~/note/public_html/"
+         :publishing-directory "~/Prophet/public_html/"
          :recursive t
          :publishing-function org-publish-attachment)
         ("blog" :components ("blog-notes" "blog-static"))))

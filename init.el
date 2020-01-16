@@ -83,7 +83,7 @@
 	  (const :tag "Tuna" tuna))
   :group 'cgfork)
 
-(defcustom cgfork/org-home (expand-file-name "~/note")
+(defcustom cgfork/org-home (expand-file-name "~/Prophet")
   "Set the org home path."
   :type 'string
   :group 'cgfork)
