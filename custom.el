@@ -111,10 +111,10 @@ Added:%U" :time-prompt t)
       (file+olp cgfork/journal-file "Contacts")
       "| %U | %^{Name} | %^{Phone}| %^{E-mail} |"))))
  '(org-export-headline-levels 6)
- '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
+ '(org-plantuml-jar-path cgfork/plantuml-jar)
  '(package-selected-packages
    (quote
-    (company-prescient racket-mode yaml-mode neotree go-mode lsp-ui company-lsp lsp-mode flycheck markdown-mode htmlize org-tree-slide toc-org org-preview-html org-rich-yank bnf-mode ob-go grab-mac-link plantuml-mode magit deadgrep rg wgrep-ag ag wgrep company ibuffer-projectile projectile clj-refactor flycheck-clojure cider elein cljsbuild-mode clojure-mode counsel swiper ivy yasnippet-snippets yasnippet all-the-icons avy multiple-cursors diff-hl diredfl which-key try dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview highlight-parentheses paredit exec-path-from-shell auto-package-update gnu-elpa-keyring-update diminish seq go-rename go-impl go-fill-struct go-dlv flycheck-golangci-lint))))
+    (company-prescient htmlize org-tree-slide toc-org org-preview-html org-rich-yank bnf-mode ob-go grab-mac-link racket-mode yaml-mode neotree go-mode lsp-ui company-lsp lsp-mode flycheck markdown-mode plantuml-mode magit deadgrep rg wgrep-ag ag wgrep company ibuffer-projectile projectile clj-refactor flycheck-clojure cider elein cljsbuild-mode clojure-mode counsel swiper ivy yasnippet-snippets yasnippet all-the-icons avy multiple-cursors diff-hl diredfl which-key try dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview highlight-parentheses paredit exec-path-from-shell auto-package-update gnu-elpa-keyring-update diminish seq go-rename go-impl go-fill-struct go-dlv flycheck-golangci-lint))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

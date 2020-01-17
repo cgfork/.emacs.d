@@ -106,40 +106,45 @@ Replace the TEXT when the BACKEND is html."
       '(("file" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")
 	("http" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")
 	("https" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")))
-;; Set ox-publ ish
-(setq org-publish-project-alist
-      '(("blog-notes"
-         :base-directory "~/Prophet/notes"
-         :base-extension "org"
-         :publishing-directory "~/Prophet/public_html/"
-         :recursive t
-         :publishing-function org-html-publish-to-html
-         :headline-levels 4             ; Just the default for this project.
-         :auto-preamble t
-         :section-numbers nil
-         :author "C_G"
-         :email "cg.fork@gmail.com"
-         :auto-sitemap t                ; Generate sitemap.org automagically...
-         :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
-         :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
-         :sitemap-sort-files anti-chronologically
-         :sitemap-file-entry-format "%d %t"
-         :html-head "<link rel=\"shortcut icon\" href=\"/favicon.ico\" type=\"image/x-icon\"/>
+
+(defun cgfork/set-org-blog-publish (base public)
+  )
+
+(let ((base (expand-file-name "notes" cgfork/org-home))
+      (public (expand-file-name "public_html" cgfork/org-home)))
+  (setq org-publish-project-alist
+	`(("blog-notes"
+           :base-directory ,base
+           :base-extension "org"
+           :publishing-directory ,public
+           :recursive t
+           :publishing-function org-html-publish-to-html
+           :headline-levels 4             ; Just the default for this project.
+           :auto-preamble t
+           :section-numbers nil
+           :author "C_G"
+           :email "cg.fork@gmail.com"
+           :auto-sitemap t                ; Generate sitemap.org automagically...
+           :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
+           :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
+           :sitemap-sort-files anti-chronologically
+           :sitemap-file-entry-format "%d %t"
+           :html-head "<link rel=\"shortcut icon\" href=\"/favicon.ico\" type=\"image/x-icon\"/>
                        <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/worg.css\"/>"
-         :html-preamble "<div id=\"preamble\"><p class=\"preamble\">Last updated %C.</p></div>"
-         :html-postamble "<div id=\"postamble\"><p class=\"postamble\">The %t published by %a with %c.</p></div>")
-        ("blog-static"
-         :base-directory "~/note/notes"
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|ico"
-         :publishing-directory "~/Prophet/public_html/"
-         :recursive t
-         :publishing-function org-publish-attachment)
-        ("blog" :components ("blog-notes" "blog-static"))))
-  
+           :html-preamble "<div id=\"preamble\"><p class=\"preamble\">Last updated %C.</p></div>"
+           :html-postamble "<div id=\"postamble\"><p class=\"postamble\">The %t published by %a with %c.</p></div>")
+          ("blog-static"
+           :base-directory ,base
+           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|ico"
+           :publishing-directory ,public
+           :recursive t
+           :publishing-function org-publish-attachment)
+          ("blog" :components ("blog-notes" "blog-static")))))
+
 (custom-set-variables
  '(org-adapt-indentation nil)
  '(org-export-headline-levels 6)
- '(org-plantuml-jar-path (expand-file-name "~/.bin/plantuml.jar"))
+ '(org-plantuml-jar-path cgfork/plantuml-jar)
  '(org-capture-templates
    '(("t" "Todo" entry (file+olp+datetree cgfork/tasks-file)
       "* TODO [#B] %^{Description} %^g\n%?\n%i\nAdded:%U" :time-prompt t)

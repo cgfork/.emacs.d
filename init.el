@@ -83,7 +83,12 @@
 	  (const :tag "Tuna" tuna))
   :group 'cgfork)
 
-(defcustom cgfork/org-home (expand-file-name "~/Prophet")
+(defcustom cgfork/exec-path (expand-file-name ".bin" (getenv "HOME"))
+  "Set path of the executable applications."
+  :type 'string
+  :group 'cgfork)
+
+(defcustom cgfork/org-home (expand-file-name "Prophet" (getenv "HOME"))
   "Set the org home path."
   :type 'string
   :group 'cgfork)
@@ -309,7 +314,6 @@ locate PACKAGE."
 (require '+grep)
 (require '+magit)
 (require '+plantuml)
-(require '+org)
 (require '+markdown)
 (require '+flycheck)
 (require '+lsp)
@@ -317,6 +321,7 @@ locate PACKAGE."
 (require '+tree)
 (require '+yaml)
 (require '+racket)
+(require '+org)
 
 ;; setup protobuf
 (require 'protobuf-mode)
