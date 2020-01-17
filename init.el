@@ -302,7 +302,7 @@ locate PACKAGE."
 (require '+yasnippet)
 (require '+ivy)
 (require '+emacs-lisp)
-(require '+cider)
+(require '+clojure)
 (require '+projectile)
 (require '+ibuffer)
 (require '+company)
@@ -314,7 +314,7 @@ locate PACKAGE."
 (require '+flycheck)
 (require '+lsp)
 (require '+go)
-(require '+treeslide)
+(require '+tree)
 (require '+yaml)
 (require '+racket)
 

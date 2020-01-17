@@ -13,5 +13,5 @@
 	neo-smart-open t
 	neo-window-fixed-size nil))
 
-(provide '+treeslide)
-;;; +treeslide.el ends here
+(provide '+tree)
+;;; +tree.el ends here

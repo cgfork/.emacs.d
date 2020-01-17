@@ -3,7 +3,7 @@
 ;;; Code:
 
 (cgfork/install 'flycheck)
-(with-eval-after-load 'flycheck
+(cgfork/after-load 'flycheck
   (add-hook 'after-init-hook 'global-flycheck-mode)
   (setq flycheck-emacs-lisp-load-path 'inherit)
   (setq-default flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))

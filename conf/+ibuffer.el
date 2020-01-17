@@ -3,9 +3,9 @@
 ;;; Code:
 
 (setq ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
-(with-eval-after-load 'ibuffer
+(cgfork/after-load 'ibuffer
   (define-key global-map (kbd "C-x C-b") 'ibuffer)
-  (with-eval-after-load 'counsel
+  (cgfork/after-load 'counsel
     (defun my-ibuffer-find-file ()
       (interactive)
       (let ((default-directory (let ((buf (ibuffer-current-buffer)))

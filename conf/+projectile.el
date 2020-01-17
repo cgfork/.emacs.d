@@ -8,7 +8,7 @@
   ;; Shorter modeline
   (setq-default projectile-mode-line-prefix " Proj")
 
-  (with-eval-after-load 'projectile
+  (cgfork/after-load 'projectile
     (setq projectile-completion-system 'ivy)
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 

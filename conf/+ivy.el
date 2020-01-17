@@ -8,7 +8,7 @@
 (when (cgfork/try-install 'ivy)
   (diminish 'ivy-mode)
   (add-hook 'after-init-hook 'ivy-mode)
-  (with-eval-after-load 'ivy
+  (cgfork/after-load 'ivy
     (setq enable-recursive-minibuffers t
           ivy-use-virtual-buffers t
 	  ivy-count-format "%d/%d"
@@ -24,7 +24,7 @@
     (define-key global-map (kbd "C-c C .") 'ivy-switch-view)))
 
 (when (cgfork/try-install 'swiper)
-  (with-eval-after-load 'swiper
+  (cgfork/after-load 'swiper
     (define-key global-map (kbd "C-s") 'swiper-isearch)
     (define-key global-map (kbd "C-r") 'swiper-isearch-backward)
     (define-key global-map (kbd "C-s-f") 'swiper)
@@ -33,7 +33,7 @@
 (when (cgfork/try-install 'counsel)
   (diminish 'counsel-mode)
   (add-hook 'after-init-hook 'counsel-mode)
-  (with-eval-after-load 'counsel
+  (cgfork/after-load 'counsel
     (define-key global-map (kbd "M-x") 'counsel-M-x)
     (define-key global-map (kbd "C-x C-f") 'counsel-find-file)))
 

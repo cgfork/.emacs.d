@@ -13,7 +13,7 @@
 ;;   (avy-goto-word-0)
 ;;   (avy-goto-word-1)
 (cgfork/install 'avy)
-(with-eval-after-load 'avy
+(cgfork/after-load 'avy
   (avy-setup-default))
 
 (provide '+avy)

@@ -5,7 +5,7 @@
 (when (cgfork/try-install 'company)
   (diminish 'company-mode)
   (add-hook 'after-init-hook 'global-company-mode)
-  (with-eval-after-load 'company
+  (cgfork/after-load 'company
     (define-key global-map (kbd "M-/") 'company-complete)
     (define-key global-map (kbd "<backtab>") 'company-yasnippet)
     (define-key company-active-map (kbd "C-p") 'company-select-previous)
