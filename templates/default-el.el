@@ -1,7 +1,13 @@
-;;; package --- $0 -*- lexical-binding: t -*-
+;;; `(file-name-nondirectory (buffer-file-name))` --- $1 -*- lexical-binding: t -*-
+
+;; Copyright (C) 2020-2029, cgfork
+
+;; Author: cgfork
+;; Version: 0.0.1
+
 ;;; Commentary:
 ;;; Code:
 
-$1
+$0
 
 ;;; `(file-name-nondirectory (buffer-file-name))` ends here
