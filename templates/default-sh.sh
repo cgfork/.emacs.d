@@ -44,9 +44,20 @@ function info() {
     head -${SCRIPT_HEADSIZE:-99} ${0} | grep -e "^#-" | sed -e "s/^#-//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g";
 }
 
+function usage1() {
+    cat <<EOF
+Usage: 
+       write your usage here.
+EOF
+}
+
 GETOPT="/usr/local/opt/gnu-getopt/bin/getopt"
 
-ARGS=`${GETOPT} -o hv -l help,version -n 'getopt_error.sh' -- "${@}"`
+ARGS=$(${GETOPT} -n "$0" \
+		 -o hv \
+		 -l help,version \
+		 -- "${@}" \
+    || { usage; exit 1; })
 
 if [ ${?} != 0 ]; then
     usage
