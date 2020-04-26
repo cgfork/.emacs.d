@@ -34,7 +34,8 @@
 #================================================================
 
 SCRIPT_HEADSIZE=$(head -200 ${0} |grep -n "^# END_OF_HEADER" | cut -f1 -d:)
-SCRIPT_NAME="$(basename ${0})"
+SCRIPT_NAME=$(basename "$0")
+SCRIPT_DIR=$(cd "$(dirname "$0")";pwd)
 
 function usage() {
     head -${SCRIPT_HEADSIZE:-99} ${0} | grep -e "^#[%+-]" | sed -e "s/^#[%+-]//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g" ;
@@ -51,7 +52,7 @@ Usage:
 EOF
 }
 
-GETOPT="/usr/local/opt/gnu-getopt/bin/getopt"
+GETOPT="$(brew --prefix gnu-getopt)/bin/getopt"
 
 ARGS=$(${GETOPT} -n "$0" \
 		 -o hv \
