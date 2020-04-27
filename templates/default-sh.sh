@@ -52,6 +52,12 @@ Usage:
 EOF
 }
 
+function should_install_getopt() {
+    if [[ $(command -v getopt) ]]; then
+	return 1
+    fi
+}
+
 GETOPT="$(brew --prefix gnu-getopt)/bin/getopt"
 
 ARGS=$(${GETOPT} -n "$0" \
