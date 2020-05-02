@@ -3,26 +3,24 @@
 ;;; Code:
 
 (require 'org)
-(when sys/macp
-  (cgfork/try-install 'grab-mac-link))
+(when (eq system-type 'darwin)
+  (power-emacs-install 'grab-mac-link))
 
 ;; Setup key bindings.
 (define-key global-map (kbd "C-c a") 'org-agenda)
 (define-key global-map (kbd "C-c c") 'org-capture)
 (define-key global-map (kbd "C-c b") 'org-switchb)
 
-  ;; Setup.
-
-(setq org-agenda-files (list cgfork/org-home)
+(setq org-agenda-files (list (expand-file-name "Prophet" (getenv "HOME")))
       org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)"
-                                    "|" "DONE(d)" "CANCEL(c)"))
+							    "|" "DONE(d)" "CANCEL(c)"))
       org-log-done 'time
       org-startup-indented nil
       org-ellipsis "  "
       org-pretty-entities t
       org-src-fontify-natively t)
   
-(cgfork/install 'ob-go)
+(power-emacs-install 'ob-go :stable nil)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
@@ -47,7 +45,7 @@
 ;;  nil ;; extra function hooks
 ;;  "Major mode for BNF highlighting.")
 
-(when (cgfork/try-install 'bnf-mode)
+(when (power-emacs-try 'bnf-mode)
   (add-to-list 'org-src-lang-modes '("bnf" . bnf)))
 
 (unless (featurep 'ob) (require 'ob))
@@ -79,24 +77,24 @@ Replace the TEXT when the BACKEND is html."
 
   ;; Rich text clipboard
 
-(when (cgfork/try-install 'org-rich-yank)
+(when (power-emacs-try 'org-rich-yank)
   (define-key org-mode-map (kbd "C-M-y") 'org-rich-yank))
 
-(when (cgfork/try-install 'org-preview-html)
+(when (power-emacs-try 'org-preview-html)
   (diminish 'org-preview-html-mode))
 
-(when (cgfork/try-install 'toc-org)
+(when (power-emacs-try 'toc-org)
   (add-hook 'org-mode-hook 'toc-org-mode))
 
-(cgfork/try-install 'org-tree-slide)
+(power-emacs-install 'org-tree-slide)
+(org-tree-slide-simple-profile)
+(define-key org-mode-map (kbd "C-<f7>") 'org-tree-slide-mode)
 (with-eval-after-load 'org-tree-slide
-  (define-key org-mode-map (kbd "C-<f7>") 'org-tree-slide-mode)
   (define-key org-tree-slide-mode-map (kbd "<left>") 'org-tree-slide-move-previous-tree)
   (define-key org-tree-slide-mode-map (kbd "<right>") 'org-tree-slide-move-next-tree)
-  (org-tree-slide-simple-profile)
   (setq org-tree-slide-skip-outline-level 2))
   
-(cgfork/install 'htmlize)
+(power-emacs-install 'htmlize)
 
 ;; Set ox-html
 (setq org-html-doctype "html5"
@@ -107,11 +105,9 @@ Replace the TEXT when the BACKEND is html."
 	("http" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")
 	("https" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")))
 
-(defun cgfork/set-org-blog-publish (base public)
-  )
-
-(let ((base (expand-file-name "notes" cgfork/org-home))
-      (public (expand-file-name "public_html" cgfork/org-home)))
+(let* ((org-home (expand-file-name "Prophet" (getenv "HOME")))
+       (base (expand-file-name "notes" org-home))
+       (public (expand-file-name "public_html" org-home)))
   (setq org-publish-project-alist
 	`(("blog-notes"
            :base-directory ,base
@@ -141,48 +137,51 @@ Replace the TEXT when the BACKEND is html."
            :publishing-function org-publish-attachment)
           ("blog" :components ("blog-notes" "blog-static")))))
 
-(custom-set-variables
- '(org-adapt-indentation nil)
- '(org-export-headline-levels 6)
- '(org-plantuml-jar-path cgfork/plantuml-jar)
- '(org-capture-templates
-   '(("t" "Todo" entry (file+olp+datetree cgfork/tasks-file)
-      "* TODO [#B] %^{Description} %^g\n%?\n%i\nAdded:%U" :time-prompt t)
-     ("T" "Todo with Clipboard" entry (file+olp+datetree cgfork/tasks-file)
-      "* TODO [#B] %^{Description} %^g\n%c\nAdded:%U" :time-prompt t)
-     ("S" "Todo with Scheduled" entry (file+olp+datetree cgfork/tasks-file)
-      "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\n%?\n%i\nAdded:%U" :time-prompt t)
-     ("D" "Todo with Deadline" entry (file+olp+datetree cgfork/tasks-file)
-      "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n%?\n%i\nAdded:%U" :time-prompt t)
-     ("P" "TODO with Properties" entry (file+olp+datetree cgfork/tasks-file)
-      "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n:PROPERTIES:\n:CATEGORY: %^{Category}\n:END:\n%?\n %i\nAdded:%U" :time-prompt t)
-     ("j" "Journal" entry (file+olp cgfork/journal-file "Journal")
-      "* %U - %^{Heading}\n %?")
-     ("l" "Log Time" entry (file+olp cgfork/journal-file "Log Time")
-      "* %U - %^{Activity}\t :TIME:")
-     ("s" "Code Snippets" entry (file+olp cgfork/journal-file "Code Snippets")
-      "* %U - %^{Heading}%^g\n%?\n")
-     ("c" "Contacts" table-line (file+olp cgfork/journal-file "Contacts")
-      "| %U | %^{Name} | %^{Phone}| %^{E-mail} |")))
- '(org-agenda-custom-commands
-   '(("w" . "任务安排")
-     ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
-     ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
-     ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
-     ("p" . "项目安排")
-     ("pw" "迭代任务" tags "CATEGORY=\"WORKLIST\"")
-     ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORKLIST\"")
-     ("t" . "个人任务")
-     ("tw" "任务清单" tags "CATEGORY=\"TASK\"")
-     ("tf" "未来要做的任务" tags-todo "CATEGORY=\"TASK\"")
-     ("P" "编程" ((tags "java|go|clj|racket|js|shell|c++")
-		  (tags-todo "java|go|clj|racket|js|shell|c++")))
-     ("R" "提醒事项" ((tags "CATEGORY=\"LEARN\"")
-			   (tags-todo "CATEGORY=\"LEARN\"")))
-     ("W" "每周计划"
-      ((stuck "") ;; review stuck projects as designated by org-stuck-projects
-       (tags-todo "CATEGORY=\"PLAN\"") ;; review all projects (assuming you use todo keywords to designate projects)
-       )))))
+(let* ((org-home (expand-file-name "Prophet" (getenv "HOME")))
+       (tasks-file (expand-file-name "getting-things-done.org" org-home))
+       (journal-file (expand-file-name "journal.org" org-home)))
+  (custom-set-variables
+   '(org-adapt-indentation nil)
+   '(org-export-headline-levels 6)
+   `(org-plantuml-jar-path ,(executable-find "plantuml.jar"))
+   `(org-capture-templates
+     (quote (("t" "Todo" entry (file+olp+datetree ,tasks-file)
+	      "* TODO [#B] %^{Description} %^g\n%?\n%i\nAdded:%U" :time-prompt t)
+	     ("T" "Todo with Clipboard" entry (file+olp+datetree ,tasks-file)
+	      "* TODO [#B] %^{Description} %^g\n%c\nAdded:%U" :time-prompt t)
+	     ("S" "Todo with Scheduled" entry (file+olp+datetree ,tasks-file)
+	      "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\n%?\n%i\nAdded:%U" :time-prompt t)
+	     ("D" "Todo with Deadline" entry (file+olp+datetree ,tasks-file)
+	      "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n%?\n%i\nAdded:%U" :time-prompt t)
+	     ("P" "TODO with Properties" entry (file+olp+datetree ,tasks-file)
+	      "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n:PROPERTIES:\n:CATEGORY: %^{Category}\n:END:\n%?\n %i\nAdded:%U" :time-prompt t)
+	     ("j" "Journal" entry (file+olp ,journal-file "Journal")
+	      "* %U - %^{Heading}\n %?")
+	     ("l" "Log Time" entry (file+olp ,journal-file "Log Time")
+	      "* %U - %^{Activity}\t :TIME:")
+	     ("s" "Code Snippets" entry (file+olp ,journal-file "Code Snippets")
+	      "* %U - %^{Heading}%^g\n%?\n")
+	     ("c" "Contacts" table-line (file+olp ,journal-file "Contacts")
+	      "| %U | %^{Name} | %^{Phone}| %^{E-mail} |"))))
+   '(org-agenda-custom-commands
+     (("w" . "任务安排")
+      ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
+      ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+      ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
+      ("p" . "项目安排")
+      ("pw" "迭代任务" tags "CATEGORY=\"WORKLIST\"")
+      ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORKLIST\"")
+      ("t" . "个人任务")
+      ("tw" "任务清单" tags "CATEGORY=\"TASK\"")
+      ("tf" "未来要做的任务" tags-todo "CATEGORY=\"TASK\"")
+      ("P" "编程" ((tags "java|go|clj|racket|js|shell|c++")
+		   (tags-todo "java|go|clj|racket|js|shell|c++")))
+      ("R" "提醒事项" ((tags "CATEGORY=\"LEARN\"")
+		       (tags-todo "CATEGORY=\"LEARN\"")))
+      ("W" "每周计划"
+       ((stuck "") ;; review stuck projects as designated by org-stuck-projects
+	(tags-todo "CATEGORY=\"PLAN\"") ;; review all projects (assuming you use todo keywords to designate projects)
+	))))))
 
 (provide '+org)
 ;;; +org.el ends here

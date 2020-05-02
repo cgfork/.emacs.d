@@ -4,6 +4,7 @@
 
 ;; Author: cgfork
 ;; Version: 0.0.1
+;; Package-Requires: ((emacs "25.3"))
 
 ;;; Commentary:
 ;;; Code:

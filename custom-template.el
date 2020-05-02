@@ -11,8 +11,8 @@
                     "Menlo" "Monaco" "DejaVu Sans Mono" "Consolas"))
       (when (member font (font-family-list))
         (set-face-attribute 'default nil :font font :height (cond
-                                                             (sys/mac-x-p 130)
-                                                             (sys/win32p 110)
+                                                             ((and (display-graphic-p) (eq system-type 'darwin))  130)
+                                                             ((eq system-type 'windows-nt) 110)
                                                              (t 100)))
         (throw 'loop t))))
 
