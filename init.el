@@ -26,17 +26,17 @@
 (power-emacs-copy-shell-variables "zsh" "PATH")
 (setq power-emacs-build-stable nil)
 
-(defmacro power-require (packages &rest body)
-  `(progn ,@(mapcar #'(lambda (pkg)
-		     (cond
-		      ((listp pkg) `(power-emacs-install (quote ,(car pkg)) ,@(cdr pkg)))
-		      ((symbolp pkg) `(power-emacs-install (quote ,pkg)))
-		      (t (error "Unknown package type %S" pkg))))
-		 packages)
-	  ,@body))
+(defmacro @-> (package &rest plist)
+  "Install the PACKAGE if it doesn't exist. The PLIST is the specific options for installing
+the package."
+  (declare (indent 1) (debug t))
+  `(power-emacs-install ,package ,@plist))
 
-(defmacro @keys (keymap &rest key-bindings)
-  `(progn ,@(mapcar #'(lambda (b) `(define-key ,keymap ,(car b) ,(cdr b))) key-bindings)))
+(defmacro @->? (package &rest plist)
+  "Try to tnstall the PACKAGE if it doesn't exist. The PLIST is the specific options for 
+installing the package"
+  (declare (indent 1) (debug t))
+  `(power-emacs-try ,package ,@plist))
 
 (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
 

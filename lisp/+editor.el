@@ -8,13 +8,18 @@
 
 ;;; Commentary:
 ;;; Code:
-(power-require
+(@requires
   (diminish paredit highlight-parentheses goto-line-preview dimmer)
-  (define-key global-map (kbd "C-x C-b") #'ibuffer)
   (@keys global-map
-	 ((kbd "C-x C-b") . #'ibuffer)
-	 ((kbd "C->") . #'mc/mark-next-like-this))
-  )
+	 ((kbd "C->") . mc/mark-next-like-this)
+	 ([remap goto-line] . goto-line-preview))
+  (@hooks eval-expression-minibuffer-setup-hook enable-paredit-mode)
+  (with-eval-after-load 'elisp-mode
+    (@hooks emacs-lisp-mode-hook enable-paredit-mode))
+  (defmacro cgfork-open-paredit (mode-hook)
+    (declare (indent 1) (debug t))
+    `(add-hook ,mode-hook #'enable-paredit-mode))
+  (when (foundp )))
 
 (provide '+editor)
 ;;; +editor.el ends here

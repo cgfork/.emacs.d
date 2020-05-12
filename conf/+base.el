@@ -7,16 +7,6 @@
   (unless (server-running-p)
     (add-hook 'after-init-hook #'server-mode)))
 
-(setq inhibit-startup-screen t)
-
-;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-
-(when (fboundp 'set-scroll-bar-mode)
-  (set-scroll-bar-mode nil))
-
 (when (fboundp 'display-line-numbers-mode)
   (setq-default display-line-numbers-width 3)
   (add-hook 'prog-mode-hook 'display-line-numbers-mode))
