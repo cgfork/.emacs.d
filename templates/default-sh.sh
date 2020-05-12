@@ -52,13 +52,15 @@ Usage:
 EOF
 }
 
-function should_install_getopt() {
-    if [[ $(command -v getopt) ]]; then
-	return 1
+function getopt_command() {
+    if [[ "$(uname)" == "Darwin" ]]; then
+	echo "$(brew --prefix gnu-getopt)/bin/getopt"
+    else
+	echo "$(command -v getopt)"
     fi
 }
 
-GETOPT="$(brew --prefix gnu-getopt)/bin/getopt"
+GETOPT=$(getopt_command)
 
 ARGS=$(${GETOPT} -n "$0" \
 		 -o hv \

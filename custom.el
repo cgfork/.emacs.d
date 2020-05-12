@@ -35,32 +35,31 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (sanityinc-tomorrow-bright)))
+ '(custom-enabled-themes '(sanityinc-tomorrow-bright))
  '(custom-safe-themes t)
  '(org-adapt-indentation nil)
  '(org-agenda-custom-commands
-   (("w" . "任务安排")
-    ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
-    ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
-    ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
-    ("p" . "项目安排")
-    ("pw" "迭代任务" tags "CATEGORY=\"WORKLIST\"")
-    ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORKLIST\"")
-    ("t" . "个人任务")
-    ("tw" "任务清单" tags "CATEGORY=\"TASK\"")
-    ("tf" "未来要做的任务" tags-todo "CATEGORY=\"TASK\"")
-    ("P" "编程"
-     ((tags "java|go|clj|racket|js|shell|c++")
-      (tags-todo "java|go|clj|racket|js|shell|c++")))
-    ("R" "提醒事项"
-     ((tags "CATEGORY=\"LEARN\"")
-      (tags-todo "CATEGORY=\"LEARN\"")))
-    ("W" "每周计划"
-     ((stuck "")
-      (tags-todo "CATEGORY=\"PLAN\"")))))
+   '(("w" . "任务安排")
+     ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
+     ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+     ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
+     ("p" . "项目安排")
+     ("pw" "迭代任务" tags "CATEGORY=\"WORKLIST\"")
+     ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORKLIST\"")
+     ("t" . "个人任务")
+     ("tw" "任务清单" tags "CATEGORY=\"TASK\"")
+     ("tf" "未来要做的任务" tags-todo "CATEGORY=\"TASK\"")
+     ("P" "编程"
+      ((tags "java|go|clj|racket|js|shell|c++")
+       (tags-todo "java|go|clj|racket|js|shell|c++")))
+     ("R" "提醒事项"
+      ((tags "CATEGORY=\"LEARN\"")
+       (tags-todo "CATEGORY=\"LEARN\"")))
+     ("W" "每周计划"
+      ((stuck "")
+       (tags-todo "CATEGORY=\"PLAN\"")))))
  '(org-capture-templates
-   (quote
-    (("t" "Todo" entry
+   '(("t" "Todo" entry
       (file+olp+datetree "/Users/yiwen/Prophet/getting-things-done.org")
       "* TODO [#B] %^{Description} %^g
 %?
@@ -109,12 +108,11 @@ Added:%U" :time-prompt t)
 ")
      ("c" "Contacts" table-line
       (file+olp "/Users/yiwen/Prophet/journal.org" "Contacts")
-      "| %U | %^{Name} | %^{Phone}| %^{E-mail} |"))))
+      "| %U | %^{Name} | %^{Phone}| %^{E-mail} |")))
  '(org-export-headline-levels 6)
  '(org-plantuml-jar-path nil)
  '(package-selected-packages
-   (quote
-    (gotest go-mode htmlize ob-go org-tree-slide toc-org org-rich-yank bnf-mode grab-mac-link flycheck-posframe posframe ibuffer-projectile projectile company-lsp lsp-ui lsp-mode lv markdown-mode ht f dash-functional flycheck pkg-info epl company-prescient prescient neotree company magit magit-popup git-commit with-editor ghub treepy async deadgrep spinner dash rg s yasnippet-snippets wgrep yasnippet counsel swiper ivy avy diff-hl diredfl which-key multiple-cursors epm highlight-parentheses paredit diminish power-emacs))))
+   '(transient dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview all-the-icons memoize company-box flycheck-popup-tip popup slime macrostep protobuf-mode gotest go-mode htmlize ob-go org-tree-slide toc-org org-rich-yank bnf-mode grab-mac-link flycheck-posframe posframe ibuffer-projectile projectile company-lsp lsp-ui lsp-mode lv markdown-mode ht f dash-functional flycheck pkg-info epl company-prescient prescient neotree company magit magit-popup git-commit with-editor ghub treepy async deadgrep spinner dash rg s yasnippet-snippets wgrep yasnippet counsel swiper ivy avy diff-hl diredfl which-key multiple-cursors epm highlight-parentheses paredit diminish power-emacs)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

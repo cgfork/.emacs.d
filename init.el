@@ -2,19 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(when (version< emacs-version "25.1")
-  (error "This requires Emacs 25.1 or above!"))
-
-(defun cgfork-add-load-path (&rest _)
-  "Add 'conf' and 'site-conf' to `load-path'."
-  (add-to-list 'load-path (expand-file-name "site-conf" user-emacs-directory))
-  (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory)))
-
-;; (advice-add #'package-initialize :after #'cgfork/add-load-path)
-
-(cgfork-add-load-path)
-
-(package-initialize)
+(when (version< emacs-version "27.0")
+  (error "This requires Emacs 27.0 or above!"))
 
 ;; Load `custom-file'.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -34,21 +23,27 @@
 	      (when (file-exists-p file)
 		(load file)))))
 
-;; Set Key Modifiers.
-(with-no-warnings
-  (cond
-   ((eq system-type 'windows-nt)
-    (setq w32-lwindow-modifier 'super ; Left windows key
-	  w32-apps-modifier 'hyper) ; Menu key
-    (w32-register-hot-key [s-t]))
-   ((eq system-type 'darwin)
-    (setq mac-option-modifier 'super ; option
-	  mac-command-modifier 'meta ; command
-	  mac-control-modifier 'control ; control
-	  ns-function-modifier 'hyper)))) ; fn
-
-
 (power-emacs-copy-shell-variables "zsh" "PATH")
+(setq power-emacs-build-stable nil)
+
+(defmacro power-require (packages &rest body)
+  `(progn ,@(mapcar #'(lambda (pkg)
+		     (cond
+		      ((listp pkg) `(power-emacs-install (quote ,(car pkg)) ,@(cdr pkg)))
+		      ((symbolp pkg) `(power-emacs-install (quote ,pkg)))
+		      (t (error "Unknown package type %S" pkg))))
+		 packages)
+	  ,@body))
+
+(defmacro @keys (keymap &rest key-bindings)
+  `(progn ,@(mapcar #'(lambda (b) `(define-key ,keymap ,(car b) ,(cdr b))) key-bindings)))
+
+(add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
+
+;; (require '+editor)
+
+;; (package-initialize)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -57,6 +52,8 @@
 (require '+org)
 (require '+programmer)
 (require '+go)
-;; (provide 'init)
+(require '+common-lisp)
+(require '+dsl)
 
+(provide 'init)
 ;;; Init.el ends here

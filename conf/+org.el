@@ -80,9 +80,6 @@ Replace the TEXT when the BACKEND is html."
 (when (power-emacs-try 'org-rich-yank)
   (define-key org-mode-map (kbd "C-M-y") 'org-rich-yank))
 
-(when (power-emacs-try 'org-preview-html)
-  (diminish 'org-preview-html-mode))
-
 (when (power-emacs-try 'toc-org)
   (add-hook 'org-mode-hook 'toc-org-mode))
 
@@ -164,24 +161,24 @@ Replace the TEXT when the BACKEND is html."
 	     ("c" "Contacts" table-line (file+olp ,journal-file "Contacts")
 	      "| %U | %^{Name} | %^{Phone}| %^{E-mail} |"))))
    '(org-agenda-custom-commands
-     (("w" . "任务安排")
-      ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
-      ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
-      ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
-      ("p" . "项目安排")
-      ("pw" "迭代任务" tags "CATEGORY=\"WORKLIST\"")
-      ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORKLIST\"")
-      ("t" . "个人任务")
-      ("tw" "任务清单" tags "CATEGORY=\"TASK\"")
-      ("tf" "未来要做的任务" tags-todo "CATEGORY=\"TASK\"")
-      ("P" "编程" ((tags "java|go|clj|racket|js|shell|c++")
-		   (tags-todo "java|go|clj|racket|js|shell|c++")))
-      ("R" "提醒事项" ((tags "CATEGORY=\"LEARN\"")
-		       (tags-todo "CATEGORY=\"LEARN\"")))
-      ("W" "每周计划"
-       ((stuck "") ;; review stuck projects as designated by org-stuck-projects
-	(tags-todo "CATEGORY=\"PLAN\"") ;; review all projects (assuming you use todo keywords to designate projects)
-	))))))
+     '(("w" . "任务安排")
+       ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
+       ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+       ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
+       ("p" . "项目安排")
+       ("pw" "迭代任务" tags "CATEGORY=\"WORKLIST\"")
+       ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORKLIST\"")
+       ("t" . "个人任务")
+       ("tw" "任务清单" tags "CATEGORY=\"TASK\"")
+       ("tf" "未来要做的任务" tags-todo "CATEGORY=\"TASK\"")
+       ("P" "编程" ((tags "java|go|clj|racket|js|shell|c++")
+		    (tags-todo "java|go|clj|racket|js|shell|c++")))
+       ("R" "提醒事项" ((tags "CATEGORY=\"LEARN\"")
+			(tags-todo "CATEGORY=\"LEARN\"")))
+       ("W" "每周计划"
+	((stuck "") ;; review stuck projects as designated by org-stuck-projects
+	 (tags-todo "CATEGORY=\"PLAN\"") ;; review all projects (assuming you use todo keywords to designate projects)
+	 ))))))
 
 (provide '+org)
 ;;; +org.el ends here

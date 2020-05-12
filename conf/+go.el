@@ -68,7 +68,9 @@
 				  standard-indent 2
 				  indent-tabs-mode nil)))
   (add-hook 'go-mode-hook #'lsp)
+  ;; (add-hook 'go-mode-hook #'yas-minor-mode)
   (power-emacs-copy-shell-variables "zsh" "GOPATH" "GO111MODULE" "GOPROXY")
+  ;; (power-emacs-set-shell-variable "GO111MODULE" "on")
   (when (executable-find "goimports")
     (setq gofmt-command "goimports"))
   (unless (executable-find "gopls")

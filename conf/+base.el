@@ -9,7 +9,7 @@
 
 (setq inhibit-startup-screen t)
 
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
@@ -54,26 +54,6 @@
     (advice-add 'goto-line-preview :around #'cgfork-with-display-line-numbers)))
 
 (add-hook 'after-init-hook 'show-paren-mode)
-
-(when (fboundp 'set-language-environment)
-  (set-language-environment 'utf-8))
-
-(when (fboundp 'display-time-mode)
-  (display-time-mode t))
-
-(when (fboundp 'save-place-mode)
-  (save-place-mode t))
-
-(when (fboundp 'electric-pair-mode)
-  (electric-pair-mode t))
-
-(setq-default
- column-number-mode t
- auto-save-default nil
- make-backup-files nil
- cursor-type 'bar
- ns-pop-up-frames nil
- tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
 
 (add-hook 'after-init-hook 'winner-mode)
 
@@ -189,9 +169,7 @@
 
   (when (power-emacs-try 'swiper)
     (define-key global-map (kbd "C-s") 'swiper-isearch)
-    (define-key global-map (kbd "C-r") 'swiper-isearch-backward)
-    (define-key global-map (kbd "C-s-f") 'swiper)
-    (define-key global-map (kbd "C-s-s") 'swiper-all))
+    (define-key global-map (kbd "C-r") 'swiper-isearch-backward))
 
   (when (power-emacs-try 'counsel)
     (diminish 'counsel-mode)
@@ -256,11 +234,19 @@
   (power-emacs-install 'deadgrep)
   (global-set-key (kbd "C-c C-p") 'rg-project))
 
+(when (power-emacs-try 'projectile)
+  (add-hook 'after-init-hook 'projectile-mode)
+  (setq-default projectile-mode-line-prefix " Proj")
+  (with-eval-after-load 'projectile
+    (setq projectile-completion-system 'ivy)
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)))
+
 (power-emacs-install 'neotree)
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (with-eval-after-load 'neotree
   (setq neo-window-width 30
 	neo-smart-open t
+	neo-autorefresh nil
 	neo-window-fixed-size nil))
     
 (provide '+base)
