@@ -2,6 +2,53 @@
 ;;; Commentary:
 ;;; Code:
 
+;; early-init
+(when (not (version< emacs-version "27.0"))
+  ;; Disable startup screen
+  (setq inhibit-startup-screen t)
+
+  ;; Disable tool bar
+  (when (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+
+  ;; Disable scroll bar
+  (when (fboundp 'set-scroll-bar-mode)
+    (set-scroll-bar-mode nil))
+
+  (when (fboundp 'set-language-environment)
+    (set-language-environment 'utf-8))
+
+  (when (fboundp 'display-time-mode)
+    (display-time-mode t))
+
+  (when (fboundp 'save-place-mode)
+    (save-place-mode t))
+
+  (when (fboundp 'electric-pair-mode)
+    (electric-pair-mode t))
+
+  (setq-default
+   column-number-mode t
+   auto-save-default nil
+   make-backup-files nil
+   cursor-type 'bar
+   ns-pop-up-frames nil
+   tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
+
+  ;; Set Key Modifiers.
+  (with-no-warnings
+    (cond
+     ((eq system-type 'windows-nt)
+      (setq w32-lwindow-modifier 'super ; Left windows key
+	    w32-apps-modifier 'hyper) ; Menu key
+      (w32-register-hot-key [s-t]))
+     ((eq system-type 'darwin)
+      (setq mac-option-modifier 'super ; option
+	    mac-command-modifier 'meta ; command
+	    mac-control-modifier 'control ; control
+	    ns-function-modifier 'hyper)))) ; fn
+  )
+
 (require 'server)
 (with-eval-after-load 'server
   (unless (server-running-p)
@@ -11,39 +58,7 @@
   (setq-default display-line-numbers-width 3)
   (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
-(defalias 'list-buffers 'ibuffer)
 (define-key global-map (kbd "C-x C-b") 'ibuffer)
-
-(power-emacs-install 'diminish)
-
-;; Setup paredit for lisp programming.
-;; If you want to open paredit mode, you should add the hook
-;; to `enable-paredit-mode'.
-(power-emacs-install 'paredit)
-(add-hook 'eval-expression-minibuffer-setup-hook 'enable-paredit-mode)
- 
-;; A macro for openning paredit.
-(defmacro cgfork-open-paredit (mode-hook)
-  "Add the `enable-paredit-mode' to the specific MODE-HOOK."
-  `(add-hook ,mode-hook 'enable-paredit-mode))
-
-(with-eval-after-load 'elisp-mode
-  (cgfork-open-paredit 'emacs-lisp-mode-hook))
-
-;; Highlight parentheses.
-(power-emacs-install 'highlight-parentheses)
-(global-highlight-parentheses-mode 1)
-
-(when (power-emacs-try 'goto-line-preview)
-  (global-set-key [remap goto-line] 'goto-line-preview)
-
-  (when (fboundp 'display-line-numbers-mode)
-    (defun cgfork-with-display-line-numbers (f &rest args)
-      (let ((display-line-numbers t))
-        (apply f args)))
-    (advice-add 'goto-line-preview :around #'cgfork-with-display-line-numbers)))
-
-(add-hook 'after-init-hook 'show-paren-mode)
 
 (add-hook 'after-init-hook 'winner-mode)
 
@@ -66,7 +81,6 @@
   (interactive)
   (setq custom-enabled-themes '(sanityinc-tomorrow-bright))
   (power-emacs-apply-themes))
-
 
 (when (power-emacs-try 'dimmer)
   (setq-default dimmer-fraction 0.15)

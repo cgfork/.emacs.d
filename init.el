@@ -2,8 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(when (version< emacs-version "27.0")
-  (error "This requires Emacs 27.0 or above!"))
+(when (version< emacs-version "25.3")
+  (error "This requires Emacs 25.3 or above!"))
 
 ;; Load `custom-file'.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -26,17 +26,30 @@
 (power-emacs-copy-shell-variables "zsh" "PATH")
 (setq power-emacs-build-stable nil)
 
-(defmacro @-> (package &rest plist)
-  "Install the PACKAGE if it doesn't exist. The PLIST is the specific options for installing
-the package."
-  (declare (indent 1) (debug t))
-  `(power-emacs-install ,package ,@plist))
+(defun power-package-install (pkg &optional try)
+  "Install the package named PKG .When try is non-nil, it will return t if is is
+successful to install the PKG. Otherwise raise an error."
+  (let* ((pkg-plist (pcase pkg
+		     (`(,a . ,b) `(,a ,@b))
+		     (`(,a . nil) `(,a))
+		     ((pred symbolp) `(,pkg))))
+	 (pkg (car pkg-plist))
+	 (plist (cdr pkg-plist)))
+    (message "(%S . %S)" pkg plist)
+    (if try
+	(apply #'power-emacs-try pkg plist)
+      (apply #'power-emacs-install pkg plist))))
 
-(defmacro @->? (package &rest plist)
-  "Try to tnstall the PACKAGE if it doesn't exist. The PLIST is the specific options for 
-installing the package"
+(defmacro @-> (packages &rest body)
+  "Install the PACKAGES and eval the BODY."
   (declare (indent 1) (debug t))
-  `(power-emacs-try ,package ,@plist))
+  `(progn
+     ,@(mapcar #'(lambda (pkg)
+		   `(power-package-install ,pkg))
+	       packages)
+     ,@body))
+
+(macroexpand-1 '(@-> ('xx)))
 
 (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
 
@@ -48,6 +61,7 @@ installing the package"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require '+base)
+(require '+editor)
 (require '+magit)
 (require '+org)
 (require '+programmer)

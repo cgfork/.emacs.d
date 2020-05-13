@@ -55,7 +55,5 @@
 	  mac-control-modifier 'control ; control
 	  ns-function-modifier 'hyper)))) ; fn
 
-
-
 (provide 'early-init)
 ;;; early-init.el ends here
