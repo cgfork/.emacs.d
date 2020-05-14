@@ -62,6 +62,8 @@
 
 (add-hook 'after-init-hook 'winner-mode)
 
+(power-emacs-install 'diminish)
+
 (when (power-emacs-try 'dimmer)
   (setq-default dimmer-fraction 0.15)
   (add-hook 'after-init-hook 'dimmer-mode)

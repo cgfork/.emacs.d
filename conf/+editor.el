@@ -13,9 +13,6 @@
 ;; If you want to open paredit mode, you should add the hook
 ;; to `enable-paredit-mode'.
 
-;; Diminish 
-(power-emacs-install 'diminish)
-
 ;; Parentheses
 (power-emacs-install 'paredit)
 (defmacro cgfork-open-paredit (mode-hook)
