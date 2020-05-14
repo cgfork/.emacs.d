@@ -17,5 +17,18 @@
 	    (lambda ()
 	      (c-add-style "proto-style" '((c-basic-offset . 4) (indent-tabs-mode . nil)) t))))
 
+(power-emacs-install 'plantuml-mode)
+(setq plantuml-jar-path (executable-find "plantuml.jar"))
+(with-eval-after-load 'plantuml-mode
+  (plantuml-set-exec-mode "jar"))
+
+(power-emacs-install 'yaml-mode)
+
+(power-emacs-install 'markdown-mode)
+(setq markdown-command "multimarkdown")
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+
 (provide '+dsl)
 ;;; +dsl.el ends here

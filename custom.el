@@ -112,7 +112,7 @@ Added:%U" :time-prompt t)
  '(org-export-headline-levels 6)
  '(org-plantuml-jar-path nil)
  '(package-selected-packages
-   '(transient dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview all-the-icons memoize company-box flycheck-popup-tip popup slime macrostep protobuf-mode gotest go-mode htmlize ob-go org-tree-slide toc-org org-rich-yank bnf-mode grab-mac-link flycheck-posframe posframe ibuffer-projectile projectile company-lsp lsp-ui lsp-mode lv markdown-mode ht f dash-functional flycheck pkg-info epl company-prescient prescient neotree company magit magit-popup git-commit with-editor ghub treepy async deadgrep spinner dash rg s yasnippet-snippets wgrep yasnippet counsel swiper ivy avy diff-hl diredfl which-key multiple-cursors epm highlight-parentheses paredit diminish power-emacs)))
+   '(yaml-mode plantuml-mode transient dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview all-the-icons memoize company-box flycheck-popup-tip popup slime macrostep protobuf-mode gotest go-mode htmlize ob-go org-tree-slide toc-org org-rich-yank bnf-mode grab-mac-link flycheck-posframe posframe ibuffer-projectile projectile company-lsp lsp-ui lsp-mode lv markdown-mode ht f dash-functional flycheck pkg-info epl company-prescient prescient neotree company magit magit-popup git-commit with-editor ghub treepy async deadgrep spinner dash rg s yasnippet-snippets wgrep yasnippet counsel swiper ivy avy diff-hl diredfl which-key multiple-cursors epm highlight-parentheses paredit diminish power-emacs)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

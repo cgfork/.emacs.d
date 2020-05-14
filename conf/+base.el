@@ -62,26 +62,6 @@
 
 (add-hook 'after-init-hook 'winner-mode)
 
-;;;;;;;;;;;;;;;;;;;;;;;; Themes ;;;;;;;;;;;;;;;;;;;;;;;;;
-(power-emacs-install 'color-theme-sanityinc-solarized)
-(power-emacs-install 'color-theme-sanityinc-tomorrow)
-
-;; (setq custom-safe-themes t)
-;; (setq-default custom-enabled-themes '(sanityinc-tomorrow-bright))
-;; (add-hook 'after-init-hook 'power-emacs-apply-themes)
-
-(defun cgfork-light ()
-  "Activate a light color theme."
-  (interactive)
-  (setq custom-enabled-themes '(sanityinc-tomorrow-day))
-  (power-emacs-apply-themes))
-
-(defun cgfork-dark ()
-  "Activate a dark color theme."
-  (interactive)
-  (setq custom-enabled-themes '(sanityinc-tomorrow-bright))
-  (power-emacs-apply-themes))
-
 (when (power-emacs-try 'dimmer)
   (setq-default dimmer-fraction 0.15)
   (add-hook 'after-init-hook 'dimmer-mode)
@@ -143,78 +123,42 @@
   (with-eval-after-load 'dired
     (add-hook 'dired-mode-hook 'diff-hl-dired-mode)))
 
-(when (power-emacs-try 'multiple-cursors)
-   (define-key global-map (kbd "C->") 'mc/mark-next-like-this)
-   (define-key global-map (kbd "C-<") 'mc/mark-previous-like-this)
-   (define-key global-map (kbd "C-c C-<") 'mc/mark-all-like-this)
-   (define-key global-map (kbd "C-c C-m") 'mc/mark-all-dwim))
+;; ivy
+(power-emacs-try 'ivy)
+(diminish 'ivy-mode)
+(add-hook 'after-init-hook 'ivy-mode)
+(define-key global-map (kbd "C-x b") 'ivy-switch-buffer)
+(define-key global-map (kbd "C-c C-r") 'ivy-resume)
+(define-key global-map (kbd "C-c C .") 'ivy-switch-view)
+(with-eval-after-load 'ivy
+  (setq enable-recursive-minibuffers t
+        ivy-use-virtual-buffers t
+	ivy-count-format "%d/%d"
+        ivy-display-style 'fancy
+        ivy-format-function 'ivy-format-function-line
+        ivy-re-builders-alist '((counsel-M-x . ivy--regex-fuzzy) 
+				(t . ivy--regex-plus))
+        ivy-initial-inputs-alist nil)    
+  (define-key global-map (kbd "C-c v p") 'ivy-push-view))
+(define-key global-map (kbd "C-c v o") 'ivy-pop-view)
 
-(when (power-emacs-try 'avy)
-  (avy-setup-default)
-  (define-key global-map (kbd "C-:") 'avy-goto-char-2))
-
-(when (power-emacs-try 'ivy)
-  (diminish 'ivy-mode)
-  (add-hook 'after-init-hook 'ivy-mode)
-  (define-key global-map (kbd "C-x b") 'ivy-switch-buffer)
-  (define-key global-map (kbd "C-c C-r") 'ivy-resume)
-  (define-key global-map (kbd "C-c C .") 'ivy-switch-view)
-  (with-eval-after-load 'ivy
-    (setq enable-recursive-minibuffers t
-          ivy-use-virtual-buffers t
-	  ivy-count-format "%d/%d"
-          ivy-display-style 'fancy
-          ivy-format-function 'ivy-format-function-line
-          ivy-re-builders-alist '((counsel-M-x . ivy--regex-fuzzy) 
-				  (t . ivy--regex-plus))
-          ivy-initial-inputs-alist nil)    
-    (define-key global-map (kbd "C-c v p") 'ivy-push-view))
-  (define-key global-map (kbd "C-c v o") 'ivy-pop-view)
-
-  (when (power-emacs-try 'swiper)
-    (define-key global-map (kbd "C-s") 'swiper-isearch)
-    (define-key global-map (kbd "C-r") 'swiper-isearch-backward))
-
-  (when (power-emacs-try 'counsel)
-    (diminish 'counsel-mode)
-    (add-hook 'after-init-hook 'counsel-mode)
-    (define-key global-map (kbd "M-x") 'counsel-M-x)
-    (define-key global-map (kbd "C-x C-f") 'counsel-find-file)
-    (with-eval-after-load 'ibuffer
-      (defun my-ibuffer-find-file ()
-	(interactive)
-	(let ((default-directory (let ((buf (ibuffer-current-buffer)))
-				   (if (buffer-live-p buf)
-				       (with-current-buffer buf default-directory)
-				     default-directory))))
-	  (counsel-find-file default-directory)))
-      (advice-add #'ibuffer-find-file :override #'my-ibuffer-find-file))))
-    
-(power-emacs-install 'yasnippet)
-(power-emacs-install 'yasnippet-snippets)
-
-(diminish 'yas-minor-mode)
-(yas-global-mode 1)
-
-;; Or you can use `yas-minor-mode' on per-buffer basic
-;; (yas-reload-all)
-;;
-;; (cgfork/after-load 'yasnippet
-;;   (add-hook 'prog-mode-hook #'yas-minor-mode))
-
-;; Setup autoinsert.
-(autoload 'yas-expand-snippet "yasnippet")
-(defun autoinsert-yas-expand (&rest _)
-  "Replace text in yasnippet template."
-  (yas-expand-snippet (buffer-string) (point-min) (point-max)))
-
-(auto-insert-mode 1) ;; trigger to load the autoinsert package.
-(with-eval-after-load 'autoinsert
-  (setq auto-insert-query nil
-	auto-insert-directory (locate-user-emacs-file "templates"))
-  (define-auto-insert "\\.org?$" [ "default-org.org" autoinsert-yas-expand ])
-  (define-auto-insert "\\.el?$" [ "default-el.el" autoinsert-yas-expand ])
-  (define-auto-insert "\\.sh?$" "default-sh.sh"))
+(power-emacs-try 'swiper)
+(define-key global-map (kbd "C-s") 'swiper-isearch)
+(define-key global-map (kbd "C-r") 'swiper-isearch-backward)
+(power-emacs-try 'counsel)
+(diminish 'counsel-mode)
+(add-hook 'after-init-hook 'counsel-mode)
+(define-key global-map (kbd "M-x") 'counsel-M-x)
+(define-key global-map (kbd "C-x C-f") 'counsel-find-file)
+(with-eval-after-load 'ibuffer
+  (defun my-ibuffer-find-file ()
+    (interactive)
+    (let ((default-directory (let ((buf (ibuffer-current-buffer)))
+			       (if (buffer-live-p buf)
+				   (with-current-buffer buf default-directory)
+				 default-directory))))
+      (counsel-find-file default-directory)))
+  (advice-add #'ibuffer-find-file :override #'my-ibuffer-find-file))
 
 (setq-default grep-highlight-matches t
 	      grep-scroll-output t)

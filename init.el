@@ -26,45 +26,17 @@
 (power-emacs-copy-shell-variables "zsh" "PATH")
 (setq power-emacs-build-stable nil)
 
-(defun power-package-install (pkg &optional try)
-  "Install the package named PKG .When try is non-nil, it will return t if is is
-successful to install the PKG. Otherwise raise an error."
-  (let* ((pkg-plist (pcase pkg
-		     (`(,a . ,b) `(,a ,@b))
-		     (`(,a . nil) `(,a))
-		     ((pred symbolp) `(,pkg))))
-	 (pkg (car pkg-plist))
-	 (plist (cdr pkg-plist)))
-    (message "(%S . %S)" pkg plist)
-    (if try
-	(apply #'power-emacs-try pkg plist)
-      (apply #'power-emacs-install pkg plist))))
-
-(defmacro @-> (packages &rest body)
-  "Install the PACKAGES and eval the BODY."
-  (declare (indent 1) (debug t))
-  `(progn
-     ,@(mapcar #'(lambda (pkg)
-		   `(power-package-install ,pkg))
-	       packages)
-     ,@body))
-
-(macroexpand-1 '(@-> ('xx)))
-
 (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
-
-;; (require '+editor)
-
-;; (package-initialize)
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require '+base)
+(require '+themes)
 (require '+editor)
 (require '+magit)
+(require '+company)
+(require '+flycheck)
 (require '+org)
-(require '+programmer)
+(require '+lsp)
 (require '+go)
 (require '+common-lisp)
 (require '+dsl)
