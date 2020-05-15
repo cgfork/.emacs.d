@@ -1,3 +1,6 @@
 [submodule "power-emacs"]
 	path = power-emacs
 	url = https://github.com/cgfork/power-emacs.git
+[submodule "melpa"]
+	path = melpa
+	url = https://github.com/melpa/melpa.git
