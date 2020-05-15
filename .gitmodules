@@ -1,0 +1,3 @@
+[submodule "power-emacs"]
+	path = power-emacs
+	url = https://github.com/cgfork/power-emacs.git
