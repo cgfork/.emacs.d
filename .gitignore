@@ -2,8 +2,7 @@ auto-save-list/
 eshell/
 elpa/
 melpa/
-power-emacs/build/
-power-emmacs/packages	
+build/
 .cache/
 .lsp-session-v1
 .mc-lists.el
