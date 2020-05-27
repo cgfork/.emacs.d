@@ -11,7 +11,7 @@
 (define-key global-map (kbd "C-c c") 'org-capture)
 (define-key global-map (kbd "C-c b") 'org-switchb)
 
-(setq org-agenda-files (list (expand-file-name "Prophet" (getenv "HOME")))
+(setq org-agenda-files (list (expand-file-name "org" (getenv "HOME")))
       org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)"
 							    "|" "DONE(d)" "CANCEL(c)"))
       org-log-done 'time
@@ -102,7 +102,7 @@ Replace the TEXT when the BACKEND is html."
 	("http" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")
 	("https" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")))
 
-(let* ((org-home (expand-file-name "Prophet" (getenv "HOME")))
+(let* ((org-home (expand-file-name "org" (getenv "HOME")))
        (base (expand-file-name "notes" org-home))
        (public (expand-file-name "public_html" org-home)))
   (setq org-publish-project-alist
@@ -134,7 +134,7 @@ Replace the TEXT when the BACKEND is html."
            :publishing-function org-publish-attachment)
           ("blog" :components ("blog-notes" "blog-static")))))
 
-(let* ((org-home (expand-file-name "Prophet" (getenv "HOME")))
+(let* ((org-home (expand-file-name "org" (getenv "HOME")))
        (tasks-file (expand-file-name "getting-things-done.org" org-home))
        (journal-file (expand-file-name "journal.org" org-home)))
   (custom-set-variables
