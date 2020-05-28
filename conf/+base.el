@@ -43,8 +43,8 @@
 	    w32-apps-modifier 'hyper) ; Menu key
       (w32-register-hot-key [s-t]))
      ((eq system-type 'darwin)
-      (setq mac-option-modifier 'super ; option
-	    mac-command-modifier 'meta ; command
+      (setq mac-option-modifier 'meta ; option
+	    mac-command-modifier 'super ; command
 	    mac-control-modifier 'control ; control
 	    ns-function-modifier 'hyper)))) ; fn
   )

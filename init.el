@@ -40,6 +40,7 @@
 (require '+go)
 (require '+common-lisp)
 (require '+dsl)
+;; (require '+clojure)
 
 (provide 'init)
 ;;; Init.el ends here
