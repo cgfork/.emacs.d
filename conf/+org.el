@@ -3,6 +3,12 @@
 ;;; Code:
 
 (require 'org)
+
+(defcustom org-notes-home (expand-file-name "~/notes")
+  "Define the home path of my notes."
+  :group 'cgfork
+  :type 'string)
+
 (when (eq system-type 'darwin)
   (power-emacs-install 'grab-mac-link))
 
@@ -11,7 +17,7 @@
 (define-key global-map (kbd "C-c c") 'org-capture)
 (define-key global-map (kbd "C-c b") 'org-switchb)
 
-(setq org-agenda-files (list (expand-file-name "org" (getenv "HOME")))
+(setq org-agenda-files (list org-notes-home)
       org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)"
 							    "|" "DONE(d)" "CANCEL(c)"))
       org-log-done 'time
@@ -102,14 +108,15 @@ Replace the TEXT when the BACKEND is html."
 	("http" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")
 	("https" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")))
 
-(let* ((org-home (expand-file-name "org" (getenv "HOME")))
-       (base (expand-file-name "notes" org-home))
-       (public (expand-file-name "public_html" org-home)))
+(let* ((notes-home org-notes-home)
+       (assets (expand-file-name "assets" notes-home))
+       (public (expand-file-name "public" notes-home))
+       (html-public (expand-file-name "html/public" notes-home)))
   (setq org-publish-project-alist
 	`(("blog-notes"
-           :base-directory ,base
+           :base-directory ,public
            :base-extension "org"
-           :publishing-directory ,public
+           :publishing-directory ,html-public
            :recursive t
            :publishing-function org-html-publish-to-html
            :headline-levels 4             ; Just the default for this project.
@@ -127,16 +134,22 @@ Replace the TEXT when the BACKEND is html."
            :html-preamble "<div id=\"preamble\"><p class=\"preamble\">Last updated %C.</p></div>"
            :html-postamble "<div id=\"postamble\"><p class=\"postamble\">The %t published by %a with %c.</p></div>")
           ("blog-static"
-           :base-directory ,base
+           :base-directory ,public
            :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|ico"
-           :publishing-directory ,public
+           :publishing-directory ,html-public
            :recursive t
            :publishing-function org-publish-attachment)
-          ("blog" :components ("blog-notes" "blog-static")))))
+	  ("static"
+	   :base-directory ,assets
+	   :base-extension "css\\|js\\|png\\|jpg\\|pdf\\|mp3\\|ogg\\|swf\\|ico"
+	   :publishing-directory ,html-public
+	   :recursive t
+	   :publishing-function org-publish-attachment)
+          ("blog" :components ("blog-notes" "blog-static" "static")))))
 
-(let* ((org-home (expand-file-name "org" (getenv "HOME")))
-       (tasks-file (expand-file-name "getting-things-done.org" org-home))
-       (journal-file (expand-file-name "journal.org" org-home)))
+(let* ((org-home org-notes-home)
+       (tasks-file (expand-file-name "TODOs.org" org-home))
+       (journal-file (expand-file-name "Journal.org" org-home)))
   (custom-set-variables
    '(org-adapt-indentation nil)
    '(org-export-headline-levels 6)
@@ -173,11 +186,11 @@ Replace the TEXT when the BACKEND is html."
        ("tf" "未来要做的任务" tags-todo "CATEGORY=\"TASK\"")
        ("P" "编程" ((tags "java|go|clj|racket|js|shell|c++")
 		    (tags-todo "java|go|clj|racket|js|shell|c++")))
-       ("R" "提醒事项" ((tags "CATEGORY=\"LEARN\"")
-			(tags-todo "CATEGORY=\"LEARN\"")))
-       ("W" "每周计划"
+       ("R" "提醒事项" ((tags "CATEGORY=\"REMINDER\"")
+			(tags-todo "CATEGORY=\"REMINDER\"")))
+       ("W" "每周工作"
 	((stuck "") ;; review stuck projects as designated by org-stuck-projects
-	 (tags-todo "CATEGORY=\"PLAN\"") ;; review all projects (assuming you use todo keywords to designate projects)
+	 (tags-todo "CATEGORY=\"WORKLIST\"") ;; review all projects (assuming you use todo keywords to designate projects)
 	 ))))))
 
 (provide '+org)
