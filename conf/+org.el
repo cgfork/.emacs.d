@@ -170,7 +170,7 @@ Replace the TEXT when the BACKEND is html."
 	     ("l" "Log Time" entry (file+olp ,journal-file "Log Time")
 	      "* %U - %^{Activity}\t :TIME:")
 	     ("s" "Code Snippets" entry (file+olp ,journal-file "Code Snippets")
-	      "* %U - %^{Heading}%^g\n%?\n")
+	      "* %U - %^{Heading} %^g\n%?\n")
 	     ("c" "Contacts" table-line (file+olp ,journal-file "Contacts")
 	      "| %U | %^{Name} | %^{Phone}| %^{E-mail} |"))))
    '(org-agenda-custom-commands
