@@ -54,6 +54,9 @@
 (when (power-emacs-try 'bnf-mode)
   (add-to-list 'org-src-lang-modes '("bnf" . bnf)))
 
+(when (power-emacs-try 'plantuml-mode)
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))
+
 (unless (featurep 'ob) (require 'ob))
 (unless (featurep 'ox-html) (require 'ox-html))
 (unless (featurep 'ox-publish) (require 'ox-publish))

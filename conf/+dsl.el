@@ -19,8 +19,8 @@
 
 (power-emacs-install 'plantuml-mode)
 (setq plantuml-jar-path (executable-find "plantuml.jar"))
-(with-eval-after-load 'plantuml-mode
-  (plantuml-set-exec-mode "jar"))
+(setq plantuml-jar-args (list "-charset" "UTF-8" "-I/Users/yiwen/notes/assets/plantuml-config.uml"))
+(setq plantuml-default-exec-mode 'jar)
 
 (power-emacs-install 'yaml-mode)
 
