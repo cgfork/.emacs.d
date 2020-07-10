@@ -4,7 +4,7 @@
 
 (when (version< emacs-version "25.3")
   (error "This requires Emacs 25.3 or above!"))
-(add-to-list 'load-path (expand-file-name "org-mode/lisp" user-emacs-directory))
+;; (add-to-list 'load-path (expand-file-name "org-mode/lisp" user-emacs-directory))
 
 ;; Load `custom-file'.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -29,17 +29,6 @@
 
 (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun fix-plantuml-make-body (oldfun &rest args)
-  (pcase args
-    (`(,body ,params)
-     (let ((full-body
-	    (org-babel-expand-body:generic
-	     body params (org-babel-variable-assignments:plantuml params))))
-       (if (string-prefix-p "@start" body t) full-body
-	 (format "@startuml\n%s\n@enduml" full-body))))))
-
-;; (advice-add #'org-babel-plantuml-make-body :override #'fix-plantuml-make-body)
 
 (require '+base)
 (require '+themes)

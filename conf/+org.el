@@ -4,6 +4,17 @@
 
 (require 'org)
 
+(require 'ob-plantuml)
+(defun fix-plantuml-make-body (body params)
+  (let ((full-body
+	    (org-babel-expand-body:generic
+	     body params (org-babel-variable-assignments:plantuml params))))
+       (message "try to export")
+       (if (string-prefix-p "@start" body t) full-body
+	 (format "@startuml\n%s\n@enduml" full-body))))
+
+(advice-add #'org-babel-plantuml-make-body :override #'fix-plantuml-make-body)
+
 (defcustom org-notes-home (expand-file-name "~/notes")
   "Define the home path of my notes."
   :group 'cgfork
