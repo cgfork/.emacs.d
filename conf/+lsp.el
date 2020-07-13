@@ -12,7 +12,7 @@
 (power-emacs-install 'lsp-mode)
 (diminish 'lsp-mode)
 (add-hook 'prog-mode-hook (lambda ()
-			    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'sh-mode 'plantuml-mode)
+			    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'sh-mode 'plantuml-mode 'clojure-mode)
 			      (lsp-deferred))))
 (add-hook 'lsp-mode-hook (lambda ()
 			   (lsp-enable-which-key-integration)
