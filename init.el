@@ -41,7 +41,7 @@
 (require '+go)
 (require '+common-lisp)
 (require '+dsl)
-;; (require '+clojure)
+(require '+clojure)
 
 ;; (add-to-list 'load-path (expand-file-name "site-conf" user-emacs-directory))
 ;; (require 'ob-plantuml)

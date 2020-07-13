@@ -35,7 +35,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;; '(custom-enabled-themes '(sanityinc-tomorrow-bright))
  '(custom-safe-themes t)
  '(org-adapt-indentation nil)
  '(org-agenda-custom-commands
@@ -53,39 +52,39 @@
       ((tags "java|go|clj|racket|js|shell|c++")
        (tags-todo "java|go|clj|racket|js|shell|c++")))
      ("R" "提醒事项"
-      ((tags "CATEGORY=\"LEARN\"")
-       (tags-todo "CATEGORY=\"LEARN\"")))
-     ("W" "每周计划"
+      ((tags "CATEGORY=\"REMINDER\"")
+       (tags-todo "CATEGORY=\"REMINDER\"")))
+     ("W" "每周工作"
       ((stuck "")
-       (tags-todo "CATEGORY=\"PLAN\"")))))
+       (tags-todo "CATEGORY=\"WORKLIST\"")))))
  '(org-capture-templates
    '(("t" "Todo" entry
-      (file+olp+datetree "/Users/yiwen/org/getting-things-done.org")
+      (file+olp+datetree "/Users/yiwen/notes/TODOs.org")
       "* TODO [#B] %^{Description} %^g
 %?
 %i
 Added:%U" :time-prompt t)
      ("T" "Todo with Clipboard" entry
-      (file+olp+datetree "/Users/yiwen/org/getting-things-done.org")
+      (file+olp+datetree "/Users/yiwen/notes/TODOs.org")
       "* TODO [#B] %^{Description} %^g
 %c
 Added:%U" :time-prompt t)
      ("S" "Todo with Scheduled" entry
-      (file+olp+datetree "/Users/yiwen/org/getting-things-done.org")
+      (file+olp+datetree "/Users/yiwen/notes/TODOs.org")
       "* TODO [#B] %^{Description} %^g
 SCHEDULED: %^t
 %?
 %i
 Added:%U" :time-prompt t)
      ("D" "Todo with Deadline" entry
-      (file+olp+datetree "/Users/yiwen/org/getting-things-done.org")
+      (file+olp+datetree "/Users/yiwen/notes/TODOs.org")
       "* TODO [#B] %^{Description} %^g
 DEADLINE: %^t
 %?
 %i
 Added:%U" :time-prompt t)
      ("P" "TODO with Properties" entry
-      (file+olp+datetree "/Users/yiwen/org/getting-things-done.org")
+      (file+olp+datetree "/Users/yiwen/notes/TODOs.org")
       "* TODO [#B] %^{Description} %^g
 DEADLINE: %^t
 :PROPERTIES:
@@ -95,24 +94,24 @@ DEADLINE: %^t
  %i
 Added:%U" :time-prompt t)
      ("j" "Journal" entry
-      (file+olp "/Users/yiwen/org/journal.org" "Journal")
+      (file+olp "/Users/yiwen/notes/Journal.org" "Journal")
       "* %U - %^{Heading}
  %?")
      ("l" "Log Time" entry
-      (file+olp "/Users/yiwen/org/journal.org" "Log Time")
+      (file+olp "/Users/yiwen/notes/Journal.org" "Log Time")
       "* %U - %^{Activity}	 :TIME:")
      ("s" "Code Snippets" entry
-      (file+olp "/Users/yiwen/org/journal.org" "Code Snippets")
-      "* %U - %^{Heading}%^g
+      (file+olp "/Users/yiwen/notes/Journal.org" "Code Snippets")
+      "* %U - %^{Heading} %^g
 %?
 ")
      ("c" "Contacts" table-line
-      (file+olp "/Users/yiwen/org/journal.org" "Contacts")
+      (file+olp "/Users/yiwen/notes/Journal.org" "Contacts")
       "| %U | %^{Name} | %^{Phone}| %^{E-mail} |")))
  '(org-export-headline-levels 6)
  '(org-plantuml-jar-path "/Users/yiwen/Develop/bin/plantuml.jar")
  '(package-selected-packages
-   '(sesman parseedn parseclj a elein cljsbuild-mode clojure-mode yaml-mode plantuml-mode transient dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview all-the-icons memoize company-box flycheck-popup-tip popup slime macrostep protobuf-mode gotest go-mode htmlize ob-go org-tree-slide toc-org org-rich-yank bnf-mode grab-mac-link flycheck-posframe posframe ibuffer-projectile projectile company-lsp lsp-ui lsp-mode lv markdown-mode ht f dash-functional flycheck pkg-info epl company-prescient prescient neotree company magit magit-popup git-commit with-editor ghub treepy async deadgrep spinner dash rg s yasnippet-snippets wgrep yasnippet counsel swiper ivy avy diff-hl diredfl which-key multiple-cursors epm highlight-parentheses paredit diminish power-emacs)))
+   '(clj-refactor hydra inflections flycheck-clojure cider sesman parseedn parseclj a elein cljsbuild-mode clojure-mode yaml-mode plantuml-mode transient dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview all-the-icons memoize company-box flycheck-popup-tip popup slime macrostep protobuf-mode gotest go-mode htmlize ob-go org-tree-slide toc-org org-rich-yank bnf-mode grab-mac-link flycheck-posframe posframe ibuffer-projectile projectile company-lsp lsp-ui lsp-mode lv markdown-mode ht f dash-functional flycheck pkg-info epl company-prescient prescient neotree company magit magit-popup git-commit with-editor ghub treepy async deadgrep spinner dash rg s yasnippet-snippets wgrep yasnippet counsel swiper ivy avy diff-hl diredfl which-key multiple-cursors epm highlight-parentheses paredit diminish power-emacs)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
