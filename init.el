@@ -24,6 +24,10 @@
 	      (when (file-exists-p file)
 		(load file)))))
 
+(when (not (require 'power-emacs nil t))
+  (add-to-list 'load-path (expand-file-name "power-emacs" user-emacs-directory)))
+
+(require 'power-emacs)
 (power-emacs-copy-shell-variables "zsh" "PATH")
 (setq power-emacs-build-stable nil)
 
