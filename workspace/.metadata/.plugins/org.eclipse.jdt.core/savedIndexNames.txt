@@ -1,4 +1,0 @@
-INDEX VERSION 1.131+/Users/yiwen/.emacs.d/workspace/.metadata/.plugins/org.eclipse.jdt.core
-564439505.index
-3842426239.index
-1113557805.index
