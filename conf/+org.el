@@ -136,7 +136,7 @@ Replace the TEXT when the BACKEND is html."
            :headline-levels 4             ; Just the default for this project.
            :auto-preamble t
            :section-numbers nil
-           :author "C_G"
+           :author "yiwen"
            :email "cg.fork@gmail.com"
            :auto-sitemap t                ; Generate sitemap.org automagically...
            :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
