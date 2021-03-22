@@ -15,7 +15,7 @@
 
 (advice-add #'org-babel-plantuml-make-body :override #'fix-plantuml-make-body)
 
-(defcustom org-notes-home (expand-file-name "~/notes")
+(defcustom org-notes-home (expand-file-name "~/Documents/notes")
   "Define the home path of my notes."
   :group 'cgfork
   :type 'string)
