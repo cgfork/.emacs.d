@@ -26,7 +26,7 @@
 ;; To avoid 'Warning (package): Unnecessary call to ‘package-initialize’ in init file [2 times]'.
 (setq warning-suppress-log-types '((package reinitialization)))
 ;; Load `cask.el'.
-(require 'cask (expand-file-name ".cask/cask.el" user-emacs-directory))
+(require 'cask (expand-file-name "cask.d/cask.el" user-emacs-directory))
 (cask-initialize)
 
 (require 'evil)
