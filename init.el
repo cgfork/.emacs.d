@@ -35,5 +35,43 @@
 (require 'which-key)
 (which-key-mode t)
 
+(require 'general)
+(general-evil-setup)
+(general-create-definer yw-space-key-define
+  :states '(normal visual motion evilified)
+  :keymaps 'override
+  :prefix "SPC"
+  :non-normal-prefix "M-SPC")
+(general-create-definer yw-comma-key-define
+  :states '(normal visual motion evilified)
+  :keymaps 'override
+  :prefix ",")
+
+;; Basic Key Bindings
+(yw-space-key-define
+  "f" '(nil :wk "file")
+  "f f" 'find-file
+  "f r" 'recentf)
+
+(yw-comma-key-define
+ "f" '(nil :wk "find")
+ "f d" 'xref-find-definitions
+ "f f" 'find-file-at-point
+ "f r" 'xref-find-references
+ "f s" 'xref-find-apropos)
+
+(require 'simple)
+(add-hook 'after-init-hook 'size-indication-mode)
+(add-hook 'text-mode-hook 'visual-line-mode)
+
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
+
+(require '+shell)
+(require '+buffer)
+(require '+window)
+(require '+projectile)
+(require '+editor)
+
 (provide 'init)
 ;;; Init.el ends here

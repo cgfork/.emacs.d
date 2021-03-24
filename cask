@@ -5,3 +5,9 @@
 (depends-on "evil")
 (depends-on "diminish")
 (depends-on "general")
+
+(package-file "lisp/+shell.el")
+(package-file "lisp/+buffer.el")
+(package-file "lisp/+window.el")
+(package-file "lisp/+projectile.el")
+(package-file "lisp/+editor.el")
