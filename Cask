@@ -1,5 +1,5 @@
-(source gnu)
-(source melpa)
+(source gnu "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+(source melpa "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
 
 (depends-on "which-key")
 (depends-on "evil")
