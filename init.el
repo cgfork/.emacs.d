@@ -72,6 +72,9 @@
 (require '+window)
 (require '+projectile)
 (require '+editor)
+(require '+company)
+(require '+flycheck)
+(require '+lsp)
 
 (provide 'init)
 ;;; Init.el ends here

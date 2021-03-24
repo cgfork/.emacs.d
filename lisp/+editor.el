@@ -57,7 +57,9 @@
 (setq auto-insert-query nil
       auto-insert-directory (locate-user-emacs-file "templates"))
 
-(define-auto-insert "\\.org?$" [ "default-org.org" autoinsert-yas-expand ])
+(define-auto-insert "\\.org?$" [ "default-org.org" yw-autoinsert-yas-expand ])
+(define-auto-insert "\\.el$" [ "default-el.el" yw-autoinsert-yas-expand ])
+(define-auto-insert "\\.sh?$" "default-sh.sh")
 
 (provide '+editor)
 ;;; +editor.el ends here 

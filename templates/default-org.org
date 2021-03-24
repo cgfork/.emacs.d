@@ -1,0 +1,8 @@
+#+TITLE: $1
+
+#+STARTUP: showall
+#+OPTIONS: ^:{}
+#+DATE: `(format-time-string "<%Y-%m-%d %a>")`
+#+AUTHOR: C_G
+
+$0
