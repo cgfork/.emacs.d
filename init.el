@@ -58,7 +58,8 @@
  "f d" 'xref-find-definitions
  "f f" 'find-file-at-point
  "f r" 'xref-find-references
- "f s" 'xref-find-apropos)
+ "f s" 'xref-find-apropos
+ "f b" 'xref-pop-marker-stack)
 
 (require 'simple)
 (add-hook 'after-init-hook 'size-indication-mode)
@@ -75,6 +76,7 @@
 (require '+company)
 (require '+flycheck)
 (require '+lsp)
+(require '+go)
 
 (provide 'init)
 ;;; Init.el ends here

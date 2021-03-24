@@ -14,3 +14,4 @@
 (package-file "lisp/+company.el")
 (package-file "lisp/+flycheck.el")
 (package-file "lisp/+lsp.el")
+(package-file "lisp/+go.el")
