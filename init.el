@@ -80,5 +80,16 @@
 (require '+go)
 (require '+rust)
 
+(defun yw-apply-themes ()
+  "Forcibly load the themes listed in the `custome-enabled-themes'."
+  (dolist (theme custom-enabled-themes)
+    (unless (custom-theme-p theme)
+      (load-theme theme))
+    (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))))
+
+(add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
+(unless (display-graphic-p)
+  (setq custom-enabled-themes '(wheatgrass))
+  (yw-apply-themes))
 (provide 'init)
 ;;; Init.el ends here
