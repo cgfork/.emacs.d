@@ -1,5 +1,7 @@
-(source gnu "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-(source melpa "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+;;(source gnu "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+;;(source melpa "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+(source gnu)
+(source melpa)
 
 (depends-on "which-key")
 (depends-on "evil")
@@ -15,3 +17,5 @@
 (package-file "lisp/+flycheck.el")
 (package-file "lisp/+lsp.el")
 (package-file "lisp/+go.el")
+(package-file "lisp/+rust.el")
+(package-file "lisp/+sidebar.el")

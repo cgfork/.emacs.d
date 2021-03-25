@@ -4,9 +4,9 @@
 
 ;; Author: cgfork
 ;; Version: 1.0.0
-;; Package-Requires: ((emacs "25.3") (go-mode))
+;; Package-Requires: ((emacs "25.3") (go-mode) (gotest))
 
-;; This file is not part of GNU Emacs.:
+;; This file is not part of GNU Emacs.
 
 ;;; Commentary:
 ;;; Code:
@@ -23,12 +23,17 @@
   (when (executable-find "goimports")
     (setq gofmt-command "goimports"))
   (add-hook 'before-save-hook #'gofmt-before-save)
-  (define-key go-mode-map (kbd "C-c i r") 'go-remove-unused-imports)
-  (define-key go-mode-map (kbd "C-c i a") 'go-import-add)
-  (define-key go-mode-map (kbd "<f1>") 'godoc-at-point)
-  (define-key go-mode-map (kbd "C-c t t") 'go-test-current-test)
-  (define-key go-mode-map (kbd "C-c t f") 'go-test-current-file)
-  (define-key go-mode-map (kbd "C-c t p") 'go-test-current-project)
+  (yw-comma-key-define
+    "i" '(nil :wk "import")
+    "i r" 'go-remove-unused-imports
+    "i a" 'go-import-add
+    "i g" 'go-goto-imports
+    "t" '(nil :wk "test")
+    "t b" 'go-test-current-benchmark
+    "t t" 'go-test-current-test
+    "t f" 'go-test-current-file
+    "t p" 'go-test-current-project
+    "t r" 'go-run)
   (with-eval-after-load 'gotest (setq go-test-verbose t)))
 
 (provide '+go)

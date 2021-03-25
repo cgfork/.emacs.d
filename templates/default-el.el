@@ -6,7 +6,7 @@
 ;; Version: 1.0.0
 ;; Package-Requires: ((emacs "25.3"))
 
-;; This file is not part of GNU Emacs.:
+;; This file is not part of GNU Emacs.
 
 ;;; Commentary:
 ;;; Code:

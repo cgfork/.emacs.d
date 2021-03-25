@@ -72,11 +72,13 @@
 (require '+buffer)
 (require '+window)
 (require '+projectile)
+(require '+sidebar)
 (require '+editor)
 (require '+company)
 (require '+flycheck)
 (require '+lsp)
 (require '+go)
+(require '+rust)
 
 (provide 'init)
 ;;; Init.el ends here
