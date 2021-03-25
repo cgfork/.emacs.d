@@ -38,9 +38,14 @@
         ;; turn off for better performance
         lsp-enable-symbol-highlighting nil
         ;; Disable eldoc displays in minibuffer
-        lsp-eldoc-enable-hover nil
+        lsp-eldoc-enable-hover t
         ;; auto kill server
         lsp-keep-workspace-alive nil))
+
+(with-eval-after-load 'lsp-ui
+  (setq lsp-ui-doc-mode nil
+	lsp-ui-doc-enable nil
+	lsp-ui-doc-position 'at-point))
 
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (with-eval-after-load 'lsp-ui-mode
