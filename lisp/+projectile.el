@@ -15,6 +15,7 @@
 ;;; Code:
 
 (require 'projectile)
+(add-hook 'after-init-hook 'projectile-mode)
 (yw-space-key-define
   "p" '(nil :wk "projectile")
   "p !" 'projectile-run-shell-command-in-root
