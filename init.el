@@ -89,7 +89,7 @@
 
 (add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
 (unless (display-graphic-p)
-  (setq custom-enabled-themes '(wheatgrass))
+  (setq custom-enabled-themes '(vscode-dark-plus))
   (yw-apply-themes))
 (provide 'init)
 ;;; Init.el ends here

@@ -21,7 +21,7 @@
   "p !" 'projectile-run-shell-command-in-root
   "p &" 'projectile-run-async-shell-command-in-root
   "p %" 'projectile-replace-regexp
-  "p /" 'projectile-rigprep
+  "p /" 'projectile-ripgrep
   "p a" 'projectile-toggle-between-implementation-and-test
   "p b" 'projectile-switch-to-buffer
   "p c" 'projectile-compile-project

@@ -7,6 +7,8 @@
 (depends-on "evil")
 (depends-on "diminish")
 (depends-on "general")
+(depends-on "vscode-dark-plus-theme")
+;; (depends-on "doom-themes")
 
 (package-file "lisp/+shell.el")
 (package-file "lisp/+buffer.el")
