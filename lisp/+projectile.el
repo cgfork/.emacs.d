@@ -6,7 +6,7 @@
 ;; Maintainer: cgfork
 ;; Version: 1.0.0
 ;; Keywords: projectile 
-;; Package-requires: ((emacs "25.3")  (ibuffer-projectile) (dimmer))
+;; Package-requires: ((emacs "25.3")  (ibuffer-projectile) (dimmer) (ripgrep))
 
 ;; This file is not part of GNU Emacs.
 

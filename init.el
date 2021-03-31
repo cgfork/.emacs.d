@@ -61,6 +61,13 @@
  "f s" 'xref-find-apropos
  "f b" 'xref-pop-marker-stack)
 
+(general-nmap xref--xref-buffer-mode-map
+  "RET" 'xref-goto-xref
+  "TAB" 'xref-quit-and-goto-xref
+  "p" 'xref-prev-line
+  "n" 'xref-next-line
+  "q" 'quit-window)
+
 (require 'simple)
 (add-hook 'after-init-hook 'size-indication-mode)
 (add-hook 'text-mode-hook 'visual-line-mode)
