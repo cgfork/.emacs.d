@@ -39,6 +39,19 @@
   "p T" 'projectile-test-project
   "p v" 'projectile-vc)
 
+(general-nmap neotree-mode-map
+  "RET" 'neotree-enter
+    "o" 'neotree-enter
+    "q" 'neotree-hide
+    "h" 'neotree-select-up-node
+    "l" 'neotree-change-root
+    "c" 'neotree-create-node
+    "C" 'neotree-copy-node
+    "d" 'neotree-delete-node
+    "g" 'neotree-refresh
+    "r" 'neotree-rename-node
+    "th" 'neotree-hidden-file-toggle)
+
 (setq projectile-enable-caching t
       projectile-sort-order 'recentf
       projectile-compleetion-system 'ivy
