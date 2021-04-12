@@ -4,7 +4,6 @@
 
 (when (version< emacs-version "25.3")
   (error "This requires Emacs 25.3 or above!"))
-;; (add-to-list 'load-path (expand-file-name "org-mode/lisp" user-emacs-directory))
 
 ;; Load `custom-file'.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -24,31 +23,80 @@
 	      (when (file-exists-p file)
 		(load file)))))
 
-(when (not (require 'power-emacs nil t))
-  (add-to-list 'load-path (expand-file-name "power-emacs" user-emacs-directory)))
+;; To avoid 'Warning (package): Unnecessary call to ‘package-initialize’ in init file [2 times]'.
+(setq warning-suppress-log-types '((package reinitialization)))
+;; Load `cask.el'.
+(require 'cask (expand-file-name "cask.d/cask.el" user-emacs-directory))
+(cask-initialize)
 
-(require 'power-emacs)
-(power-emacs-copy-shell-variables "zsh" "PATH")
-(setq power-emacs-build-stable nil)
+(require 'evil)
+(evil-mode t)
 
-(add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'which-key)
+(which-key-mode t)
 
-(require '+base)
-(require '+themes)
+(require 'general)
+(general-evil-setup)
+(general-create-definer yw-space-key-define
+  :states '(normal visual motion evilified)
+  :keymaps 'override
+  :prefix "SPC"
+  :non-normal-prefix "M-SPC")
+(general-create-definer yw-comma-key-define
+  :states '(normal visual motion evilified)
+  :keymaps 'override
+  :prefix ",")
+
+;; Basic Key Bindings
+(yw-space-key-define
+  "f" '(nil :wk "file")
+  "f f" 'find-file
+  "f r" 'recentf)
+
+(yw-comma-key-define
+ "f" '(nil :wk "find")
+ "f d" 'xref-find-definitions
+ "f f" 'find-file-at-point
+ "f r" 'xref-find-references
+ "f s" 'xref-find-apropos
+ "f b" 'xref-pop-marker-stack)
+
+(general-nmap xref--xref-buffer-mode-map
+  "RET" 'xref-goto-xref
+  "TAB" 'xref-quit-and-goto-xref
+  "p" 'xref-prev-line
+  "n" 'xref-next-line
+  "q" 'quit-window)
+
+(require 'simple)
+(add-hook 'after-init-hook 'size-indication-mode)
+(add-hook 'text-mode-hook 'visual-line-mode)
+
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
+
+(require '+shell)
+(require '+buffer)
+(require '+window)
+(require '+projectile)
+(require '+sidebar)
 (require '+editor)
-(require '+magit)
 (require '+company)
 (require '+flycheck)
-(require '+org)
 (require '+lsp)
 (require '+go)
-(require '+common-lisp)
-(require '+dsl)
-(require '+clojure)
+(require '+rust)
 
-;; (add-to-list 'load-path (expand-file-name "site-conf" user-emacs-directory))
-;; (require 'ob-plantuml)
+(defun yw-apply-themes ()
+  "Forcibly load the themes listed in the `custome-enabled-themes'."
+  (dolist (theme custom-enabled-themes)
+    (unless (custom-theme-p theme)
+      (load-theme theme))
+    (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))))
 
+(add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
+(unless (display-graphic-p)
+  (setq custom-enabled-themes '(vscode-dark-plus))
+  (yw-apply-themes))
 (provide 'init)
 ;;; Init.el ends here

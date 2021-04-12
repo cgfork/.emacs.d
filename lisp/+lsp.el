@@ -1,15 +1,16 @@
-;;; +lsp.el --- LSP -*- lexical-binding: t -*-
+;;; +lsp.el --- lsp -*- lexical-binding: t -*-
 
-;; Copyright (C) 2020-2029, cgfork
+;; Copyright (C) 2021 cgfork
 
 ;; Author: cgfork
-;; Version: 0.0.1
-;; Package-Requires: ((emacs "25.3"))
+;; Version: 1.0.0
+;; Package-Requires: ((emacs "25.3") (lsp-mode) (lsp-ui))
+
+;; This file is not part of GNU Emacs.:
 
 ;;; Commentary:
 ;;; Code:
 
-(power-emacs-install 'lsp-mode)
 (diminish 'lsp-mode)
 (add-hook 'prog-mode-hook (lambda ()
 			    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'sh-mode 'plantuml-mode 'clojure-mode)
@@ -37,21 +38,18 @@
         ;; turn off for better performance
         lsp-enable-symbol-highlighting nil
         ;; Disable eldoc displays in minibuffer
-        lsp-eldoc-enable-hover nil
+        lsp-eldoc-enable-hover t
         ;; auto kill server
         lsp-keep-workspace-alive nil))
 
-(power-emacs-install 'lsp-ui)
+(with-eval-after-load 'lsp-ui
+  (setq lsp-ui-doc-mode nil
+	lsp-ui-doc-enable nil
+	lsp-ui-doc-position 'at-point))
+
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (with-eval-after-load 'lsp-ui-mode
   (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide))
-
-(power-emacs-install 'company-lsp)
-(with-eval-after-load 'company-lsp
-   (setq company-lsp-async t
-	 company-lsp-enable-snippet t
-	 company-lsp-cache-candidates 'auto
-	 company-lsp-enable-recompletion t))
 
 (provide '+lsp)
 ;;; +lsp.el ends here

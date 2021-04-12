@@ -1,10 +1,12 @@
 ;;; `(file-name-nondirectory (buffer-file-name))` --- $1 -*- lexical-binding: t -*-
 
-;; Copyright (C) 2020-2029, cgfork
+;; Copyright (C) 2021 cgfork
 
 ;; Author: cgfork
-;; Version: 0.0.1
+;; Version: 1.0.0
 ;; Package-Requires: ((emacs "25.3"))
+
+;; This file is not part of GNU Emacs.
 
 ;;; Commentary:
 ;;; Code:

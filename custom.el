@@ -35,83 +35,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes t)
- '(org-adapt-indentation nil)
- '(org-agenda-custom-commands
-   '(("w" . "任务安排")
-     ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
-     ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
-     ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
-     ("p" . "项目安排")
-     ("pw" "迭代任务" tags "CATEGORY=\"WORKLIST\"")
-     ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORKLIST\"")
-     ("t" . "个人任务")
-     ("tw" "任务清单" tags "CATEGORY=\"TASK\"")
-     ("tf" "未来要做的任务" tags-todo "CATEGORY=\"TASK\"")
-     ("P" "编程"
-      ((tags "java|go|clj|racket|js|shell|c++")
-       (tags-todo "java|go|clj|racket|js|shell|c++")))
-     ("R" "提醒事项"
-      ((tags "CATEGORY=\"REMINDER\"")
-       (tags-todo "CATEGORY=\"REMINDER\"")))
-     ("W" "每周工作"
-      ((stuck "")
-       (tags-todo "CATEGORY=\"WORKLIST\"")))))
- '(org-capture-templates
-   '(("t" "Todo" entry
-      (file+olp+datetree "/Users/yiwen/notes/TODOs.org")
-      "* TODO [#B] %^{Description} %^g
-%?
-%i
-Added:%U" :time-prompt t)
-     ("T" "Todo with Clipboard" entry
-      (file+olp+datetree "/Users/yiwen/notes/TODOs.org")
-      "* TODO [#B] %^{Description} %^g
-%c
-Added:%U" :time-prompt t)
-     ("S" "Todo with Scheduled" entry
-      (file+olp+datetree "/Users/yiwen/notes/TODOs.org")
-      "* TODO [#B] %^{Description} %^g
-SCHEDULED: %^t
-%?
-%i
-Added:%U" :time-prompt t)
-     ("D" "Todo with Deadline" entry
-      (file+olp+datetree "/Users/yiwen/notes/TODOs.org")
-      "* TODO [#B] %^{Description} %^g
-DEADLINE: %^t
-%?
-%i
-Added:%U" :time-prompt t)
-     ("P" "TODO with Properties" entry
-      (file+olp+datetree "/Users/yiwen/notes/TODOs.org")
-      "* TODO [#B] %^{Description} %^g
-DEADLINE: %^t
-:PROPERTIES:
-:CATEGORY: %^{Category}
-:END:
-%?
- %i
-Added:%U" :time-prompt t)
-     ("j" "Journal" entry
-      (file+olp "/Users/yiwen/notes/Journal.org" "Journal")
-      "* %U - %^{Heading}
- %?")
-     ("l" "Log Time" entry
-      (file+olp "/Users/yiwen/notes/Journal.org" "Log Time")
-      "* %U - %^{Activity}	 :TIME:")
-     ("s" "Code Snippets" entry
-      (file+olp "/Users/yiwen/notes/Journal.org" "Code Snippets")
-      "* %U - %^{Heading} %^g
-%?
-")
-     ("c" "Contacts" table-line
-      (file+olp "/Users/yiwen/notes/Journal.org" "Contacts")
-      "| %U | %^{Name} | %^{Phone}| %^{E-mail} |")))
- '(org-export-headline-levels 6)
- '(org-plantuml-jar-path "/Users/yiwen/Develop/bin/plantuml.jar")
- '(package-selected-packages
-   '(lsp-java dap-mode lsp-treemacs bui treemacs pfuture ace-window request queue clj-refactor hydra inflections flycheck-clojure cider sesman parseedn parseclj a elein cljsbuild-mode clojure-mode yaml-mode plantuml-mode transient dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized goto-line-preview all-the-icons memoize company-box flycheck-popup-tip popup slime macrostep protobuf-mode gotest go-mode htmlize ob-go org-tree-slide toc-org org-rich-yank bnf-mode grab-mac-link flycheck-posframe posframe ibuffer-projectile projectile company-lsp lsp-ui lsp-mode lv markdown-mode ht f dash-functional flycheck pkg-info epl company-prescient prescient neotree company magit magit-popup git-commit with-editor ghub treepy async deadgrep spinner dash rg s yasnippet-snippets wgrep yasnippet counsel swiper ivy avy diff-hl diredfl which-key multiple-cursors epm highlight-parentheses paredit diminish power-emacs)))
+ '(custom-enabled-themes '(vscode-dark-plus))
+ '(custom-safe-themes
+   '("c7302f7def35329e8c871e32cbf281e97eddd5af2f904032e90a1aa7436d04e1" "76bfa9318742342233d8b0b42e824130b3a50dcc732866ff8e47366aed69de11" "94c58c823c52282f8881b56743b90c87b431903822eb8a2369446ee7785d1f4b" "4a201d19d8f7864e930fbb67e5c2029b558d26a658be1313b19b8958fe451b55" "6f895d86fb25fac5dd4fcce3aec0fe1d88cf3b3677db18a9607cf7a3ef474f02" "8f54cfa3f010d83d782fbcdc3a34cdc9dfe23c8515d87ba22d410c033160ad7e" "b9e406b52f60a61c969f203958f406fed50b5db5ac16c127b86bbddd9d8444f7" "0c6a36393d5782839b88e4bf932f20155cb4321242ce75dc587b4f564cb63d90" "d9a28a009cda74d1d53b1fbd050f31af7a1a105aa2d53738e9aa2515908cac4c" "38143778a2b0b81fb7c7d0e286e5b0e27cd6b2ba1c3b0aa4efbc33e6ac2ed482" default))
+ '(package-selected-packages '(ansi package-build shut-up epl git commander f s)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
