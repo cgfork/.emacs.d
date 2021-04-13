@@ -13,6 +13,10 @@
 
 (add-hook 'rust-mode-hook #'lsp-deferred)
 (with-eval-after-load 'rust-mode
+  (add-hook 'rust-mode-hook (lambda ()
+			      (setq tab-width 4
+				    standard-indent 2
+				    indent-tabs-mode nil)))
   (setq rust-format-on-save t))
 
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
