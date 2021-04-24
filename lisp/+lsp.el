@@ -24,28 +24,37 @@
   (define-key lsp-mode-map (kbd "C-c C-r") 'lsp-rename)
   (define-key lsp-mode-map [remap xref-find-definitions] 'lsp-find-definition)
   (define-key lsp-mode-map [remap xref-find-references] 'lsp-find-references)
-  (setq lsp-prefer-flymake nil
-	flymake-fringe-indicator-position 'right-fringe
-        ;;prefer flycheck
-        lsp-diagnostic-package :flycheck
-        lsp-auto-guess-root t
-        ;;disable file wathcer when large file
-        lsp-enable-file-watchers nil
-        ;; enable log only for debug
-        lsp-log-io nil
-        ;; completion
-        lsp-prefer-capf  nil
-        ;; turn off for better performance
-        lsp-enable-symbol-highlighting nil
-        ;; Disable eldoc displays in minibuffer
-        lsp-eldoc-enable-hover t
-        ;; auto kill server
-        lsp-keep-workspace-alive nil))
+  (if (not (display-graphic-p))
+      (setq lsp-prefer-flymake nil
+	    flymake-fringe-indicator-position 'right-fringe
+            ;;prefer flycheck
+            lsp-diagnostic-package :flycheck
+            lsp-auto-guess-root t 
+            ;;disable file wathcer when large file
+            lsp-enable-file-watchers nil
+            ;; enable log only for debug
+            lsp-log-io nil
+            ;; completion
+            lsp-prefer-capf  nil
+            ;; turn off for better performance
+            lsp-enable-symbol-highlighting nil
+            ;; Disable eldoc displays in minibuffer
+            lsp-eldoc-enable-hover t 
+            ;; auto kill server
+            lsp-keep-workspace-alive nil)
+    (setq lsp-eldoc-render-all nil
+	  lsp-eldoc-enable-hover t
+	  lsp-idle-delay 0.5)))
 
 (with-eval-after-load 'lsp-ui
-  (setq lsp-ui-doc-mode nil
-	lsp-ui-doc-enable nil
-	lsp-ui-doc-position 'at-point))
+  (if (not (display-graphic-p))
+      (setq lsp-ui-doc-mode nil
+	    lsp-ui-doc-enable nil
+	    lsp-ui-doc-position 'at-point)
+    (setq lsp-ui-peek-always-show t 
+	  lsp-ui-sideline-show-hover nil
+	  lsp-ui-doc-position 'top
+	  lsp-ui-doc-enable nil)))  
 
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (with-eval-after-load 'lsp-ui-mode

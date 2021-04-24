@@ -17,7 +17,10 @@
 			      (setq tab-width 4
 				    standard-indent 2
 				    indent-tabs-mode nil)))
+  (add-hook 'rustic-mode-hook (lambda ()
+				(setq-local buffer-save-without-query t)))
   (setq rustic-format-on-save t
+	lsp-rust-analyzer-cargo-watch-command "clippy"
 	lsp-rust-analyzer-server-display-inlay-hints t))
 
 ;; (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
