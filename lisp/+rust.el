@@ -4,20 +4,21 @@
 
 ;; Author: cgfork
 ;; Version: 1.0.0
-;; Package-Requires: ((emacs "25.3") (rust-mode) (flycheck-rust))
+;; Package-Requires: ((emacs "25.3") (rustic) (flycheck-rust) (cargo))
 
 ;; This file is not part of GNU Emacs.
 
 ;;; Commentary:
 ;;; Code:
 
-(add-hook 'rust-mode-hook #'lsp-deferred)
-(with-eval-after-load 'rust-mode
-  (add-hook 'rust-mode-hook (lambda ()
+(add-hook 'rustic-mode-hook #'lsp-deferred)
+(with-eval-after-load 'rustic
+  (add-hook 'rustic-mode-hook (lambda ()
 			      (setq tab-width 4
 				    standard-indent 2
 				    indent-tabs-mode nil)))
-  (setq rust-format-on-save t))
+  (setq rustic-format-on-save t
+	lsp-rust-analyzer-server-display-inlay-hints t))
 
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
