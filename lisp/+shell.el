@@ -66,5 +66,8 @@ It will return the pairs that are set into the environment variables."
 		(cons name nil))))
 	  vars))
 
+(when (display-graphic-p)
+  (yw-copy-shell-variables "zsh" "PATH"))
+
 (provide '+shell)
 ;;; +shell.el ends here

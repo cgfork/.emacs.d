@@ -11,7 +11,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-hook 'rustic-mode-hook #'lsp-deferred)
+;; (add-hook 'rustic-mode-hook #'lsp-deferred)
 (with-eval-after-load 'rustic
   (add-hook 'rustic-mode-hook (lambda ()
 			      (setq tab-width 4
@@ -20,7 +20,7 @@
   (setq rustic-format-on-save t
 	lsp-rust-analyzer-server-display-inlay-hints t))
 
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+;; (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 (provide '+rust)
 ;;; +rust.el ends here

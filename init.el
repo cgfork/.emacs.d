@@ -95,9 +95,20 @@
       (load-theme theme))
     (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))))
 
-(add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
-(unless (display-graphic-p)
-  (setq custom-enabled-themes '(vscode-dark-plus))
-  (yw-apply-themes))
+(add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory)) 
+(setq custom-enabled-themes '(vscode-dark-plus))
+(yw-apply-themes)
+
+ (set-frame-font "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+;; (set-face-font 'default (selected-frame) "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-fontset-auto9")
+;; (set-face-attribute 'default (selected-frame) :font "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+
+;; (set-face-attribute 'default nil
+;;                     :family "Ubuntu Mono"
+;;                     :height 140
+;;                     :weight 'normal
+;;                     :width 'normal)
+;; (copy-face 'default 'fixed-pith)
+
 (provide 'init)
 ;;; Init.el ends here
