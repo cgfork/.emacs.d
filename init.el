@@ -71,6 +71,7 @@
 (require 'simple)
 (add-hook 'after-init-hook 'size-indication-mode)
 (add-hook 'text-mode-hook 'visual-line-mode)
+(add-hook 'after-init-hook 'global-hl-line-mode)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
