@@ -87,6 +87,8 @@
 (require '+lsp)
 (require '+go)
 (require '+rust)
+(require '+markdown)
+(require '+org)
 
 (defun yw-apply-themes ()
   "Forcibly load the themes listed in the `custome-enabled-themes'."

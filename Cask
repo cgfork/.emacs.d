@@ -21,3 +21,5 @@
 (package-file "lisp/+go.el")
 (package-file "lisp/+rust.el")
 (package-file "lisp/+sidebar.el")
+(package-file "lisp/+markdown.el")
+(package-file "lisp/+org.el")
