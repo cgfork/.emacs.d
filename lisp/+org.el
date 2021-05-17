@@ -36,10 +36,21 @@
       org-pretty-entities t
       org-src-fontify-natively t)
 
+(yw-space-key-define
+  "o" '(nil :wk "org")
+  "o a" 'org-agenda
+  "o c" 'org-capture)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((plantuml . t)))
+
+(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+
 (custom-set-variables
   '(org-adapt-indentation nil)
   '(org-export-headline-levels 6)
-  `(org-plantuml-jar-path ,(executable-find "plantuml.jar"))
+  `(org-plantuml-jar-path ,(expand-file-name "plantuml.jar" user-emacs-directory))
   `(org-capture-templates
     (quote (("t" "Todo" entry (file+olp+datetree ,yw-org-agenda-file)
 	     "* TODO [#B] %^{Description} %^g\n%?\n%i\nAdded:%U" :time-prompt t)

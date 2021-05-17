@@ -89,6 +89,7 @@
 (require '+rust)
 (require '+markdown)
 (require '+org)
+(require '+plantuml)
 
 (defun yw-apply-themes ()
   "Forcibly load the themes listed in the `custome-enabled-themes'."

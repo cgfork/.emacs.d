@@ -23,3 +23,4 @@
 (package-file "lisp/+sidebar.el")
 (package-file "lisp/+markdown.el")
 (package-file "lisp/+org.el")
+(package-file "lisp/+plantuml.el")
