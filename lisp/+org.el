@@ -4,7 +4,7 @@
 
 ;; Author: cgfork
 ;; Version: 1.0.0
-;; Package-Requires: ((emacs "25.3"))
+;; Package-Requires: ((emacs "25.3") (ob-go))
 
 ;; This file is not part of GNU Emacs.
 
@@ -34,7 +34,8 @@
       org-startup-indented nil
       org-ellipsis "   "
       org-pretty-entities t
-      org-src-fontify-natively t)
+      org-src-fontify-natively t
+      org-edit-src-content-indentation 0)
 
 (yw-space-key-define
   "o" '(nil :wk "org")
@@ -43,7 +44,8 @@
 
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((plantuml . t)))
+ '((plantuml . t)
+   (go . t)))
 
 (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
 
