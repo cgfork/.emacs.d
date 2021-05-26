@@ -30,6 +30,17 @@
       (apply f args)))
   (advice-add 'goto-line-preview :around #'yw-with-display-line-numbers))
 
+(require 'display-fill-column-indicator)
+(defun yw-toggle-fill-column-indicator ()
+  "Toggle displaying of fill column indicator."
+  (interactive)
+  (if display-fill-column-indicator
+      (setq display-fill-column-indicator nil)
+    (setq display-fill-column-indicator t)))
+
+(setq-default display-fill-column-indicator-column 120)
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+
 (yw-space-key-define
   "m" '(nil :wk "mark")
   "m n" 'mc/mark-next-like-this
