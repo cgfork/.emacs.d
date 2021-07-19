@@ -29,7 +29,7 @@
   :type 'string)
 
 (setq org-agenda-files (list yw-org-agenda-file)
-      org-todo-keywords '((sequence "TODO(t)" "DODING(i)" "HANGHUP(h)" "|" "DONE(d)" "CANCEL(c)"))
+      org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGHUP(h)" "|" "DONE(d)" "CANCEL(c)"))
       org-log-done 'time
       org-startup-indented nil
       org-ellipsis "   "
