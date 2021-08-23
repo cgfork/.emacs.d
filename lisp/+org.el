@@ -18,13 +18,8 @@
   :group 'yiwen
   :type 'string)
 
-(defcustom yw-org-code-snappets-file (expand-file-name "~/Oympt/code-snappets.org.")
-  "Define my org code snappets file."
-  :group 'yiwen
-  :type 'string)
-
-(defcustom yw-org-contacts-file (expand-file-name "~/Oympt/contacts.org")
-  "Define my contacts file."
+(defcustom yw-org-log-file (expand-file-name "~/Oympt/log.org")
+  "Define my log file."
   :group 'yiwen
   :type 'string)
 
@@ -54,22 +49,24 @@
   '(org-export-headline-levels 6)
   `(org-plantuml-jar-path ,(expand-file-name "plantuml.jar" user-emacs-directory))
   `(org-capture-templates
-    (quote (("t" "Todo" entry (file+olp+datetree ,yw-org-agenda-file)
-	     "* TODO [#B] %^{Description} %^g\n%?\n%i\nAdded:%U" :time-prompt t)
-	    ("T" "Todo with Clipboard" entry (file+olp+datetree ,yw-org-agenda-file)
-	     "* TODO [#B] %^{Description} %^g\n%c\nAdded:%U" :time-prompt t)
-	    ("S" "Todo with Scheduled" entry (file+olp+datetree ,yw-org-agenda-file)
-	     "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\n%?\n%i\nAdded:%U" :time-prompt t)
-	    ("d" "Todo with Deadline" entry (file+olp+datetree ,yw-org-agenda-file)
-	     "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n%?\n%i\nAdded:%U" :time-prompt t)
-	    ("D" "Todo with Scheduled + Deadline" entry (file+olp+datetree ,yw-org-agenda-file)
-	     "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\nDEADLINE: %^t\n%?\n%i\nAdded:%U" :time-prompt t)
-	    ("P" "TODO with Properties" entry (file+olp+datetree ,yw-org-agenda-file)
-	     "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n:PROPERTIES:\n:CATEGORY: %^{Category}\n:END:\n%?\n %i\nAdded:%U" :time-prompt t)
-	    ("s" "Code Snippets" entry (file+olp ,yw-org-code-snappets-file "Code Snippets")
-	     "* %U - %^{Heading} %^g\n%?\n")
-	    ("c" "Contacts" table-line (file+olp ,yw-org-contacts-file "Contacts")
-	     "| %U | %^{Name} | %^{Phone}| %^{E-mail} |"))))
+    (quote (("t" "Todo" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
+	     "* TODO [#B] %^{Description} %^g\n%?\n%i\nAdded:%U\n" :time-prompt t)
+	    ("T" "Todo with Clipboard" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
+	     "* TODO [#B] %^{Description} %^g\n%c\nAdded:%U\n" :time-prompt t)
+	    ("S" "Todo with Scheduled" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
+	     "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\n%?\n%i\nAdded:%U\n" :time-prompt t)
+	    ("d" "Todo with Deadline" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
+	     "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n%?\n%i\nAdded:%U\n" :time-prompt t)
+	    ("D" "Todo with Scheduled + Deadline" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
+	     "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\nDEADLINE: %^t\n%?\n%i\nAdded:%U\n" :time-prompt t)
+	    ("P" "TODO with Properties" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
+	     "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n:PROPERTIES:\n:CATEGORY: %^{Category}\n:END:\n%?\n %i\nAdded:%U\n" :time-prompt t)
+	    ("s" "Code Snippets" table-line (file+olp ,yw-org-log-file "Code Snippets")
+	     "| %U | %^{LANG} | %^{Description} | %^{Links} |")
+	    ("c" "Contacts" table-line (file+olp ,yw-org-log-file "Contacts")
+	     "| %U | %^{Name} | %^{Phone}| %^{E-mail} |")
+	    ("l" "Log Records" entry (file+olp ,yw-org-log-file "Log Records")
+	     "* %U %^{Message} %^g\n%?\n"))))
   '(org-agenda-custom-commands
     '(("w" . "任务安排")
       ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
