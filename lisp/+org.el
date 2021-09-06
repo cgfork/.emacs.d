@@ -13,18 +13,7 @@
 
 (require 'org)
 
-(defcustom yw-org-agenda-file (expand-file-name "~/Oympt/agenda.org")
-  "Define my org agenda file."
-  :group 'yiwen
-  :type 'string)
-
-(defcustom yw-org-log-file (expand-file-name "~/Oympt/log.org")
-  "Define my log file."
-  :group 'yiwen
-  :type 'string)
-
-(setq org-agenda-files (list yw-org-agenda-file)
-      org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGHUP(h)" "|" "DONE(d)" "CANCEL(c)"))
+(setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGHUP(h)" "|" "DONE(d)" "CANCEL(c)"))
       org-log-done 'time
       org-startup-indented nil
       org-ellipsis "   "
@@ -32,60 +21,12 @@
       org-src-fontify-natively t
       org-edit-src-content-indentation 0)
 
-(yw-space-key-define
-  "o" '(nil :wk "org")
-  "o a" 'org-agenda
-  "o c" 'org-capture)
-
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((plantuml . t)
    (go . t)))
 
 (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-
-(custom-set-variables
-  '(org-adapt-indentation nil)
-  '(org-export-headline-levels 6)
-  `(org-plantuml-jar-path ,(expand-file-name "plantuml.jar" user-emacs-directory))
-  `(org-capture-templates
-    (quote (("t" "Todo" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
-	     "* TODO [#B] %^{Description} %^g\n%?\n%i\nAdded:%U\n" :time-prompt t)
-	    ("T" "Todo with Clipboard" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
-	     "* TODO [#B] %^{Description} %^g\n%c\nAdded:%U\n" :time-prompt t)
-	    ("S" "Todo with Scheduled" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
-	     "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\n%?\n%i\nAdded:%U\n" :time-prompt t)
-	    ("d" "Todo with Deadline" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
-	     "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n%?\n%i\nAdded:%U\n" :time-prompt t)
-	    ("D" "Todo with Scheduled + Deadline" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
-	     "* TODO [#B] %^{Description} %^g\nSCHEDULED: %^t\nDEADLINE: %^t\n%?\n%i\nAdded:%U\n" :time-prompt t)
-	    ("P" "TODO with Properties" entry (file+olp+datetree ,yw-org-agenda-file "GTDs")
-	     "* TODO [#B] %^{Description} %^g\nDEADLINE: %^t\n:PROPERTIES:\n:CATEGORY: %^{Category}\n:END:\n%?\n %i\nAdded:%U\n" :time-prompt t)
-	    ("s" "Code Snippets" table-line (file+olp ,yw-org-log-file "Code Snippets")
-	     "| %U | %^{LANG} | %^{Description} | %^{Links} |")
-	    ("c" "Contacts" table-line (file+olp ,yw-org-log-file "Contacts")
-	     "| %U | %^{Name} | %^{Phone}| %^{E-mail} |")
-	    ("l" "Log Records" entry (file+olp ,yw-org-log-file "Log Records")
-	     "* %U %^{Message} %^g\n%?\n"))))
-  '(org-agenda-custom-commands
-    '(("w" . "任务安排")
-      ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
-      ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
-      ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
-      ("p" . "项目安排")
-      ("pw" "迭代任务" tags "CATEGORY=\"WORKLIST\"")
-      ("pf" "未来要做的任务" tags-todo "CATEGORY=\"WORKLIST\"")
-      ("t" . "个人任务")
-      ("tw" "任务清单" tags "CATEGORY=\"TASK\"")
-      ("tf" "未来要做的任务" tags-todo "CATEGORY=\"TASK\"")
-      ("P" "编程" ((tags "java|go|clj|racket|js|shell|c++")
-		   (tags-todo "java|go|clj|racket|js|shell|c++")))
-      ("R" "提醒事项" ((tags "CATEGORY=\"REMINDER\"")
-		       (tags-todo "CATEGORY=\"REMINDER\"")))
-      ("W" "每周工作"
-       ((stuck "") ;; review stuck projects as designated by org-stuck-projects
-	(tags-todo "CATEGORY=\"WORKLIST\"") ;; review all projects (assuming you use todo keywords to designate projects)
-	)))))
 
 (defun ox-org-clean-space (text backend _)
   "Clean the space between chinese when export to html.

@@ -16,42 +16,6 @@
 
 (require 'projectile)
 (add-hook 'after-init-hook 'projectile-mode)
-(yw-space-key-define
-  "p" '(nil :wk "projectile")
-  "p !" 'projectile-run-shell-command-in-root
-  "p &" 'projectile-run-async-shell-command-in-root
-  "p %" 'projectile-replace-regexp
-  "p /" 'projectile-ripgrep
-  "p a" 'projectile-toggle-between-implementation-and-test
-  "p b" 'projectile-switch-to-buffer
-  "p c" 'projectile-compile-project
-  "p d" 'projectile-find-dir
-  "p D" 'projectile-dired
-  "p f" 'projectile-find-file
-  "p F" 'projectile-find-file-dwim
-  "p g" 'projectile-find-tag
-  "p G" 'projectile-regenerate-tags
-  "p I" 'projectile-invalidate-cache
-  "p k" 'projectile-kill-buffers
-  "p p" 'projectile-switch-project
-  "p r" 'projectile-recentf
-  "p R" 'projectile-replace
-  "p T" 'projectile-test-project
-  "p v" 'projectile-vc)
-
-(general-nmap neotree-mode-map
-  "RET" 'neotree-enter
-    "o" 'neotree-enter
-    "q" 'neotree-hide
-    "h" 'neotree-select-up-node
-    "l" 'neotree-change-root
-    "c" 'neotree-create-node
-    "C" 'neotree-copy-node
-    "d" 'neotree-delete-node
-    "g" 'neotree-refresh
-    "r" 'neotree-rename-node
-    "th" 'neotree-hidden-file-toggle)
-
 (setq projectile-enable-caching t
       projectile-sort-order 'recentf
       projectile-compleetion-system 'ivy

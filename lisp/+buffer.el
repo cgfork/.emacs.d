@@ -42,15 +42,6 @@
                                         extended-command-history)
          savehist-autosave-interval 300))
 
-(with-eval-after-load 'ibuffer
-  (yw-space-key-define
-    "b" '(:ignore t :wk "buffer")
-    "b b" 'switch-to-buffer
-    "b d" 'kill-this-buffer
-    "b p" 'switch-to-prev-buffer
-    "b n" 'switch-to-next-buffer
-    "b s" 'save-buffer))
-
 ;; (require 'ivy)
 (diminish 'ivy-mode)
 (add-hook 'after-init-hook 'ivy-mode)

@@ -29,44 +29,8 @@
 (require 'cask (expand-file-name "cask.d/cask.el" user-emacs-directory))
 (cask-initialize)
 
-(require 'evil)
-(evil-mode t)
-
 (require 'which-key)
 (which-key-mode t)
-
-(require 'general)
-(general-evil-setup)
-(general-create-definer yw-space-key-define
-  :states '(normal visual motion evilified)
-  :keymaps 'override
-  :prefix "SPC"
-  :non-normal-prefix "M-SPC")
-(general-create-definer yw-comma-key-define
-  :states '(normal visual motion evilified)
-  :keymaps 'override
-  :prefix ",")
-
-;; Basic Key Bindings
-(yw-space-key-define
-  "f" '(nil :wk "file")
-  "f f" 'find-file
-  "f r" 'recentf)
-
-(yw-comma-key-define
- "f" '(nil :wk "find")
- "f d" 'xref-find-definitions
- "f f" 'find-file-at-point
- "f r" 'xref-find-references
- "f s" 'xref-find-apropos
- "f b" 'xref-pop-marker-stack)
-
-(general-nmap xref--xref-buffer-mode-map
-  "RET" 'xref-goto-xref
-  "TAB" 'xref-quit-and-goto-xref
-  "p" 'xref-prev-line
-  "n" 'xref-next-line
-  "q" 'quit-window)
 
 (require 'simple)
 (add-hook 'after-init-hook 'size-indication-mode)

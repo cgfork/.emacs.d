@@ -41,20 +41,7 @@
 (setq-default display-fill-column-indicator-column 120)
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
 
-(yw-space-key-define
-  "m" '(nil :wk "mark")
-  "m n" 'mc/mark-next-like-this
-  "m p" 'mc/mark-previous-like-this
-  "m a" 'mc/mark-all-like-this
-  "m d" 'mc/mark-all-dwim)
-
 (avy-setup-default)
-(yw-space-key-define
-  "j" '(nil :wk "jump")
-  "j c" 'avy-goto-char-2
-  "j f" 'beginning-of-defun
-  "j l" 'avy-goto-line
-  "j j" 'avy-resume)
 
 (diminish 'yas-minor-mode)
 (yas-global-mode 1)

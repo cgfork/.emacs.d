@@ -29,21 +29,6 @@
     (remove-hook 'window-configuration-change-hook 'darkroom-tentative-mode)))
 
 (add-hook 'after-init-hook #'winum-mode)
-(with-eval-after-load 'winum 
-  (yw-space-key-define
-    "w" '(nil :wk "window")
-    "w 1" 'winum-select-window-1
-    "w 2" 'winum-select-window-2
-    "w 3" 'winum-select-window-3
-    "w 4" 'winum-select-window-4
-    "w 5" 'winum-select-window-5
-    "w 6" 'winum-select-window-6
-    "w 7" 'winum-select-window-7
-    "w 8" 'winum-select-window-8
-    "w 9" 'winum-select-window-9
-    "w d" 'delete-window
-    "w D" 'delete-other-window
-    "w o" 'other-window
-    "w w" 'yw-toggle-darkroom-mode))
+
 (provide '+window)
 ;;; +window.el ends here
