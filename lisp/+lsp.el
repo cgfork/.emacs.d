@@ -39,12 +39,15 @@
             ;; turn off for better performance
             lsp-enable-symbol-highlighting nil
             ;; Disable eldoc displays in minibuffer
-            lsp-eldoc-enable-hover t 
+	    lsp-eldoc-hook nil
+            lsp-eldoc-enable-hover nil
             ;; auto kill server
             lsp-keep-workspace-alive nil)
-    (setq lsp-eldoc-render-all nil
-	  lsp-eldoc-enable-hover t
-	  lsp-idle-delay 0.5)))
+    (setq lsp-eldoc-hook nil
+	  lsp-eldoc-render-all nil
+	  lsp-eldoc-enable-hover nil
+	  lsp-idle-delay 0.5
+	  lsp-auto-guess-root t)))
 
 (with-eval-after-load 'lsp-ui
   (if (not (display-graphic-p))
@@ -53,6 +56,7 @@
 	    lsp-ui-doc-position 'at-point)
     (setq lsp-ui-peek-always-show t 
 	  lsp-ui-sideline-show-hover nil
+	  lsp-ui-sideline-ignore-duplicate t
 	  lsp-ui-doc-position 'top
 	  lsp-ui-doc-enable nil)))  
 

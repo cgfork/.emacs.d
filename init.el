@@ -72,7 +72,7 @@
 
 (cond
  ((member "Ubuntu Mono" (font-family-list))
-  (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
+  (set-face-attribute 'default nil :font "Ubuntu Mono-12"))
  ((member "Monaco" (font-family-list))
   (set-face-attribute 'default nil :font "Monaco-12"))) 
 (provide 'init)

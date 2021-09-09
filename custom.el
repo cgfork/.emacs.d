@@ -124,7 +124,8 @@ Added:%U
 ")))
  '(org-export-headline-levels 6)
  '(org-plantuml-jar-path "/home/yiwen/.emacs.d/plantuml.jar")
- '(package-selected-packages '(ansi package-build shut-up epl git commander f s))
+ '(package-selected-packages
+   '(command-log-mode ansi package-build shut-up epl git commander f s))
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil))

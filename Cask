@@ -9,6 +9,7 @@
 (depends-on "general")
 (depends-on "vscode-dark-plus-theme")
 ;; (depends-on "doom-themes")
+(depends-on "command-log-mode")
 
 (package-file "lisp/+shell.el")
 (package-file "lisp/+buffer.el")
