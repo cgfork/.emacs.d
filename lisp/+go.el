@@ -23,17 +23,6 @@
   (when (executable-find "goimports")
     (setq gofmt-command "goimports"))
   (add-hook 'before-save-hook #'gofmt-before-save)
-  (yw-comma-key-define
-    "i" '(nil :wk "import")
-    "i r" 'go-remove-unused-imports
-    "i a" 'go-import-add
-    "i g" 'go-goto-imports
-    "t" '(nil :wk "test")
-    "t b" 'go-test-current-benchmark
-    "t t" 'go-test-current-test
-    "t f" 'go-test-current-file
-    "t p" 'go-test-current-project
-    "t r" 'go-run)
   (with-eval-after-load 'gotest (setq go-test-verbose t)))
 
 (provide '+go)
