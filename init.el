@@ -64,6 +64,16 @@
  ((member "Ubuntu Mono" (font-family-list))
   (set-face-attribute 'default nil :font "Ubuntu Mono-12"))
  ((member "Monaco" (font-family-list))
-  (set-face-attribute 'default nil :font "Monaco-12"))) 
+  (set-face-attribute 'default nil :font "Monaco-12")))
+
+(when (member "HYKaiTiJ" (font-family-list))
+  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font
+     (frame-parameter nil 'font)
+     charset
+     (font-spec :name "-unknown-HYKaiTiJ-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
+		:weight 'normal
+		:slant 'normal
+		:size 10))))
 (provide 'init)
 ;;; Init.el ends here

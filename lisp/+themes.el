@@ -18,7 +18,7 @@
       (load-theme theme))
     (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))))
 
-
+(setq inhibit-compacting-font-caches t)
 
 (setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
