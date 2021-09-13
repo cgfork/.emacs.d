@@ -19,7 +19,8 @@
       org-ellipsis "   "
       org-pretty-entities t
       org-src-fontify-natively t
-      org-edit-src-content-indentation 0)
+      org-edit-src-content-indentation 0
+      org-plantuml-jar-path (expand-file-name "plantuml.jar" user-emacs-directory))
 
 (org-babel-do-load-languages
  'org-babel-load-languages

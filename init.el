@@ -54,17 +54,7 @@
 (require '+markdown)
 (require '+org)
 (require '+plantuml)
-
-(defun yw-apply-themes ()
-  "Forcibly load the themes listed in the `custome-enabled-themes'."
-  (dolist (theme custom-enabled-themes)
-    (unless (custom-theme-p theme)
-      (load-theme theme))
-    (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))))
-
-(add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory)) 
-(setq custom-enabled-themes '(vscode-dark-plus))
-(yw-apply-themes)
+(require '+themes)
 
 ;; (set-frame-font "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 ;; (set-face-font 'default (selected-frame) "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-fontset-auto9")
