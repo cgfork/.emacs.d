@@ -4,7 +4,7 @@
 
 ;; Author: cgfork
 ;; Version: 1.0.0
-;; Package-Requires: ((emacs "25.3") (ob-go))
+;; Package-Requires: ((emacs "25.3") (ob-go) (htmlize))
 
 ;; This file is not part of GNU Emacs.
 
@@ -52,6 +52,7 @@ Replace the TEXT when the BACKEND is html."
       s)))
 ;; (add-to-list 'org-export-filter-paragraph-functions 'ox-org-clean-space)
 
+(require 'htmlize)
 
 (provide '+org)
 ;;; +org.el ends here
