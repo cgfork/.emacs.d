@@ -20,7 +20,7 @@
 
 (setq inhibit-compacting-font-caches t)
 
-(setq doom-themes-enable-bold t
+(setq doom-themes-enable-bold nil
       doom-themes-enable-italic t)
 (setq custom-enabled-themes '(doom-xcode))
 (yw-apply-themes)
