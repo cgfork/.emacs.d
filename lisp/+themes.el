@@ -20,13 +20,14 @@
 
 (setq inhibit-compacting-font-caches t)
 
-(setq doom-themes-enable-bold nil
+(setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
 (setq custom-enabled-themes '(doom-xcode))
 (yw-apply-themes)
 ;; all-the-icons must be installed!
 (doom-themes-neotree-config)
-(doom-themes-org-config)
+(with-eval-after-load 'org-mode
+  (doom-themes-org-config))
 
 (add-hook 'after-init-hook 'doom-modeline-mode)
 (with-eval-after-load 'doom-modeline
