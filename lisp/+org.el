@@ -25,9 +25,11 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((plantuml . t)
-   (go . t)))
+   (go . t)
+   (dot . t)))
 
 (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+(add-to-list 'org-src-lang-modes '("rust" . rustic))
 
 (defun ox-org-clean-space (text backend _)
   "Clean the space between chinese when export to html.
@@ -53,6 +55,12 @@ Replace the TEXT when the BACKEND is html."
 ;; (add-to-list 'org-export-filter-paragraph-functions 'ox-org-clean-space)
 
 (require 'htmlize)
+(require 'ox-md)
+
+;; use minted to replace verbatim
+(setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted") ("" "xeCJK"))
+      org-latex-minted-options '(("breaklines")))
 
 (provide '+org)
 ;;; +org.el ends here
