@@ -56,6 +56,10 @@
 	  mac-command-modifier 'super ; command
 	  mac-control-modifier 'control ; control
 	  ns-function-modifier 'hyper)))) ; fn
+
+(when (eq system-type 'darwin)
+  (setenv "LIBRARY_PATH" "/usr/local/opt/gcc/lib/gcc/11:/usr/local/opt/gcc/lib/gcc/11/gcc/x86_64-apple-darwin20/11.2.0"))
+
 (defconst sys/win32p
   (eq system-type 'windows-nt)
   "Are we running on a WinTel system?")
