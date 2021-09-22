@@ -3,6 +3,7 @@ eshell/
 elpa/
 melpa/
 build/
+eln-cache/
 .cache/
 .lsp-session-v1
 .mc-lists.el
@@ -17,4 +18,5 @@ projectile-bookmarks.eld
 projectile.cache
 recentf
 history
+custom.el
 workspace/
