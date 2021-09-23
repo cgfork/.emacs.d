@@ -26,3 +26,4 @@
 (package-file "lisp/+org.el")
 (package-file "lisp/+plantuml.el")
 (package-file "lisp/+themes.el")
+(package-file "lisp/+git.el")

@@ -55,6 +55,7 @@
 (require '+org)
 (require '+plantuml)
 (require '+themes)
+(require '+git)
 
 ;; (set-frame-font "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 ;; (set-face-font 'default (selected-frame) "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-fontset-auto9")
