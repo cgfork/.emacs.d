@@ -23,40 +23,75 @@
 	      (when (file-exists-p file)
 		(load file)))))
 
+(setq url-proxy-services
+   '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
+     ("http" . "127.0.0.1:1235")
+     ("https" . "127.0.0.1:1235")))
+
+(setq straight-base-dir user-emacs-directory
+      straight-cache-autoloads t
+      straight-repository-branch "develop"
+      straight-check-for-modifications '(check-on-save find-when-checking)
+      straight-enable-package-integration nil
+      straight-vc-git-default-clone-depth 1
+      straight-use-package-by-default t
+      use-package-always-ensure nil)
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
 ;; To avoid 'Warning (package): Unnecessary call to ‘package-initialize’ in init file [2 times]'.
-(setq warning-suppress-log-types '((package reinitialization)))
+;; (setq warning-suppress-log-types '((package reinitialization)))
 ;; Load `cask.el'.
-(require 'cask (expand-file-name "cask.d/cask.el" user-emacs-directory))
-(cask-initialize)
+;; (require 'cask (expand-file-name "cask.d/cask.el" user-emacs-directory))
+;; (cask-initialize)
 
-(require 'which-key)
-(which-key-mode t)
+(straight-use-package 'use-package)
+(eval-when-compile
+  (require 'use-package))
 
-(require 'simple)
-(add-hook 'after-init-hook 'size-indication-mode)
-(add-hook 'text-mode-hook 'visual-line-mode)
-(add-hook 'after-init-hook 'global-hl-line-mode)
+(use-package which-key
+  :config
+  (which-key-mode t))
+
+;; (require 'which-key)
+;; (which-key-mode t)
+
+;; (require 'simple)
+;; (add-hook 'after-init-hook 'size-indication-mode)
+;; (add-hook 'text-mode-hook 'visual-line-mode)
+;; (add-hook 'after-init-hook 'global-hl-line-mode)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
-(require '+shell)
-(require '+buffer)
-(require '+window)
-(require '+projectile)
-(require '+sidebar)
-(require '+editor)
-(require '+company)
-(require '+flycheck)
-(require '+lsp)
-(require '+go)
-(require '+rust)
-(require '+markdown)
-(require '+org)
-(require '+plantuml)
-(require '+themes)
-(require '+git)
-
+;;(require '+shell)
+;;(require '+buffer)
+;;(require '+window)
+;;(require '+projectile)
+;;(require '+sidebar)
+;;(require '+editor)
+;;(require '+company)
+;;(require '+flycheck)
+;;(require '+lsp)
+;;(require '+go)
+;;(require '+rust)
+;;(require '+markdown)
+;;(require '+org)
+;;(require '+plantuml)
+;;(require '+themes)
+;;(require '+git)
+;;
 ;; (set-frame-font "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 ;; (set-face-font 'default (selected-frame) "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-fontset-auto9")
 ;; (set-face-attribute 'default (selected-frame) :font "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")

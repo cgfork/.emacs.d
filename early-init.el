@@ -109,5 +109,18 @@
   "Define the group for the my emacs package."
   :group 'convenience)
 
+(setq native-comp-deferred-compilation t
+      package-native-compile t
+      comp-deferred-compilation-deny-list
+      '("\\(?:[/\\\\]\\.dir-locals\\.el$\\)"
+        ;; Don't native-compile *-authloads.el and *-pkg.el files as they
+        ;; seem to produce errors during native-compile.
+        "\\(?:[^z-a]*-autoloads\\.el$\\)"
+        "\\(?:[^z-a]*-pkg\\.el$\\)"))
+;; Disable for preventing the package.el loading packages prior to init-file loading.
+(setq package-enable-at-startup nil
+      package-quickstart nil)
+
+
 (provide 'early-init)
 ;;; early-init.el ends here
