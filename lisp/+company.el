@@ -11,9 +11,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(diminish 'company-mode)
-(add-hook 'after-init-hook 'global-company-mode)
-(with-eval-after-load 'company
+(use-package company
+  :diminish
+  :hook (after-init . global-company-mode)
+  :config
   (define-key global-map (kbd "M-/") 'company-complete)
   (define-key global-map (kbd "<backtab>") 'company-yasnippet)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
@@ -29,7 +30,9 @@
 	company-dabbrev-ignore-case t
 	company-dabbrev-downcase nil))
 
-(company-prescient-mode 1)
+(use-package company-prescient
+  :init
+  (company-prescient-mode 1))
 
 (provide '+company)
 ;;; +company.el ends here

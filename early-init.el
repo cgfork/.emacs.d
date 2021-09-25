@@ -57,9 +57,6 @@
 	  mac-control-modifier 'control ; control
 	  ns-function-modifier 'hyper)))) ; fn
 
-(when (eq system-type 'darwin)
-  (setenv "LIBRARY_PATH" "/usr/local/opt/gcc/lib/gcc/11:/usr/local/opt/gcc/lib/gcc/11/gcc/x86_64-apple-darwin20/11.2.0"))
-
 (defconst sys/win32p
   (eq system-type 'windows-nt)
   "Are we running on a WinTel system?")
@@ -109,6 +106,9 @@
   "Define the group for the my emacs package."
   :group 'convenience)
 
+(when (eq system-type 'darwin)
+  (setenv "LIBRARY_PATH" "/usr/local/opt/gcc/lib/gcc/11:/usr/local/opt/gcc/lib/gcc/11/gcc/x86_64-apple-darwin20/11.2.0"))
+
 (setq native-comp-deferred-compilation t
       package-native-compile t
       comp-deferred-compilation-deny-list
@@ -117,6 +117,7 @@
         ;; seem to produce errors during native-compile.
         "\\(?:[^z-a]*-autoloads\\.el$\\)"
         "\\(?:[^z-a]*-pkg\\.el$\\)"))
+
 ;; Disable for preventing the package.el loading packages prior to init-file loading.
 (setq package-enable-at-startup nil
       package-quickstart nil)

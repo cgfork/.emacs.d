@@ -12,10 +12,12 @@
 
 ;;; Code:
 
-(with-eval-after-load 'ace-window
+(use-package ace-window
+  :config
   (global-set-key [remap other-window] #'ace-window))
 
-(with-eval-after-load 'darkroom
+(use-package darkroom
+  :config
   (setq darkroom-margins 0.15
 	darkroom-text-scale-increase 0
 	darkroom-fringes-outside-margins nil))
@@ -28,7 +30,8 @@
 	(add-hook 'window-configuration-change-hook 'darkroom-tentative-mode))
     (remove-hook 'window-configuration-change-hook 'darkroom-tentative-mode)))
 
-(add-hook 'after-init-hook #'winum-mode)
+(use-package winum
+  :hook (after-init . winum-mode))
 
 (provide '+window)
 ;;; +window.el ends here

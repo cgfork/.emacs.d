@@ -14,16 +14,19 @@
 
 ;;; Code:
 
-(require 'projectile)
-(add-hook 'after-init-hook 'projectile-mode)
-(setq projectile-enable-caching t
+(use-package projectile
+  :hook (after-init . projectile-mode)
+  :config
+  (setq projectile-enable-caching t
       projectile-sort-order 'recentf
       projectile-compleetion-system 'ivy
       projectile-globally-ignore-file-suffixes
       '(".dir" ".cmake" ".make" ".o" ".elc" ".internal" ".DS_store"))
-(add-to-list 'projectile-globally-ignored-directories "build")
+  (add-to-list 'projectile-globally-ignored-directories "build"))
 
-(require 'ibuffer-projectile)
+(use-package ibuffer-projectile)
+(use-package dimmer)
+(use-package ripgrep)
 
 (provide '+projectile)
 ;;; +projectile.el ends here  

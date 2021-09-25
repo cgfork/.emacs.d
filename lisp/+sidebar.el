@@ -11,8 +11,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(global-set-key (kbd "<f8>") 'neotree-toggle)
-(with-eval-after-load 'neotree
+(use-package neotree
+  :bind (("<f8>" . neotree-toggle))
+  :config
   (setq neo-window-width 30
 	neo-smart-open t
 	neo-autorefresh t
@@ -21,5 +22,6 @@
 	'(
 	  "^\\.\\(DS_store\\|git\\|gitignore\\)$"
 	  "^\\.\\(pyc\\|o\\|elc\\|lock\\|class\\)$")))
+
 (provide '+sidebar)
 ;;; +sidebar.el ends here

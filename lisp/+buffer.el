@@ -42,13 +42,13 @@
                                         extended-command-history)
          savehist-autosave-interval 300))
 
-;; (require 'ivy)
-(diminish 'ivy-mode)
-(add-hook 'after-init-hook 'ivy-mode)
-(define-key global-map (kbd "C-x b") 'ivy-switch-buffer)
-(define-key global-map (kbd "C-c C-r") 'ivy-resume)
-(define-key global-map (kbd "C-c C .") 'ivy-switch-view)
-(with-eval-after-load 'ivy
+(use-package ivy
+  :diminish
+  :hook (after-init . ivy-mode)
+  :bind (("C-x b" . ivy-switch-buffer)
+	 ("C-c C-r" . ivy-resume)
+	 ("C-c C ." . ivy-switch-view))
+  :config
   (setq enable-recursive-minibuffers t
         ivy-use-virtual-buffers t
 	ivy-count-format "%d/%d"
@@ -58,20 +58,35 @@
 				(t . ivy--regex-plus))
         ivy-initial-inputs-alist nil))
 
+(use-package swiper
+  :bind(("C-s" . swiper-isearch)
+	("C-r" . swiper-isearch-backwark)))
+
 ;; (require 'swiper)
-(define-key global-map (kbd "C-s") 'swiper-isearch)
-(define-key global-map (kbd "C-r") 'swiper-isearch-backward)
+;; (define-key global-map (kbd "C-s") 'swiper-isearch)
+;; (define-key global-map (kbd "C-r") 'swiper-isearch-backward)
+
+(use-package counsel
+  :diminish
+  :hook (after-init . counsel-mode)
+  :bind (:map counsel-mode-map
+	      ([remap find-file] . counsel-find-file)
+	      ([remap amx] . counsel-M-x)
+	      ([remap swiper] . counsel-grep-or-swiper)
+	      ([remap swiper-backword] . counsel-grep-or-swiper-backword)
+	      ([remap dired] . counsel-dired)
+	      ([remap recentf] . counsel-recentf)))
 
 ;; (require 'counsel)
-(diminish 'counsel-mode)
-(add-hook 'after-init-hook 'counsel-mode)
-(with-eval-after-load 'counsel
-  (define-key counsel-mode-map [remap find-file] 'counsel-find-file)
-  (define-key counsel-mode-map [remap amx] 'counsel-M-x)
-  (define-key counsel-mode-map [remap swiper] 'counsel-grep-or-swiper)
-  (define-key counsel-mode-map [remap swiper-backword] 'counsel-grep-or-swiper-backword)
-  (define-key counsel-mode-map [remap dired] 'counsel-dired)
-  (define-key counsel-mode-map [remap recentf] 'counsel-recentf))
+;; (diminish 'counsel-mode)
+;; (add-hook 'after-init-hook 'counsel-mode)
+;; (with-eval-after-load 'counsel
+;;   (define-key counsel-mode-map [remap find-file] 'counsel-find-file)
+;;   (define-key counsel-mode-map [remap amx] 'counsel-M-x)
+;;   (define-key counsel-mode-map [remap swiper] 'counsel-grep-or-swiper)
+;;   (define-key counsel-mode-map [remap swiper-backword] 'counsel-grep-or-swiper-backword)
+;;   (define-key counsel-mode-map [remap dired] 'counsel-dired)
+;;   (define-key counsel-mode-map [remap recentf] 'counsel-recentf))
 
 (with-eval-after-load 'ibuffer
   (defun my-ibuffer-find-file ()
@@ -83,19 +98,23 @@
       (counsel-find-file default-directory)))
   (advice-add #'ibuffer-find-file :override #'my-ibuffer-find-file))
 
-(setq-default grep-highlight-matches t
-	      grep-scroll-output t)
+(use-package wgrep
+  :init
+  (setq-default grep-highlight-matches t
+		grep-scroll-output t)
+  :config
+  (dolist (key (list (kbd "C-c C-q") (kbd "w")))
+    (define-key grep-mode-map key 'wgrep-change-to-wgrep-mode)))
+
+(use-package deadgrep)
 
 (when (eq system-type 'darwin)
   (setq-default locate-command "mdfind"))
 
-(with-eval-after-load 'grep
-  (dolist (key (list (kbd "C-c C-q") (kbd "w")))
-    (define-key grep-mode-map key 'wgrep-change-to-wgrep-mode)))
-
-(when (and (executable-find "rg")
-	   (package-installed-p 'rg))
-  (global-set-key (kbd "C-c C-p") 'rg-project))
+(use-package rg
+  :config
+  (when (executable-find "rg")
+    (global-set-key (kbd "C-c C-p") 'rg-project)))
 
 (provide '+buffer)
 ;;; +buffer.el ends here

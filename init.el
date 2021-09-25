@@ -50,12 +50,6 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; To avoid 'Warning (package): Unnecessary call to ‘package-initialize’ in init file [2 times]'.
-;; (setq warning-suppress-log-types '((package reinitialization)))
-;; Load `cask.el'.
-;; (require 'cask (expand-file-name "cask.d/cask.el" user-emacs-directory))
-;; (cask-initialize)
-
 (straight-use-package 'use-package)
 (eval-when-compile
   (require 'use-package))
@@ -64,24 +58,23 @@
   :config
   (which-key-mode t))
 
-;; (require 'which-key)
-;; (which-key-mode t)
+(require 'simple)
+(add-hook 'after-init-hook #'size-indication-mode)
+(add-hook 'text-mode-hook #'visual-line-mode)
+(add-hook 'after-init-hook #'global-hl-line-mode)
 
-;; (require 'simple)
-;; (add-hook 'after-init-hook 'size-indication-mode)
-;; (add-hook 'text-mode-hook 'visual-line-mode)
-;; (add-hook 'after-init-hook 'global-hl-line-mode)
+(use-package diminish)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
-;;(require '+shell)
-;;(require '+buffer)
-;;(require '+window)
-;;(require '+projectile)
-;;(require '+sidebar)
-;;(require '+editor)
-;;(require '+company)
+(require '+shell)
+(require '+buffer)
+(require '+window)
+(require '+projectile)
+(require '+sidebar)
+(require '+editor)
+(require '+company)
 ;;(require '+flycheck)
 ;;(require '+lsp)
 ;;(require '+go)
