@@ -11,19 +11,22 @@
 ;;; Commentary:
 ;;; Code:
 
-(with-eval-after-load 'go-mode
+(use-package go-mode
+  :mode ("\\.go\\'" . go-mode)
+  :init
+  (yw-copy-shell-variables "zsh" "GOPATH" "GO111MODULE" "GOPROXY")
+  :config
+  (add-hook 'go-mode-hook #'lsp)
   (add-hook 'go-mode-hook (lambda ()
 			    (setq tab-width 4
 				  standard-indent 2
 				  indent-tabs-mode nil)))
-  (add-hook 'go-mode-hook #'lsp)
-  ;; (add-hook 'go-mode-hook #'yas-minor-mode)
-  (yw-copy-shell-variables "zsh" "GOPATH" "GO111MODULE" "GOPROXY")
-  ;; (power-emacs-set-shell-variable "GO111MODULE" "on")
   (when (executable-find "goimports")
     (setq gofmt-command "goimports"))
   (add-hook 'before-save-hook #'gofmt-before-save)
-  (with-eval-after-load 'gotest (setq go-test-verbose t)))
+  (use-package gotest
+    :config
+    (setq go-test-verbose t)))
 
 (provide '+go)
 

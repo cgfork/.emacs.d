@@ -11,6 +11,11 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package all-the-icons
+  :if (display-graphic-p)
+  :init
+  (setq inhibit-compacting-font-caches t))
+
 (defun yw-apply-themes ()
   "Forcibly load the themes listed in the `custome-enabled-themes'."
   (dolist (theme custom-enabled-themes)
@@ -18,30 +23,34 @@
       (load-theme theme))
     (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))))
 
-(setq inhibit-compacting-font-caches t)
+(use-package doom-themes
+  :init
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t)
+   ;; all-the-icons must be installed!
+  (with-eval-after-load 'neotree
+    (doom-themes-neotree-config)
+    (setq doom-themes-neotree-file-icons 't))
+  (with-eval-after-load 'org-mode
+    (doom-themes-org-config))
+  :config
+  (setq custom-enabled-themes '(doom-xcode))
+  (yw-apply-themes))
 
-(setq doom-themes-enable-bold t
-      doom-themes-enable-italic t)
-(setq custom-enabled-themes '(doom-xcode))
-(yw-apply-themes)
-;; all-the-icons must be installed!
-(doom-themes-neotree-config)
-(with-eval-after-load 'org-mode
-  (doom-themes-org-config))
-
-(add-hook 'after-init-hook 'doom-modeline-mode)
-(with-eval-after-load 'doom-modeline
-  (when (display-graphic-p)
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :config
+   (when (display-graphic-p)
     (progn 
       (setq doom-modeline-height 15)
       (setq doom-modeline-bar-width 4)))
-  (setq doom-modeline-icon (display-graphic-p))
-  (setq doom-modeline-window-width-limit fill-column)
-  (setq doom-modeline-project-detection 'auto)
-  (setq doom-modeline-minor-modes nil)
-  (setq doom-modeline-lsp t)
-  (setq doom-modeline-workspace-name t)
-  (setq doom-modeline-unicode-fallback nil))
+   (setq doom-modeline-icon (display-graphic-p))
+   (setq doom-modeline-window-width-limit fill-column)
+   (setq doom-modeline-project-detection 'auto)
+   (setq doom-modeline-minor-modes nil)
+   (setq doom-modeline-lsp t)
+   (setq doom-modeline-workspace-name t)
+   (setq doom-modeline-unicode-fallback nil))
 
 (provide '+themes)
 ;;; +themes.el ends here

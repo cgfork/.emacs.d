@@ -13,5 +13,7 @@
 
 ;; (require 'magit)
 
+(use-package magit)
+
 (provide '+git)
 ;;; +git.el ends here

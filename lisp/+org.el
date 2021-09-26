@@ -11,26 +11,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'org)
-
-(setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGHUP(h)" "|" "DONE(d)" "CANCEL(c)"))
-      org-log-done 'time
-      org-startup-indented nil
-      org-ellipsis "   "
-      org-pretty-entities t
-      org-src-fontify-natively t
-      org-edit-src-content-indentation 0
-      org-plantuml-jar-path (expand-file-name "plantuml.jar" user-emacs-directory))
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((plantuml . t)
-   (go . t)
-   (dot . t)))
-
-(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-(add-to-list 'org-src-lang-modes '("rust" . rustic))
-
 (defun ox-org-clean-space (text backend _)
   "Clean the space between chinese when export to html.
 Replace the TEXT when the BACKEND is html."
@@ -54,13 +34,39 @@ Replace the TEXT when the BACKEND is html."
       s)))
 ;; (add-to-list 'org-export-filter-paragraph-functions 'ox-org-clean-space)
 
-(require 'htmlize)
-(require 'ox-md)
+(use-package org
+  :ensure nil
+  :straight (:type built-in)
+  :config
+  (add-to-list 'org-export-backends 'md)
+  (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGHUP(h)" "|" "DONE(d)" "CANCEL(c)"))
+	org-log-done 'time
+	org-startup-indented nil
+	org-ellipsis "   "
+	org-pretty-entities t
+	org-src-fontify-natively t
+	org-edit-src-content-indentation 0
+	org-plantuml-jar-path (expand-file-name "plantuml.jar" user-emacs-directory))
+  
+  (setq org-latex-listings 'minted
+	org-latex-packages-alist '(("" "minted") ("" "xeCJK"))
+	org-latex-minted-options '(("breaklines")))
 
-;; use minted to replace verbatim
-(setq org-latex-listings 'minted
-      org-latex-packages-alist '(("" "minted") ("" "xeCJK"))
-      org-latex-minted-options '(("breaklines")))
+  (use-package ob-go)
+  
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((plantuml . t)
+     (go . t)
+     (dot . t)))
+
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+  (add-to-list 'org-src-lang-modes '("rust" . rustic)))
+
+(use-package htmlize)
+
+;; (use-package org-bullets
+;;   :hook (org-mode . org-bullets-mode))
 
 (provide '+org)
 ;;; +org.el ends here

@@ -11,7 +11,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(with-eval-after-load 'markdown-mode
+(use-package markdown-mode
+  :config
   (setq markdown-command "multimarkdown")
   (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
   (add-to-list 'auto-mode-alist '("\.md\\'" . markdown-mode))

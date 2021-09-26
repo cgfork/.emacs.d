@@ -11,15 +11,18 @@
 ;;; Commentary:
 ;;; Code:
 
-(diminish 'lsp-mode)
-(add-hook 'prog-mode-hook (lambda ()
+(use-package lsp-mode
+  :diminish lsp-mode
+  :commands lsp lsp-deferred
+  :init
+  (add-hook 'prog-mode-hook (lambda ()
 			    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'sh-mode 'plantuml-mode 'clojure-mode)
 			      (lsp-deferred))))
-(add-hook 'lsp-mode-hook (lambda ()
+  (add-hook 'lsp-mode-hook (lambda ()
 			   (lsp-enable-which-key-integration)
 			   (add-hook 'before-save-hook #'lsp-format-buffer t t)
 			   (add-hook 'before-save-hook #'lsp-organize-imports t t)))
-(with-eval-after-load 'lsp-mode
+  :config
   (define-key lsp-mode-map (kbd "C-c C-d") 'lsp-describe-thing-at-point)
   (define-key lsp-mode-map (kbd "C-c C-r") 'lsp-rename)
   (define-key lsp-mode-map [remap xref-find-definitions] 'lsp-find-definition)
@@ -39,17 +42,18 @@
             ;; turn off for better performance
             lsp-enable-symbol-highlighting nil
             ;; Disable eldoc displays in minibuffer
-	    lsp-eldoc-hook nil
-            lsp-eldoc-enable-hover nil
+            lsp-eldoc-enable-hover t
+	    lsp-eldoc-render-all nil
             ;; auto kill server
             lsp-keep-workspace-alive nil)
-    (setq lsp-eldoc-hook nil
-	  lsp-eldoc-render-all nil
-	  lsp-eldoc-enable-hover nil
+    (setq lsp-eldoc-render-all nil
+	  lsp-eldoc-enable-hover t
 	  lsp-idle-delay 0.5
 	  lsp-auto-guess-root t)))
 
-(with-eval-after-load 'lsp-ui
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
   (if (not (display-graphic-p))
       (setq lsp-ui-doc-mode nil
 	    lsp-ui-doc-enable nil
@@ -58,10 +62,7 @@
 	  lsp-ui-sideline-show-hover nil
 	  lsp-ui-sideline-ignore-duplicate t
 	  lsp-ui-doc-position 'top
-	  lsp-ui-doc-enable nil)))  
-
-(add-hook 'lsp-mode-hook 'lsp-ui-mode)
-(with-eval-after-load 'lsp-ui-mode
+	  lsp-ui-doc-enable nil))
   (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide))
 
 (provide '+lsp)

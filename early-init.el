@@ -122,6 +122,8 @@
 (setq package-enable-at-startup nil
       package-quickstart nil)
 
+;; Avoid rendering multiple icons simultaneously
+(setq inhibit-compacting-font-caches t)
 
 (provide 'early-init)
 ;;; early-init.el ends here

@@ -12,7 +12,7 @@
 ;;; Code:
 
 (use-package company
-  :diminish
+  :diminish company-mode
   :hook (after-init . global-company-mode)
   :config
   (define-key global-map (kbd "M-/") 'company-complete)

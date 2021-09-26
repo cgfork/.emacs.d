@@ -59,15 +59,15 @@
         ivy-initial-inputs-alist nil))
 
 (use-package swiper
-  :bind(("C-s" . swiper-isearch)
-	("C-r" . swiper-isearch-backwark)))
+  :bind (("C-s" . swiper-isearch)
+	 ("C-r" . swiper-isearch-backwark)))
 
-;; (require 'swiper)
-;; (define-key global-map (kbd "C-s") 'swiper-isearch)
-;; (define-key global-map (kbd "C-r") 'swiper-isearch-backward)
+;; on MacOS, ls doesn't support the --dired option while on Linux is supported.
+(when sys/macp
+  (setq dired-use-ls-dired nil))
 
 (use-package counsel
-  :diminish
+  :diminish counsel-mode
   :hook (after-init . counsel-mode)
   :bind (:map counsel-mode-map
 	      ([remap find-file] . counsel-find-file)
@@ -76,17 +76,6 @@
 	      ([remap swiper-backword] . counsel-grep-or-swiper-backword)
 	      ([remap dired] . counsel-dired)
 	      ([remap recentf] . counsel-recentf)))
-
-;; (require 'counsel)
-;; (diminish 'counsel-mode)
-;; (add-hook 'after-init-hook 'counsel-mode)
-;; (with-eval-after-load 'counsel
-;;   (define-key counsel-mode-map [remap find-file] 'counsel-find-file)
-;;   (define-key counsel-mode-map [remap amx] 'counsel-M-x)
-;;   (define-key counsel-mode-map [remap swiper] 'counsel-grep-or-swiper)
-;;   (define-key counsel-mode-map [remap swiper-backword] 'counsel-grep-or-swiper-backword)
-;;   (define-key counsel-mode-map [remap dired] 'counsel-dired)
-;;   (define-key counsel-mode-map [remap recentf] 'counsel-recentf))
 
 (with-eval-after-load 'ibuffer
   (defun my-ibuffer-find-file ()

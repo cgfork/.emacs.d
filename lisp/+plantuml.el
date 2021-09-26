@@ -11,11 +11,12 @@
 ;;; Commentary:
 ;;; Code:
 
-
-(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
-(add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
-(setq plantuml-jar-path (expand-file-name "plantuml.jar" user-emacs-directory))
-(setq plantuml-default-exec-mode 'jar)
+(use-package plantuml-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+  (add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
+  (setq plantuml-jar-path (expand-file-name "plantuml.jar" user-emacs-directory))
+  (setq plantuml-default-exec-mode 'jar))
 
 (provide '+plantuml)
 ;;; +plantuml.el ends here
