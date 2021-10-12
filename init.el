@@ -68,6 +68,7 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
+(require '+font)
 (require '+shell)
 (require '+buffer)
 (require '+window)
@@ -84,25 +85,6 @@
 (require '+org)
 (require '+plantuml)
 (require '+git)
-;;
-;; (set-frame-font "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-;; (set-face-font 'default (selected-frame) "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-fontset-auto9")
-;; (set-face-attribute 'default (selected-frame) :font "-*-Ubuntu Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 
-(cond
- ((member "Ubuntu Mono" (font-family-list))
-  (set-face-attribute 'default nil :font "Ubuntu Mono-12"))
- ((member "Monaco" (font-family-list))
-  (set-face-attribute 'default nil :font "Monaco-12")))
-
-(when (member "HYKaiTiJ" (font-family-list))
-  (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font
-     (frame-parameter nil 'font)
-     charset
-     (font-spec :name "-unknown-HYKaiTiJ-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
-		:weight 'normal
-		:slant 'normal
-		:size 10))))
 (provide 'init)
 ;;; Init.el ends here

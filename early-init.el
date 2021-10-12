@@ -35,7 +35,7 @@
   (electric-pair-mode t))
 
 (setq-default
- line-number-mode t 
+ line-number-mode t
  column-number-mode t
  auto-save-default nil
  make-backup-files nil
