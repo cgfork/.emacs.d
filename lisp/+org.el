@@ -52,7 +52,7 @@ Replace the TEXT when the BACKEND is html."
     (set-face-attribute (car face) nil :font "Consolas-with-Yahei" :weight 'regular :height (cdr face))))
 
 (defun yw-org-mode-setup ()
-  (org-indent-mode)
+  (org-indent-mode nil)
   (variable-pitch-mode 1)
   (visual-line-mode 1)
   (display-line-numbers-mode 0))
@@ -107,13 +107,13 @@ Replace the TEXT when the BACKEND is html."
   (add-to-list 'org-src-lang-modes '("rust" . rustic))
   (yw-org-font-setup))
 
-(defun yw-org-mode-visual-fill ()
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
+;; (defun yw-org-mode-visual-fill ()
+;;   (setq visual-fill-column-width 100
+;;         visual-fill-column-center-text t)
+;;   (visual-fill-column-mode 1))
 
-(use-package visual-fill-column
-  :hook (org-mode . yw-org-mode-visual-fill))
+;; (use-package visual-fill-column
+;;   :hook (org-mode . yw-org-mode-visual-fill))
 
 
 ;; (use-package org-bullets

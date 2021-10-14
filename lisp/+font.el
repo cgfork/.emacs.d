@@ -45,8 +45,8 @@ horizontal and vertical directions."
     (cond
      ((member "Monaco" (font-family-list))
       (set-face-attribute 'default nil :font "Monaco-13"))
-     ((member "Source Code Pro" (font-family-list))
-      (set-face-attribute 'default nil :font "Source Code Pro-13")))
+     ((member "Andale Mono" (font-family-list))
+      (set-face-attribute 'default nil :font "Source Code Pro-14")))
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font
        (frame-parameter nil 'font)
