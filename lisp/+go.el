@@ -13,8 +13,6 @@
 
 (use-package go-mode
   :mode ("\\.go\\'" . go-mode)
-  :init
-  (yw-copy-shell-variables "zsh" "GOPATH" "GO111MODULE" "GOPROXY")
   :config
   (add-hook 'go-mode-hook #'lsp)
   (add-hook 'go-mode-hook (lambda ()
@@ -25,6 +23,8 @@
     (setq gofmt-command "goimports"))
   (add-hook 'before-save-hook #'gofmt-before-save)
   (use-package gotest
+    :bind (:map go-mode-map
+		("C-c C-t" . go-test-current-test)) 
     :config
     (setq go-test-verbose t)))
 

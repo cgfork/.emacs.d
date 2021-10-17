@@ -67,7 +67,8 @@ It will return the pairs that are set into the environment variables."
 	  vars))
 
 (when (display-graphic-p)
-  (yw-copy-shell-variables "zsh" "PATH"))
+  (when (or sys/macp sys/linuxp)
+    (yw-copy-shell-variables yw-shell-executable "PATH")))
 
 (provide '+shell)
 ;;; +shell.el ends here

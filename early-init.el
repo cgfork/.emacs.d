@@ -34,29 +34,6 @@
 (when (fboundp 'electric-pair-mode)
   (electric-pair-mode t))
 
-(setq-default
- line-number-mode t
- column-number-mode t
- auto-save-default nil
- make-backup-files nil
- cursor-type 'bar
- ns-pop-up-frames nil
- display-line-numbers t
- tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
-
-;; Set Key Modifiers.
-(with-no-warnings
-  (cond
-   ((eq system-type 'windows-nt)
-    (setq w32-lwindow-modifier 'super ; Left windows key
-	  w32-apps-modifier 'hyper) ; Menu key
-    (w32-register-hot-key [s-t]))
-   ((eq system-type 'darwin)
-    (setq mac-option-modifier 'meta ; option
-	  mac-command-modifier 'super ; command
-	  mac-control-modifier 'control ; control
-	  ns-function-modifier 'hyper)))) ; fn
-
 (defconst sys/win32p
   (eq system-type 'windows-nt)
   "Are we running on a WinTel system?")
@@ -106,8 +83,31 @@
   "Define the group for the my emacs package."
   :group 'convenience)
 
-(when (eq system-type 'darwin)
+(when sys/macp
   (setenv "LIBRARY_PATH" "/usr/local/opt/gcc/lib/gcc/11:/usr/local/opt/gcc/lib/gcc/11/gcc/x86_64-apple-darwin20/11.2.0"))
+
+(setq-default
+ line-number-mode t
+ column-number-mode t
+ auto-save-default nil
+ make-backup-files nil
+ cursor-type 'bar
+ ns-pop-up-frames nil
+ display-line-numbers t
+ tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
+
+;; Set Key Modifiers.
+(with-no-warnings
+  (cond
+   (sys/win32p
+    (setq w32-lwindow-modifier 'super ; Left windows key
+	  w32-apps-modifier 'hyper) ; Menu key
+    (w32-register-hot-key [s-t]))
+   (sys/macp
+    (setq mac-option-modifier 'meta ; option
+	  mac-command-modifier 'super ; command
+	  mac-control-modifier 'control ; control
+	  ns-function-modifier 'hyper)))) ; fn
 
 (setq native-comp-deferred-compilation t
       package-native-compile t

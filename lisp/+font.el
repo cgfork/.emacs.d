@@ -26,32 +26,30 @@ horizontal and vertical directions."
     (error "Attemp to calculate the dpi of a non-graphic display")))
 
 (when (display-graphic-p)
-  (when sys/linux-x-p
-    (cond
-     ((member "Ubuntu Mono" (font-family-list))
-      (set-face-attribute 'default nil :font "Ubuntu Mono-12"))
-     ((member "Source Code Pro" (font-family-list))
-      (set-face-attribute 'default nil :font "Source Code Pro-12")))
-    (when (member "HYKaiTiJ" (font-family-list))
+  ;; Mono Font
+  (let ((font-size (cond
+		    (sys/macp 13)
+		    (sys/linuxp 12)
+		    (t 12))))
+    (catch 'loop
+      (dolist (font '("Fira Code" "Ubuntu Mono" "SF Mono" "Monaco" "Consolas"))
+	(when (member font (font-family-list))
+	  (set-face-attribute 'default nil :font (format "%s-%d" font font-size))
+	  (throw 'loop t)))))
+  ;; Unicode
+  (catch 'loop
+    (dolist (font '("Symbola" "Apple Symbols" "Symbol"))
+      (when (member font (font-family-list))
+	(set-fontset-font t 'unicode font nil 'prepend)
+	(throw 'loop t))))
+  ;; Chinese font
+  (dolist (font '("WenQuanYi Micro Hei" "Microsoft Yahei" "HYKaiTiJ" "Pingfang SC"))
+    (when (member font (font-family-list))
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
 	(set-fontset-font
 	 (frame-parameter nil 'font)
 	 charset
-	 (font-spec :name "-unknown-HYKaiTiJ-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
-		    :weight 'normal
-		    :slant 'normal
-		    :size 10)))))
-  (when sys/mac-x-p
-    (cond
-     ((member "Monaco" (font-family-list))
-      (set-face-attribute 'default nil :font "Monaco-13"))
-     ((member "Andale Mono" (font-family-list))
-      (set-face-attribute 'default nil :font "Source Code Pro-14")))
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font
-       (frame-parameter nil 'font)
-       charset
-       (font-spec :family "Pingfang SC")))))
+	 (font-spec :family font))))))
 
 (provide '+font)
 ;;; +font.el ends here

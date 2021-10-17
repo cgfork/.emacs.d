@@ -49,7 +49,9 @@ Replace the TEXT when the BACKEND is html."
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Consolas-with-Yahei" :weight 'regular :height (cdr face))))
+    (dolist (font '("Consolas-with-Yahei"))
+      (when (member font (font-family-list))
+	(set-face-attribute (car face) nil :font font :weight 'regular :height (cdr face))))))
 
 (defun yw-org-mode-setup ()
   (org-indent-mode nil)
