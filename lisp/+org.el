@@ -98,6 +98,8 @@ Replace the TEXT when the BACKEND is html."
 
   (use-package htmlize)
   (use-package ob-go)
+
+  (use-package ox-gfm)
   
   (org-babel-do-load-languages
    'org-babel-load-languages

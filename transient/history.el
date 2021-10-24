@@ -4,5 +4,6 @@
   ("--ff"))
  (magit-commit nil)
  (magit-dispatch nil)
+ (magit-gitignore nil)
  (magit-patch-apply nil)
  (magit-push nil))

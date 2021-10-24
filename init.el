@@ -5,6 +5,9 @@
 (when (version< emacs-version "25.3")
   (error "This requires Emacs 25.3 or above!"))
 
+(when (version< emacs-version "27.1")
+  (load-file (expand-file-name "early-init.el" user-emacs-directory)))
+
 ;; Load `custom-file'.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 ;; If it doesn't exist, copy from the template, then load it.
@@ -23,10 +26,15 @@
 	      (when (file-exists-p file)
 		(load file)))))
 
-(setq url-proxy-services
-   '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
-     ("http" . "127.0.0.1:1235")
-     ("https" . "127.0.0.1:1235")))
+(setq url-proxy-services '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")))
+
+(when (length> yw-http-proxy 0)
+  (add-to-list 'url-proxy-services
+	       '("http" . yw-http-proxy)))
+
+(when (length> yw-https-proxy 0)
+  (add-to-list 'url-proxy-services
+	       '("https" . yw-https-proxy)))
 
 (setq straight-base-dir user-emacs-directory
       straight-cache-autoloads t
@@ -69,7 +77,6 @@
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
 (require '+font)
-(require '+shell)
 (require '+buffer)
 (require '+window)
 (require '+projectile)

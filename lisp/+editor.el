@@ -33,21 +33,22 @@
   (global-set-key [remap goto-line] 'goto-line-preview)
   :config
   (when (fboundp 'display-line-numbers-mode)
-  (defun yw-with-display-line-numbers (f &rest args)
-    (let ((display-line-numbers t))
-      (apply f args)))
-  (advice-add 'goto-line-preview :around #'yw-with-display-line-numbers)))
+    (defun yw-with-display-line-numbers (f &rest args)
+      (let ((display-line-numbers t))
+	(apply f args)))
+    (advice-add 'goto-line-preview :around #'yw-with-display-line-numbers)))
 
-(require 'display-fill-column-indicator)
-(defun yw-toggle-fill-column-indicator ()
-  "Toggle displaying of fill column indicator."
-  (interactive)
-  (if display-fill-column-indicator
-      (setq display-fill-column-indicator nil)
-    (setq display-fill-column-indicator t)))
+(when (fboundp 'display-fill-column-indicator)
+  (require 'display-fill-column-indicator)
+  (defun yw-toggle-fill-column-indicator ()
+    "Toggle displaying of fill column indicator."
+    (interactive)
+    (if display-fill-column-indicator
+	(setq display-fill-column-indicator nil)
+      (setq display-fill-column-indicator t)))
 
-(setq-default display-fill-column-indicator-column 120)
-(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+  (setq-default display-fill-column-indicator-column 120)
+  (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode))
 
 (use-package avy
   :init
