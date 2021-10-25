@@ -92,6 +92,7 @@
 (require '+org)
 (require '+plantuml)
 (require '+git)
+(require '+protobuf)
 
 (provide 'init)
 ;;; Init.el ends here
