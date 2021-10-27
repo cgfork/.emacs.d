@@ -17,14 +17,14 @@
 
 (use-package paredit
   :config
-  (defmacro yw-open-paredit (mode-hook)
+  (defmacro ewx-open-paredit (mode-hook)
     "Add the `enable-paredit-mode' to the specific MODE-HOOK."
     `(add-hook ,mode-hook #'enable-paredit-mode))
-  (yw-open-paredit 'eval-expression-minibuffer-setup-hook))
+  (ewx-open-paredit 'eval-expression-minibuffer-setup-hook))
 
 
 (with-eval-after-load 'elisp-mode
-  (yw-open-paredit 'emacs-lisp-mode-hook))
+  (ewx-open-paredit 'emacs-lisp-mode-hook))
 (add-hook 'after-init-hook #'show-paren-mode)
 
 (use-package highlight-parentheses
@@ -33,14 +33,14 @@
   (global-set-key [remap goto-line] 'goto-line-preview)
   :config
   (when (fboundp 'display-line-numbers-mode)
-    (defun yw-with-display-line-numbers (f &rest args)
+    (defun ewx-with-display-line-numbers (f &rest args)
       (let ((display-line-numbers t))
 	(apply f args)))
-    (advice-add 'goto-line-preview :around #'yw-with-display-line-numbers)))
+    (advice-add 'goto-line-preview :around #'ewx-with-display-line-numbers)))
 
 (when (fboundp 'display-fill-column-indicator)
   (require 'display-fill-column-indicator)
-  (defun yw-toggle-fill-column-indicator ()
+  (defun ewx-toggle-fill-column-indicator ()
     "Toggle displaying of fill column indicator."
     (interactive)
     (if display-fill-column-indicator
@@ -63,15 +63,15 @@
   :init
   (autoload 'yas-expand-snippet "yasnippet")
   :config
-  (defun yw-autoinsert-yas-expand (&rest _)
+  (defun ewx-autoinsert-yas-expand (&rest _)
   "Replace text in yasnippet template."
   (yas-expand-snippet (buffer-string) (point-min) (point-max)))
   (auto-insert-mode 1)
   (setq auto-insert-query nil
 	auto-insert-directory (locate-user-emacs-file "templates"))
 
-  (define-auto-insert "\\.org?$" [ "default-org.org" yw-autoinsert-yas-expand ])
-  (define-auto-insert "\\.el$" [ "default-el.el" yw-autoinsert-yas-expand ])
+  (define-auto-insert "\\.org?$" [ "default-org.org" ewx-autoinsert-yas-expand ])
+  (define-auto-insert "\\.el$" [ "default-el.el" ewx-autoinsert-yas-expand ])
   (define-auto-insert "\\.sh?$" "default-sh.sh"))
 
 (provide '+editor)

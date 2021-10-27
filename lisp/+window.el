@@ -22,7 +22,7 @@
 	darkroom-text-scale-increase 0
 	darkroom-fringes-outside-margins nil))
 
-(defun yw-toggle-darkroom-mode ()
+(defun ewx-toggle-darkroom-mode ()
   (interactive)
   (darkroom-tentative-mode (if darkroom-tentative-mode 0 1))
   (if darkroom-tentative-mode

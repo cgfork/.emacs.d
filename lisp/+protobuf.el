@@ -13,7 +13,7 @@
 (use-package protobuf-mode
   :hook (protobuf-mode . (lambda ()
 			   (c-add-style
-			    "yw-style"
+			    "ewx-style"
 			    '((c-basic-offset . 4)
 			      (indent-tabs-mode . nil))
 			    t))))

@@ -11,7 +11,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun yw-ox-org-clean-space (text backend _)
+(defun ewx-ox-org-clean-space (text backend _)
   "Clean the space between chinese when export to html.
 Replace the TEXT when the BACKEND is html."
   (when (org-export-derived-backend-p backend 'html)
@@ -34,7 +34,7 @@ Replace the TEXT when the BACKEND is html."
       s)))
 ;; (add-to-list 'org-export-filter-paragraph-functions 'ox-org-clean-space)
 
-(defun yw-org-font-setup ()
+(defun ewx-org-font-setup ()
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
@@ -53,7 +53,7 @@ Replace the TEXT when the BACKEND is html."
       (when (member font (font-family-list))
 	(set-face-attribute (car face) nil :font font :weight 'regular :height (cdr face))))))
 
-(defun yw-org-mode-setup ()
+(defun ewx-org-mode-setup ()
   (org-indent-mode nil)
   (variable-pitch-mode 1)
   (visual-line-mode 1)
@@ -75,7 +75,7 @@ Replace the TEXT when the BACKEND is html."
 (use-package org
   :ensure nil
   :straight (:type built-in)
-  :hook (org-mode . yw-org-mode-setup)
+  :hook (org-mode . ewx-org-mode-setup)
   :config
   (add-to-list 'org-export-backends 'md)
   (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGHUP(h)" "|" "DONE(d)" "CANCEL(c)"))
@@ -109,15 +109,15 @@ Replace the TEXT when the BACKEND is html."
 
   (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
   (add-to-list 'org-src-lang-modes '("rust" . rustic))
-  (yw-org-font-setup))
+  (ewx-org-font-setup))
 
-;; (defun yw-org-mode-visual-fill ()
+;; (defun ewx-org-mode-visual-fill ()
 ;;   (setq visual-fill-column-width 100
 ;;         visual-fill-column-center-text t)
 ;;   (visual-fill-column-mode 1))
 
 ;; (use-package visual-fill-column
-;;   :hook (org-mode . yw-org-mode-visual-fill))
+;;   :hook (org-mode . ewx-org-mode-visual-fill))
 
 
 ;; (use-package org-bullets

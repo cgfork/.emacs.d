@@ -26,15 +26,79 @@
 	      (when (file-exists-p file)
 		(load file)))))
 
+(require 'subr-x)
+
+(defun ewx-get-shell-variable (name &optional shell)
+  "Return the value associated with the NAME in the default shell environments
+or in the SHELL environments if it exists."
+  (let* ((shell (or shell ewx-shell-executable))
+	 (shell-exec (executable-find shell))
+	 (name (cond
+		((stringp name) name)
+		((symbolp name) (symbol-name name))
+		(t (error "Unknown name %S" name))))
+	 (printf (or (executable-find "printf") "printf"))
+	 (printf-command (concat printf " '%s'" (format "${%s}" name)))
+	 (shell-args (cond
+		      ((string-match-p "t?csh$" shell)
+		       `("-d" "-c" ,(concat "sh -c" printf-command)))
+		      ((string-match-p "fish" shell)
+		       `("-l" "-c" ,(concat "sh -c" printf-command)))
+		      (t
+		       `("-l" "-c" ,printf-command)))))
+    (with-temp-buffer
+      (let ((exit-code (apply #'call-process shell-exec nil t nil shell-args)))
+	(unless (zerop exit-code)
+	  (error "Non-zero exit code when execute `%s' with '%S" shell shell-args)))
+      (buffer-string))))
+
+(defun ewx-set-shell-variable (name value)
+  "Set the value of environment variable NAME to VALUE.
+If NAME is 'PATH', it will also set corresponding variables
+such as `exec-path', `eshell-path-env' and so on."
+  (setenv name value)
+  (when (and (string-equal "PATH" name)
+	     (not (string-empty-p value)))
+    (setq eshell-path-env value
+	  exec-path (append (parse-colon-path value) (list exec-directory)))))
+
+(defun ewx-copy-shell-variables (shell &rest vars)
+  "Set the environemnt VARS from the given shell.
+It will return the pairs that are set into the environment variables."
+  (mapcar (lambda (name)
+	    (let ((value (condition-case err
+			     (ewx-get-shell-variable name shell)
+			   (message "get %s variable error: %s. skip it" name (error-message-string err)))))
+	      (if value
+		  (progn (ewx-set-shell-variable name value)
+			 (cons name value))
+		(cons name nil))))
+	  vars))
+
+
+(when (display-graphic-p)
+  (when (or sys/macp sys/linuxp)
+    (ewx-copy-shell-variables ewx-shell-executable "PATH")))
+
+(defcustom ewx-http-proxy (ewx-get-shell-variable "HTTP_PROXY" ewx-shell-executable)
+  "Define the http or https proxy."
+  :type 'string
+  :group 'ywg)
+
+(defcustom ewx-https-proxy (ewx-get-shell-variable "HTTPS_PROXY" ewx-shell-executable)
+  "Define the http or https proxy."
+  :type 'string
+  :group 'ywg)
+
 (setq url-proxy-services '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")))
 
-(when (length> yw-http-proxy 0)
+(when (length> ewx-http-proxy 0)
   (add-to-list 'url-proxy-services
-	       '("http" . yw-http-proxy)))
+	       '("http" . ewx-http-proxy)))
 
-(when (length> yw-https-proxy 0)
+(when (length> ewx-https-proxy 0)
   (add-to-list 'url-proxy-services
-	       '("https" . yw-https-proxy)))
+	       '("https" . ewx-https-proxy)))
 
 (setq straight-base-dir user-emacs-directory
       straight-cache-autoloads t

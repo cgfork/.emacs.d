@@ -16,7 +16,7 @@
   :init
   (setq inhibit-compacting-font-caches t))
 
-(defun yw-apply-themes ()
+(defun ewx-apply-themes ()
   "Forcibly load the themes listed in the `custome-enabled-themes'."
   (dolist (theme custom-enabled-themes)
     (unless (custom-theme-p theme)
@@ -35,7 +35,7 @@
 ;;     (doom-themes-org-config))
 ;;   :config
 ;;   (setq custom-enabled-themes '(doom-xcode))
-;;   (yw-apply-themes))
+;;   (ewx-apply-themes))
 
 (use-package modus-themes
   :init
