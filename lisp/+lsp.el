@@ -65,5 +65,15 @@
 	  lsp-ui-doc-enable nil))
   (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide))
 
+(use-package dap-mode
+  :config
+  (dap-register-debug-template "Rust::GDB Run Configuration"
+                               (list :type "gdb"
+                                     :request "launch"
+                                     :name "GDB::Run"
+				     :gdbpath "rust-gdb"
+                                     :target nil
+                                     :cwd nil)))
+
 (provide '+lsp)
 ;;; +lsp.el ends here
