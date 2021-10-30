@@ -86,12 +86,12 @@ It will return the pairs that are set into the environment variables."
       (ewx-set-shell-variable name ewx-shell-executable)
     (getenv name)))
 
-(defcustom ewx-http-proxy (ewx-get-shell-variable "HTTP_PROXY" ewx-shell-executable)
+(defcustom ewx-http-proxy (ewx-proxy-get "HTTP_PROXY")
   "Define the http or https proxy."
   :type 'string
   :group 'ywg)
 
-(defcustom ewx-https-proxy (ewx-get-shell-variable "HTTPS_PROXY" ewx-shell-executable)
+(defcustom ewx-https-proxy (ewx-proxy-get "HTTPS_PROXY")
   "Define the http or https proxy."
   :type 'string
   :group 'ywg)
