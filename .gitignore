@@ -5,6 +5,7 @@ melpa/
 build/
 eln-cache/
 .cache/
+transient/
 .lsp-session-v1
 .mc-lists.el
 .DS_Store

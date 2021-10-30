@@ -80,31 +80,10 @@ It will return the pairs that are set into the environment variables."
   (when (or sys/macp sys/linuxp)
     (ewx-copy-shell-variables ewx-shell-executable "PATH")))
 
-(defun ewx-proxy-get (name)
-  "Get the value of environment variable NAME to VALUE."
-  (if (or sys/macp sys/linuxp)
-      (ewx-set-shell-variable name ewx-shell-executable)
-    (getenv name)))
-
-(defcustom ewx-http-proxy (ewx-proxy-get "HTTP_PROXY")
-  "Define the http or https proxy."
-  :type 'string
-  :group 'ywg)
-
-(defcustom ewx-https-proxy (ewx-proxy-get "HTTPS_PROXY")
-  "Define the http or https proxy."
-  :type 'string
-  :group 'ywg)
-
-(setq url-proxy-services '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")))
-
-(when (length> ewx-http-proxy 0)
-  (add-to-list 'url-proxy-services
-	       '("http" . ewx-http-proxy)))
-
-(when (length> ewx-https-proxy 0)
-  (add-to-list 'url-proxy-services
-	       '("https" . ewx-https-proxy)))
+(setq url-proxy-services
+      '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
+	("http" . "127.0.0.1:1235")
+	("https" . "127.0.0.1:1235")))
 
 (setq straight-base-dir user-emacs-directory
       straight-cache-autoloads t
