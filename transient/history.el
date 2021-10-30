@@ -6,4 +6,5 @@
  (magit-dispatch nil)
  (magit-gitignore nil)
  (magit-patch-apply nil)
+ (magit-pull nil)
  (magit-push nil))

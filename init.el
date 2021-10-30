@@ -80,6 +80,12 @@ It will return the pairs that are set into the environment variables."
   (when (or sys/macp sys/linuxp)
     (ewx-copy-shell-variables ewx-shell-executable "PATH")))
 
+(defun ewx-proxy-get (name)
+  "Get the value of environment variable NAME to VALUE."
+  (if (or sys/macp sys/linuxp)
+      (ewx-set-shell-variable name ewx-shell-executable)
+    (getenv name)))
+
 (defcustom ewx-http-proxy (ewx-get-shell-variable "HTTP_PROXY" ewx-shell-executable)
   "Define the http or https proxy."
   :type 'string
