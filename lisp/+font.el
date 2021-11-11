@@ -32,7 +32,7 @@ horizontal and vertical directions."
 		    (sys/linuxp 12)
 		    (t 12))))
     (catch 'loop
-      (dolist (font '("Fira Code" "Ubuntu Mono" "SF Mono" "Monaco" "Consolas"))
+      (dolist (font '("Consolas" "Fira Code" "Ubuntu Mono" "SF Mono" "Monaco"))
 	(when (member font (font-family-list))
 	  (set-face-attribute 'default nil :font (format "%s-%d" font font-size))
 	  (throw 'loop t)))))

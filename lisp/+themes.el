@@ -23,25 +23,25 @@
       (load-theme theme))
     (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))))
 
-;; (use-package doom-themes
-;;   :init
-;;   (setq doom-themes-enable-bold t
-;; 	doom-themes-enable-italic t)
-;;    ;; all-the-icons must be installed!
-;;   (with-eval-after-load 'neotree
-;;     (doom-themes-neotree-config)
-;;     (setq doom-themes-neotree-file-icons 't))
-;;   (with-eval-after-load 'org-mode
-;;     (doom-themes-org-config))
-;;   :config
-;;   (setq custom-enabled-themes '(doom-xcode))
-;;   (ewx-apply-themes))
-
-(use-package modus-themes
+(use-package doom-themes
   :init
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t)
+   ;; all-the-icons must be installed!
+  (with-eval-after-load 'neotree
+    (doom-themes-neotree-config)
+    (setq doom-themes-neotree-file-icons 't))
+  (with-eval-after-load 'org-mode
+    (doom-themes-org-config))
   :config
-  (modus-themes-load-themes)
-  (modus-themes-load-operandi))
+  (setq custom-enabled-themes '(doom-dark+))
+  (ewx-apply-themes))
+
+;; (use-package modus-themes
+;;   :init
+;;   :config
+;;   (modus-themes-load-themes)
+;;   (modus-themes-load-operandi))
 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)

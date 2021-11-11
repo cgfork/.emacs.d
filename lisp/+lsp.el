@@ -16,7 +16,7 @@
   :commands lsp lsp-deferred
   :init
   (add-hook 'prog-mode-hook (lambda ()
-			    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'sh-mode 'plantuml-mode 'clojure-mode)
+			    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'sh-mode 'plantuml-mode 'clojure-mode 'tcl-mode)
 			      (lsp-deferred))))
   (add-hook 'lsp-mode-hook (lambda ()
 			   (lsp-enable-which-key-integration)
