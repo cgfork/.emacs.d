@@ -111,6 +111,16 @@ It will return the pairs that are set into the environment variables."
 (eval-when-compile
   (require 'use-package))
 
+;; (use-package benchmark-init
+;;   :ensure t
+;;   :hook (after-init . benchmark-init/deactivate))
+;; https://github.com/dholm/benchmark-init-el/issues/15
+;; (cl-letf (((symbol-function 'define-obsolete-function-alias) #'defalias))
+;;   (use-package benchmark-init
+;;     :config
+;;     (require 'benchmark-init-modes)                                     ; explicitly required
+;;     (add-hook 'after-init-hook #'benchmark-init/deactivate)))
+
 (use-package which-key
   :config
   (which-key-mode t))

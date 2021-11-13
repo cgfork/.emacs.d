@@ -64,8 +64,8 @@
   (autoload 'yas-expand-snippet "yasnippet")
   :config
   (defun ewx-autoinsert-yas-expand (&rest _)
-  "Replace text in yasnippet template."
-  (yas-expand-snippet (buffer-string) (point-min) (point-max)))
+    "Replace text in yasnippet template."
+    (yas-expand-snippet (buffer-string) (point-min) (point-max)))
   (auto-insert-mode 1)
   (setq auto-insert-query nil
 	auto-insert-directory (locate-user-emacs-file "templates"))

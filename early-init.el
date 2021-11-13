@@ -130,5 +130,7 @@
 ;; Avoid rendering multiple icons simultaneously
 (setq inhibit-compacting-font-caches t)
 
+(setq gc-cons-threshold most-positive-fixnum)
+
 (provide 'early-init)
 ;;; early-init.el ends here
