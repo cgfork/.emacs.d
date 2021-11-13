@@ -27,6 +27,9 @@
   (define-key lsp-mode-map (kbd "C-c C-r") 'lsp-rename)
   (define-key lsp-mode-map [remap xref-find-definitions] 'lsp-find-definition)
   (define-key lsp-mode-map [remap xref-find-references] 'lsp-find-references)
+  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  (setq lsp-idle-delay 0.500)
   (if (not (display-graphic-p))
       (setq lsp-prefer-flymake nil
 	    flymake-fringe-indicator-position 'right-fringe
@@ -48,7 +51,6 @@
             lsp-keep-workspace-alive nil)
     (setq lsp-eldoc-render-all nil
 	  lsp-eldoc-enable-hover t
-	  lsp-idle-delay 0.5
 	  lsp-auto-guess-root t)))
 
 (use-package lsp-ui
