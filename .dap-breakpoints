@@ -1,1 +1,0 @@
-#s(hash-table size 65 test equal rehash-size 1.5 rehash-threshold 0.8125 data ("/Users/yiwen/go/src/git.bilibili.co/microservices/paladin/api/paladin/core/v1/kv.proto" ((:point 804)) "/Users/yiwen/go/pkg/mod/github.com/boltdb/bolt@v1.3.1/bucket.go" ((:point 2599))))
