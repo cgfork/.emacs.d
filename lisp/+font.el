@@ -26,16 +26,12 @@ horizontal and vertical directions."
     (error "Attemp to calculate the dpi of a non-graphic display")))
 
 (when (display-graphic-p)
-  ;; Mono Font
-  (let ((font-size (cond
-		    (sys/macp 13)
-		    (sys/linuxp 12)
-		    (t 12))))
-    (catch 'loop
-      (dolist (font '("Consolas" "Fira Code" "Ubuntu Mono" "SF Mono" "Monaco"))
+  ;; Mono 
+  (catch 'loop
+      (dolist (font '("Ubuntu Mono" "Fira Code" "Consolas" "SF Mono" "Monaco"))
 	(when (member font (font-family-list))
-	  (set-face-attribute 'default nil :font (format "%s-%d" font font-size))
-	  (throw 'loop t)))))
+	  (set-face-attribute 'default nil :font font :height 150)
+	  (throw 'loop t))))
   ;; Unicode
   (catch 'loop
     (dolist (font '("Symbola" "Apple Symbols" "Symbol"))
