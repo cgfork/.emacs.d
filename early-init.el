@@ -131,6 +131,19 @@
 (setq inhibit-compacting-font-caches t)
 
 (setq gc-cons-threshold most-positive-fixnum)
+(setq garbage-collection-messages t)
+
+(defmacro k-time (&rest body)
+  "Measure and return the time it takes evaluating BODY."
+  `(let ((start (current-time)))
+     ,@body
+     (float-time (time-since start))))
+
+(defvar k-gc-timer
+  (run-with-idle-timer 15 t
+		       (lambda ()
+			 (message "Garbage Collector has run for %.06fsec"
+				  (k-time (garbage-collect))))))
 
 (provide 'early-init)
 ;;; early-init.el ends here
