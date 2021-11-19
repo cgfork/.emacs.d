@@ -23,25 +23,30 @@
       (load-theme theme))
     (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))))
 
+(defvar ewx-load-theme-hook nil
+  "Hook run after the theme is loaded with `load-theme'.")
+
+(defun ewx-run-load-theme-hooks (&rest _)
+  "Run the hooks after `load-theme'."
+  (run-hooks 'ewx-load-theme-hook))
+
 (use-package doom-themes
   :init
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t)
-   ;; all-the-icons must be installed!
-  (with-eval-after-load 'neotree
-    (doom-themes-neotree-config)
-    (setq doom-themes-neotree-file-icons 't))
-  (with-eval-after-load 'org-mode
-    (doom-themes-org-config))
+  ;; all-the-icons must be installed!
+  (add-hook 'ewx-load-theme-hook
+	    (lambda ()
+	      (progn
+		 (with-eval-after-load 'neotree
+		   (doom-themes-neotree-config)
+		   (setq doom-themes-neotree-file-icons 't))
+		 (with-eval-after-load 'org-mode
+		   (doom-themes-org-config)))))
   :config
-  (setq custom-enabled-themes '(doom-dark+))
-  (ewx-apply-themes))
-
-;; (use-package modus-themes
-;;   :init
-;;   :config
-;;   (modus-themes-load-themes)
-;;   (modus-themes-load-operandi))
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions (lambda (frame) (load-theme 'doom-dark+ t)))
+    (load-theme 'doom-dark+ t)))
 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
@@ -54,9 +59,16 @@
    (setq doom-modeline-window-width-limit fill-column)
    (setq doom-modeline-project-detection 'auto)
    (setq doom-modeline-minor-modes nil)
+   (setq doom-modeline-major-mode-icon t)
+   (setq doom-modeline-major-mode-color-icon t)
+   (setq doom-modeline-modal-icon nil)
    (setq doom-modeline-lsp t)
    (setq doom-modeline-workspace-name t)
    (setq doom-modeline-unicode-fallback nil))
+
+(when (display-graphic-p)
+  (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+  (add-to-list 'default-frame-alist '(fullscreen . maximized)))
 
 (provide '+themes)
 ;;; +themes.el ends here

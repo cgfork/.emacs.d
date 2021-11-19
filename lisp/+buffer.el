@@ -42,6 +42,41 @@
                                         extended-command-history)
          savehist-autosave-interval 300))
 
+;; Completion engine
+(use-package minibuffer
+  :straight (:type built-in)
+  :bind (:map minibuffer-local-map
+         ([escape] . abort-recursive-edit)
+         :map minibuffer-local-ns-map
+         ([escape] . abort-recursive-edit)
+         :map minibuffer-local-completion-map
+         ([escape] . abort-recursive-edit)
+         :map minibuffer-local-must-match-map
+         ([escape] . abort-recursive-edit)
+         :map minibuffer-local-isearch-map
+         ([escape] . abort-recursive-edit))
+  :custom
+  (completion-auto-help t)
+  (completion-show-help nil)
+  ;; Cycle completions regardless of the count
+  (completion-cycle-threshold t)
+  (enable-recursive-minibuffers t)
+  (minibuffer-depth-indicate-mode t)
+  (minibuffer-eldef-shorten-default t)
+  (minibuffer-electric-default-mode t)
+  ;; One frame one minibuffer.
+  (minibuffer-follows-selected-frame nil)
+  ;; Ignore cases when complete
+  (completion-ignore-case t)
+  (read-buffer-completion-ignore-case t)
+  (read-file-name-completion-ignore-case t)
+  ;; `selectrum', `vertico' and `icomplete' will honoring
+  (completion-styles '(basic partial-completion substring flex))
+  (completion-category-overrides '((buffer (styles . (flex)))))
+  ;; vertical view
+  (completions-format 'one-column)
+  (completions-detailed t))
+
 (use-package ivy
   :diminish
   :hook (after-init . ivy-mode)
