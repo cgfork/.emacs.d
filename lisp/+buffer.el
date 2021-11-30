@@ -19,6 +19,11 @@
   (unless (server-running-p)
     (add-hook 'after-init-hook #'server-mode)))
 
+;; enable the mouse support
+(when (not (display-graphic-p))
+  (require 'mouse)
+  (xterm-mouse-mode t))
+
 (add-hook 'after-init-hook #'winner-mode)
 
 (add-hook 'after-init-hook #'recentf-mode)
