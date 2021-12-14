@@ -145,5 +145,9 @@
   (when (executable-find "rg")
     (global-set-key (kbd "C-c C-p") 'rg-project)))
 
+(use-package ace-jump-mode
+  :config
+  (global-set-key (kbd "C-c SPC") 'ace-jump-mode))
+
 (provide '+buffer)
 ;;; +buffer.el ends here
