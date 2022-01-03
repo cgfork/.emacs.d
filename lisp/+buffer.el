@@ -24,8 +24,6 @@
   (require 'mouse)
   (xterm-mouse-mode t))
 
-(add-hook 'after-init-hook #'winner-mode)
-
 (add-hook 'after-init-hook #'recentf-mode)
 (with-eval-after-load 'recentf
   (setq recentf-max-saved-items 200
