@@ -152,6 +152,7 @@ It will return the pairs that are set into the environment variables."
 (require '+plantuml)
 (require '+git)
 (require '+protobuf)
+(require '+shell)
 
 (provide 'init)
 ;;; Init.el ends here
