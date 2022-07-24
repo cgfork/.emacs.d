@@ -1,0 +1,42 @@
+# .emacs.d
+
+* Introduction
+
+这是一个原滋原味的 emacs 配置，尽量使用 emacs 自带的 packages 以及 emacs 键位。
+
+* Prerequisites
+
+- git
+- jdk (by plantuml)
+- http proxy (somewhere)
+- rg 
+- emacs 28 above
+
+* Installation
+
+** Download
+
+将仓库 clone 到你的 ~HOME~ 目录下。
+
+** Vannila Emacs
+
+如果你只想依赖 emacs自带的包，可以使用 ~emacs -mini~ 启动 Emacs。
+
+* Start Guide
+
+** Modifier
+*** Windows
+
+- Left windows key as super
+- Menu key as hyper
+- Alt key as meta
+
+
+*** MacOS
+
+- Option key as meta
+- Command key as super
+- Fn key as hyper
+
+
+
